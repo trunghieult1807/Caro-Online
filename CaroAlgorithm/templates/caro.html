@@ -4,18 +4,30 @@
     <meta charset="UTF-8">
     <title>Tic tac toe</title>
     <link rel="stylesheet" type="text/css" href="static/css/caro.css">
+    <link rel="stylesheet" type="text/css" href="static/css/animation.css">
+    <style>
+      .textGradient {
+        text-transform: uppercase;
+        background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 60px;
+        font-family: 'Poppins', sans-serif;
+      }
+    </style>
 </head>
 <body>
-    <h2 style="text-align: center">Caro Game Not Simple</h2>
-    <p id="caroGame" style="text-align: center"></p>
+    <div class = "textGradient hinge" style = "text-align: center"><br>Caro Game</div>
+    <p id="caroGame" style = "text-align: center"></p>
+    <p id="alert" style = "text-align: center"></p>
     <script>
         let view = document.getElementById("caroGame");
         let data = "";
         let board = [];
         let idArray = [];
         let current = "O";
-        let maxRow = 10;
-        let maxCol = 10;
+        let maxRow = 20;
+        let maxCol = 20;
 
         display();
         function display() {
@@ -280,16 +292,19 @@
         }
 
         function win(cell_1, cell_2, cell_3, cell_4, cell_5, cell_6, cell_7) {
-            if(cell_1=="X" && cell_2=="X" && cell_3=="X" && cell_4=="X" && cell_5=="X"){
-                if(cell_6=="O" && cell_7=="O"){
-                }else {
-                    alert("X Win");
+            if(cell_1=="X" && cell_2=="X" && cell_3=="X" && cell_4=="X" && cell_5=="X") {
+                if(cell_6=="O" && cell_7=="O") {
+                } else {
+                  document.getElementById("alert").textContent = "Blue win";
+
+                    //alert("X Win");
                 }
             }
-            if(cell_1=="O" && cell_2=="O" && cell_3=="O" && cell_4=="O" && cell_5=="O"){
-                if(cell_6=="X" && cell_7=="X"){
-                }else {
-                    alert("O Win");
+            if(cell_1=="O" && cell_2=="O" && cell_3=="O" && cell_4=="O" && cell_5=="O") {
+                if(cell_6=="X" && cell_7=="X") {
+                } else {
+                  document.getElementById("alert").textContent = "Red win";
+                    //alert("O Win");
                 }
             }
         }
