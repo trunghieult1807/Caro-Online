@@ -1,0 +1,20 @@
+#!/bin/bash
+
+git reset --hard HEAD
+git pull origin master
+
+# storage cache
+rm -rf storage
+mkdir -p storage/app
+mkdir -p storage/debugbar
+mkdir -p storage/backup
+mkdir -p storage/logs
+mkdir -p storage/framework/cache
+mkdir -p storage/framework/sessions
+mkdir -p storage/framework/views
+chmod -R 777 storage
+chmod -R 777 public/uploads
+chmod -R 777 public/admin/thumbs
+
+#composer update
+

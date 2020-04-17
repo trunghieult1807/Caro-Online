@@ -1,0 +1,13 @@
+#!/bin/bash
+
+git add . -A
+
+if [ $# -eq 0 ]
+then
+	git commit -m "Update project"
+else
+	git commit -m "$*"
+fi
+
+#git status
+git push origin master
