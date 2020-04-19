@@ -1,0 +1,433 @@
+<html>
+<head>
+  <title>Afflnlgnaslkdgn</title>
+  <link rel="stylesheet" type="text/css" href="caro.css">
+</head>
+<body>
+  <span style = "display:none">
+    <img id="scream" height = "5px", width = "50%" src="img_the_scream.jpg">
+    <img id="scream2" width = "5px", height = "50%" src="img_the_scream.jpg">
+    <img id="x" src="x.png">
+    <img id="o" src="o.png">
+  </span>
+  <h1>Gomoku</h1>
+  <div><button id="restart">Restart</button></div>
+  <div>
+    You: <span style="color:blue">BLUE</span>
+    AI: <span style="color:red">RED</span>
+    <span id="win"></span>
+  </div>
+  <canvas id="board" width="500" height="500"></canvas>
+  <script>
+    let isPlaying = true;
+    let isBlue = true;
+    const WINNING_STREAK = 5;
+    const BLUE = 1;
+    const RED = 2;
+    const ROW = 15,COL = 15;
+    const canvas = document.getElementById('board');
+    const context = canvas.getContext('2d');
+    const cellWidth = Math.floor(canvas.width / COL);
+    const cellHeight = Math.floor(canvas.height / ROW);
+    const board = new Array(ROW);
+    for (let i = 0; i < ROW; i++) {
+      board[i] = new Array(COL);
+    }
+
+
+
+    function restart() {
+      for (let row = 0; row < ROW; row++) {
+        for (let col = 0; col < COL; col++) {
+          board[row][col] = 0;
+        }
+      }
+      refreshBoard();
+      isPlaying = true;
+      isBlue = true;
+      document.getElementById('win').innerText = '';
+      canvas.style.opacity = '1';
+    }
+
+    function refreshBoard() {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      drawGrid();
+      drawPieces();
+    }
+    function drawGrid() {
+      context.strokeStyle = 'rgb(0, 255, 0)';
+      context.beginPath();
+      for (let i = 1; i < ROW; i++) {
+        const y = i * cellHeight;
+
+        var img = document.getElementById("scream");
+        context.drawImage(img, 0, y, canvas.width, 3);
+
+        //context.moveTo(0, y);
+        //context.lineTo(canvas.width, y);
+      }
+
+      for (let i = 1; i < COL; i++) {
+        const x = i * cellWidth;
+
+        var img = document.getElementById("scream2");
+        context.drawImage(img, x, 0, 3, canvas.height);
+
+        // context.moveTo(x, 0);
+        // context.lineTo(x, canvas.height);
+      }
+      context.stroke();
+    }
+
+    function drawPieces() {
+      for (let row = 0; row < ROW; row++) {
+        for (let col = 0; col < COL; col++) {
+          if (!board[row][col]) {
+            continue;
+          }
+          context.beginPath();
+          const r = Math.floor(0.4 * Math.min(cellWidth, cellHeight));
+
+          var imgX = document.getElementById("x");
+          var imgO = document.getElementById("o");
+
+          // const centerX = Math.floor((col + col + 1) * cellWidth / 2) + 1.7;
+          // const centerY = Math.floor((row + row + 1) * cellHeight / 2) + 1.7;
+          // context.fillStyle = board[row][col] == RED ? 'rgb(0, 0, 255)' : 'rgb(255, 0, 0)';
+          // context.arc(centerX, centerY, r, 0, Math.PI * 2);
+          // context.fill();
+
+          if (board[row][col] == RED) {
+            context.drawImage(imgX, col * cellWidth + 3 + 0.1 * r, row * cellHeight + 3 + 0.1 * r, 2*r, 2*r);
+          } else {
+            context.drawImage(imgO, col * cellWidth + 3, row * cellHeight + 3, 2*r, 2*r);
+          }
+        }
+      }
+    }
+
+    function isCellInBoard(row, col) {
+      return row >= 0 && row < ROW && col >= 0 && col < COL;
+    }
+
+    function calcScore(row, col, color, prevCell, nextCell) {
+      // if (board[row][col]) {
+      //   return {
+      //     score: -1
+      //   };
+      // }
+      let streak = 1;
+      let cell = prevCell(row, col);
+      for (; isCellInBoard(cell.row, cell.col) && board[cell.row][cell.col] == color; cell = prevCell(cell.row, cell.col)) {
+        streak++;
+      }
+      let prevOpen = isCellInBoard(cell.row, cell.col) && !board[cell.row][cell.col];
+      cell = nextCell(row, col);
+      for (; isCellInBoard(cell.row, cell.col) && board[cell.row][cell.col] == color; cell = nextCell(cell.row, cell.col)) {
+        streak++;
+      }
+      let nextOpen = isCellInBoard(cell.row, cell.col) && !board[cell.row][cell.col];
+      return {
+        score: streak,
+        open: prevOpen && nextOpen
+      };
+    }
+
+    function searchBestScore(color) {
+      let maxScore = -1;
+      let maxScoreCell = null;
+      for (let row = 0; row < ROW; row++) {
+        for (let col = 0; col < COL; col++) {
+          if (board[row][col]) {
+            continue;
+          }
+          let scores = [
+            calcScore(row, col, color, function (row, col) {
+              return {
+                row: row,
+                col: col - 1
+              }
+            }, function (row, col) {
+              return {
+                row: row,
+                col: col + 1
+              }
+            }),
+            calcScore(row, col, color, function (row, col) {
+              return {
+                row: row - 1,
+                col: col
+              }
+            }, function (row, col) {
+              return {
+                row: row + 1,
+                col: col
+              }
+            }),
+            calcScore(row, col, color, function (row, col) {
+              return {
+                row: row - 1,
+                col: col - 1
+              }
+            }, function (row, col) {
+              return {
+                row: row + 1,
+                col: col + 1
+              }
+            }),
+            calcScore(row, col, color, function (row, col) {
+              return {
+                row: row + 1,
+                col: col - 1
+              }
+            }, function (row, col) {
+              return {
+                row: row - 1,
+                col: col + 1
+              }
+            })
+          ];
+          let max = -1;
+          let open3 = 0;
+          for (let i = 0; i < 4; i++) {
+            if (scores[i].score == WINNING_STREAK) {
+              return {
+                maxScore: WINNING_STREAK + 1,
+                maxScoreCell: {
+                  row: row,
+                  col: col
+                }
+              };
+            } else {
+              let score = scores[i].score;
+              if (score == WINNING_STREAK - 2 && scores[i].open) {
+                open3++;
+              } else if (score == WINNING_STREAK - 1 && scores[i].open) {
+                score = WINNING_STREAK;
+              }
+              if (score > max) {
+                max = score;
+              }
+            }
+          }
+
+          if (open3 >= 2 && max < WINNING_STREAK) {
+            max = WINNING_STREAK;
+          }
+
+          if (max > maxScore) {
+            maxScore = max;
+            maxScoreCell = {
+              row: row,
+              col: col
+            };
+          }
+        }
+      }
+      return {
+        maxScore: maxScore,
+        maxScoreCell: maxScoreCell
+      };
+    }
+
+    function aiNextStep() {
+      let defend = searchBestScore(opponentColor());
+      let attack = searchBestScore(currentColor());
+      if (attack.maxScore > WINNING_STREAK ||
+        attack.maxScore > defend.maxScore ||
+        (attack.maxScore == defend.maxScore && (defend.maxScore < WINNING_STREAK - 1 || attack.maxScore == WINNING_STREAK))) {
+        return {
+          row: attack.maxScoreCell.row,
+          col: attack.maxScoreCell.col
+        }
+      } else {
+        return {
+          row: defend.maxScoreCell.row,
+          col: defend.maxScoreCell.col
+        }
+      }
+    }
+
+    // function aiNextStepRandom() {
+    //   while (true) {
+    //     const row = Math.floor(Math.random() * ROW);
+    //     const col = Math.floor(Math.random() * COL);
+    //     if (row >= 0 && row < ROW && col >= 0 && col < COL && !board[row][col]) {
+    //       return {row, col};
+    //     }
+    //   }
+    //   return {row: -1, col: -1};
+    // }
+
+    document.getElementById('restart').onclick = function () {
+      restart();
+    }
+
+    function getCell(mouseX, mouseY) {
+      if (mouseX < 0 || mouseX >= canvas.width || mouseY < 0 || mouseY >= canvas.height) {
+        return {
+          x: -1,
+          y: -1
+        };
+      }
+      return {
+        x: Math.floor(mouseX / cellWidth),
+        y: Math.floor(mouseY / cellHeight)
+      };
+    }
+
+    canvas.addEventListener('click', function (event) {
+      if (!isPlaying) {
+        return;
+      }
+      const rect = canvas.getBoundingClientRect();
+      const cell = getCell(event.clientX - rect.left, event.clientY - rect.top);
+      if (cell.x < 0 || cell.y < 0) {
+        return;
+      }
+      if (!board[cell.y][cell.x]) {
+        isPlaying = false;
+        if (!place(cell.y, cell.x)) {
+          const next = aiNextStep();
+          if (!place(next.row, next.col)) {
+            isPlaying = true;
+          }
+        }
+      }
+    });
+
+    function currentColor() {
+      return isBlue ? BLUE : RED;
+    }
+
+    function opponentColor() {
+      return isBlue ? RED : BLUE;
+    }
+
+    function place(row, col) {
+      const color = currentColor();
+      board[row][col] = color;
+      refreshBoard();
+      const win = checkIfWin(color);
+      if (win) {
+        document.getElementById('win').innerText = (currentColor() == BLUE ? 'BLUE' : 'RED') + ' win!';
+        canvas.style.opacity = '0.5';
+      }
+      isBlue = !isBlue;
+      return win;
+    }
+
+
+
+    function checkRow(row, col, color, checked) {
+      if (board[row][col] != color) {
+        return false;
+      }
+      let streak = 1;
+      for (let left = col - 1; left >= 0 && board[row][left] == color; left--) {
+        if (checked[row][left]) {
+          return false;
+        }
+        streak++;
+      }
+      for (let right = col + 1; right < COL && board[row][right] == color; right++) {
+        if (checked[row][right]) {
+          return false;
+        }
+        streak++;
+      }
+      return streak == WINNING_STREAK;
+    }
+
+    function checkColumn(row, col, color, checked) {
+      if (board[row][col] != color) {
+        return false;
+      }
+      let streak = 1;
+      for (let up = row - 1; up >= 0 && board[up][col] == color; up--) {
+        if (checked[up][col]) {
+          return false;
+        }
+        streak++;
+      }
+      for (let down = row + 1; down < ROW && board[down][col] == color; down++) {
+        if (checked[down][col]) {
+          return false;
+        }
+        streak++;
+      }
+      return streak == WINNING_STREAK;
+    }
+
+    function checkMainDiagonal(row, col, color, checked) {
+      if (board[row][col] != color) {
+        return false;
+      }
+      let streak = 1;
+      for (let up = row - 1, left = col - 1; up >= 0 && left >= 0 && board[up][left] == color; up--, left--) {
+        if (checked[up][left]) {
+          return false;
+        }
+        streak++;
+      }
+      for (let down = row + 1, right = col + 1; down < ROW && right < COL && board[down][right] == color; down++,
+        right++) {
+        if (checked[down][right]) {
+          return false;
+        }
+        streak++;
+      }
+      return streak == WINNING_STREAK;
+    }
+
+    function checkSecondaryDiagonal(row, col, color, checked) {
+      if (board[row][col] != color) {
+        return false;
+      }
+      let streak = 1;
+      for (let up = row - 1, right = col + 1; up >= 0 && right < COL && board[up][right] == color; up--, right++) {
+        if (checked[up][right]) {
+          return false;
+        }
+        streak++;
+      }
+      for (let down = row + 1, left = col - 1; down < ROW && left >= 0 && board[down][left] == color; down++, left--) {
+        if (checked[down][left]) {
+          return false;
+        }
+        streak++;
+      }
+      return streak == WINNING_STREAK;
+    }
+
+    function checkIfWin(color) {
+      const checked = new Array(ROW);
+      for (let i = 0; i < ROW; i++) {
+        checked[i] = new Array(COL);
+      }
+      for (let row = 0; row < ROW; row++) {
+        for (let col = 0; col < COL; col++) {
+          if (board[row][col] != color) {
+            continue;
+          }
+          if (checkRow(row, col, color, checked)) {
+            return true;
+          }
+          if (checkColumn(row, col, color, checked)) {
+            return true;
+          }
+          if (checkMainDiagonal(row, col, color, checked)) {
+            return true;
+          }
+          if (checkSecondaryDiagonal(row, col, color, checked)) {
+            return true;
+          }
+          checked[row][col] = true;
+        }
+      }
+    }
+
+    restart();
+  </script>
+</body>
+</html>
