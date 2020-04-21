@@ -1,2 +1,0 @@
-# PSE-Project
-Game Caro
