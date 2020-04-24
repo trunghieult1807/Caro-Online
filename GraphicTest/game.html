@@ -1,24 +1,29 @@
 <html>
 <head>
-  <title>Afflnlgnaslkdgn</title>
+  <title>Game</title>
   <link rel="stylesheet" type="text/css" href="caro.css">
 </head>
 <body>
+
   <span style = "display:none">
-    <img id="scream" height = "5px", width = "50%" src="img_the_scream.jpg">
-    <img id="scream2" width = "5px", height = "50%" src="img_the_scream.jpg">
     <img id="x" src="x.png">
     <img id="o" src="o.png">
   </span>
-  <h1>Gomoku</h1>
-  <div><button id="restart">Restart</button></div>
-  <div>
-    You: <span style="color:blue">BLUE</span>
-    AI: <span style="color:red">RED</span>
-    <span id="win"></span>
+  <div id = "life">
+    <h1>Gomoku</h1>
+    <div><button id="restart">Restart</button></div>
+    <div>
+      You: <span style="color:blue">BLUE</span>
+      AI: <span style="color:red">RED</span>
+      <span id="win"></span>
+    </div>
+    <div id = "app">
+      <!-- <div style="background-image: url('cat.jpg');"> -->
+      <canvas id="board" width="500" height="500"></canvas>
+    </div>
   </div>
-  <canvas id="board" width="500" height="500"></canvas>
   <script>
+
     let isPlaying = true;
     let isBlue = true;
     const WINNING_STREAK = 5;
@@ -55,26 +60,41 @@
       drawPieces();
     }
     function drawGrid() {
-      context.strokeStyle = 'rgb(0, 255, 0)';
+
+      context.strokeStyle = 'rgb(0, 0, 0)';
+      //context.style.opacity = '1';
       context.beginPath();
+
+      context.moveTo(0, 0);
+      context.lineTo(0, COL*cellWidth);
+
+      context.moveTo(0, 0);
+      context.lineTo(ROW*cellHeight, 0);
+
+      context.moveTo(COL*cellWidth, 0);
+      context.lineTo(ROW*cellHeight, COL*cellWidth);
+
+      context.moveTo(0, ROW*cellHeight);
+      context.lineTo(ROW*cellHeight, COL*cellHeight);
+
       for (let i = 1; i < ROW; i++) {
         const y = i * cellHeight;
 
-        var img = document.getElementById("scream");
-        context.drawImage(img, 0, y, canvas.width, 3);
+        // var img = document.getElementById("scream");
+        // context.drawImage(img, 0, y, canvas.width, 3);
 
-        //context.moveTo(0, y);
-        //context.lineTo(canvas.width, y);
+        context.moveTo(0, y);
+        context.lineTo(COL*cellWidth, y);
       }
 
       for (let i = 1; i < COL; i++) {
         const x = i * cellWidth;
 
-        var img = document.getElementById("scream2");
-        context.drawImage(img, x, 0, 3, canvas.height);
+        // var img = document.getElementById("scream2");
+        // context.drawImage(img, x, 0, 3, canvas.height);
 
-        // context.moveTo(x, 0);
-        // context.lineTo(x, canvas.height);
+        context.moveTo(x, 0);
+        context.lineTo(x, COL*cellHeight);
       }
       context.stroke();
     }
@@ -85,7 +105,7 @@
           if (!board[row][col]) {
             continue;
           }
-          context.beginPath();
+          //context.beginPath();
           const r = Math.floor(0.4 * Math.min(cellWidth, cellHeight));
 
           var imgX = document.getElementById("x");

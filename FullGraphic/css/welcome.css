@@ -1,0 +1,28 @@
+
+
+@media all and (min-width: 768px){
+	#talking{
+		font-size: 16px;
+	}
+}
+@media all and (min-width: 900px){
+	#talking{
+		font-size: 20px;
+	}
+	#notify, #chat{
+		width: 30%;
+		clear: none;
+
+	}
+	#board-area {
+		width: 60%;
+		clear: none;
+	}
+	#container{
+		width: 80%;
+		max-width: 1500px;
+	}
+	.content-area{
+		margin: 10px;
+	}
+}
