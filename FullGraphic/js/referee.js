@@ -68,13 +68,13 @@ var referee = {
 	checkWin : function(){
 		var result = referee.isWin();
 		if ( result == 1){	//check from current currGame.sq: has  the current player won?
-			alert('X Thắng!');
+			alert('Win!');
 			currGame.isGamming = false;
 		} else if ( result == 2){
-			alert('O Thắng!');
+			alert('Lose!');
 			currGame.isGamming = false;
 		} else if (result == 3) {  //check draw
-			alert('Hoà!');
+			alert('Draw!');
 			currGame.isGamming = false;
 		}
 	},
