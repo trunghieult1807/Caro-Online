@@ -6,28 +6,7 @@
 	font-size: 14px;
 }
 body {
-	background: url("../img/wood.png");
-}
-
-
-
-.centerXY {
-	display:-webkit-box;
-	display:-ms-flexbox;
-	display:flex;
-	-webkit-box-flex:1;
-	-ms-flex:1;flex:1;
-	-webkit-box-orient:vertical;
-	-webkit-box-direction:normal;
-	-ms-flex-direction:column;
-	flex-direction:column;
-	-webkit-box-pack:center;
-	-ms-flex-pack:center;
-	justify-content:center;
-	-webkit-box-align:center;
-	-ms-flex-align:center;
-	align-items:center;
-	display: inline-block;
+	background: url("../img/bg.jpg");
 }
 
 #logo {
@@ -54,7 +33,7 @@ body {
 	margin: 30px auto;
 }
 .content-area-title{
-	color: #5C392A;
+	color: black;
 	font-weight: bold;
 	font-size: 16px;
 	text-transform: uppercase;
@@ -62,13 +41,13 @@ body {
 .content-area{
 	padding: 5px;
 	margin: 5px;
-	background: #E5B27E;
+	background: white;/*areacolor*/
 	border: 1px solid #7F4F2A;
 	float: left;
 }
 .content-area a {
 	text-decoration: none;
-	color: #362A1D;
+	color: blue;/*Name*/
 }
 
 
@@ -76,25 +55,23 @@ body {
 .btn1 {
 	font-weight: bold;
 	text-transform: uppercase;
-	background-color: #D4A475;
+	background-color: white;/*new game, send*/
 	border: 2px solid #7F4F2A;
 	border-radius: 5px;
-	color: #5C392A;
+	color: black;/*Letter new game*/
 	margin-top: 2px;
 	margin-bottom: 2px;
-}
-.btn-med {
 	padding: 10px;
 }
-.tbox1{
+
+.chat-script{
 	margin-top: 2px;
 	margin-bottom: 2px;
 	border: 2px solid #BF9469;
 	border-radius: 5px;
-	background: #FFD2AA;
 	padding-left: 4px;
 }
 .info {
-	border: 2px solid #BF9469;
+	border: 2px solid black;
 	text-overflow: auto;
 }

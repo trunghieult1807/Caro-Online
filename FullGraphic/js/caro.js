@@ -1,7 +1,7 @@
 const X = 1, O = 2, Empty = 0;
 
 
-var currGame = new game(21, 21);
+var currGame = new game(16, 16);
 board.writeBoard();
 
 

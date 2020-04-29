@@ -11,16 +11,17 @@
 <body>
 
 <div id = "container">
+
 	<div id = "board-area" class="content-area">
 		<div id="info-board">
 			<span id="oppo1-time" class="time"> 00:00 </span>&nbsp;
-			<img id="ava1" class="oppo-avt" src="img/ava1.jpg">
-			<img id="vs" src="img/vs.png">
-			<img id="ava2" class="oppo-avt" src="img/ava2.jpg">&nbsp;&nbsp;
+			<img id="ava1" class="oppo-avt" src="img/ava1.jpg">&nbsp;
+			<img id="vs" src="img/vs.png">&nbsp;&nbsp;
+			<img id="ava2" class="oppo-avt" src="img/ava2.jpg">&nbsp;&nbsp;&nbsp;
 			<span id="oppo2-time" class="time"> 00:00 </span>
 			<br/>
 
-			<span class = "centerXY">
+			<span>
 				<a href="#" style="font-weight:bold;"> Youth Camp </a>
 				<img style="width:16px;" src="./img/x.png"> fights against
 				<a href="#" style="font-weight:bold;"> Hope Camp </a>
@@ -31,16 +32,16 @@
 		<div id="board"></div>
 		<div id="board-cpanel">
 
-			<button class="btn1 btn-med" id="newGame" onclick="ctrl.newGame()">
+			<button class="btn1" id="newGame" onclick="ctrl.newGame()">
 				<i class="fa fa-gamepad fa-2x" aria-hidden="true"></i>New game</button>
 
-			<button class="btn1 btn-med" id="resign" onclick="ctrl.resign()">
-				<i class="fa fa-flag-o fa-2x" aria-hidden="true"></i>Surrend</button>
+			<button class="btn1" id="surender" onclick="ctrl.surrender()">
+				<i class="fa fa-flag-o fa-2x" aria-hidden="true"></i>Surrender</button>
 
-			<button class="btn1 btn-med" id="undo" onclick="ctrl.undo()">
+			<button class="btn1" id="rewind" onclick="ctrl.rewind()">
 				<i class="fa fa-undo fa-2x" aria-hidden="true"></i> Rewind</button>
 
-			<button class="btn1 btn-med" id="quit" onclick="ctrl.standUp()">
+			<button class="btn1" id="quit" onclick="ctrl.quit()">
 				<i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>Quit</button>
 
 		</div>
@@ -54,12 +55,12 @@
 	<div id = "chat" class="content-area">
 		<span class="content-area-title"><i class="fa fa-comments-o" aria-hidden="true"></i> Chat</span>
 		<div id="chat-content" class="info"></div>
-		<input id="chat-message" class="tbox1" type="text" placeholder="Enter to send">
-		<button id="chat-send" class="btn1 btn-med" type="submit"><i class="fa fa-paper-plane fa-2x" aria-hidden="true"></i></button>
+		<input id="chat-message" class="chat-script" type="text" placeholder="Enter to send">
+		<button id="chat-send" class="btn1" type="submit"><i class="fa fa-paper-plane fa-2x" aria-hidden="true"></i></button>
 	</div>
 
 	<div id = "notify" class="content-area">
-		<span class="content-area-title"><i class="fa fa-info" aria-hidden="true"></i>System information</span>
+		<span class="content-area-title"><i class="fa fa-info" aria-hidden="true"></i> System information</span>
 		<div id="notify-content" class="info"></div>
 	</div>
 </div>

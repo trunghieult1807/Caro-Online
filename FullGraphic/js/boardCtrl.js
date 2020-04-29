@@ -3,14 +3,14 @@ var ctrl = {
 		currGame = new game(16, 16);
 		board.writeBoard();
 	},
-	undo : function() {
-		alert('Chơi với máy đã gà thế này rồi nên không có chơi lại nha! :D :D ');
+	rewind : function() {
+		alert('Chuồn chuồn bay thấp thì cao, bay cao thì thấp, bay vừa thì thôi!');
 	},
-	resign : function() {
-		alert('Bạn đã chịu thua. :D :D');
+	surrender : function() {
+		alert(':D');
 		currGame.isGamming = false;
 	},
-	standUp : function() {
+	quit : function() {
 		if (currGame.Turn == X) {
 			var bestMove = {row: 0, col:0};
 			AIthink(X, bestMove);

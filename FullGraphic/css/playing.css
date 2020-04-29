@@ -2,6 +2,7 @@
 #board-area{
 	max-width: 1000px;
 }
+
 #info-board{
 	padding: 5px;
 	text-align: center;
@@ -40,8 +41,8 @@
 	overflow:hidden;
 }
 .square:before{
-    content:'';
-    float: left;
+  content:'';
+  float: left;
 	padding-top:100%;
 }
 .square img{
@@ -55,8 +56,9 @@
 	margin-top: 10px;
 	padding: 10px;
 	z-index: 100;
-	background-color: #BF9469;
+	background-color: grey;
 	border-radius: 5px;
+	text-align: center;
 }
 
 
@@ -97,17 +99,19 @@
 	#notify, #chat{
 		width: 30%;
 		clear: none;
-
+		float: right;
 	}
 	#board-area {
-		width: 60%;
+		width: 55%;
 		clear: none;
+		float: left;
 	}
 	#container{
 		width: 80%;
 		max-width: 1500px;
 	}
 	.content-area{
-		margin: 10px;
+		margin: 20px;
+
 	}
 }
