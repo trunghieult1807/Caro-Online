@@ -115,7 +115,7 @@ function game(noOfRow, noOfCol) {
 	// this.sq[16][19] = O;
 
 
-
+	//With AI
 	this.xMove = function(i,j){
 		currGame.sq[i][j] = X;
 		board.sqUpdate(i, j);
@@ -133,4 +133,28 @@ function game(noOfRow, noOfCol) {
 		currGame.noOfPiece++;
 		referee.checkWin()
 	};
+
+	//With player
+	this.xMoveTwoPlayer = function(i,j){
+		currGame.sq[i][j] = X;
+		board.sqUpdate(i, j);
+		currGame.noOfPiece++;
+		currGame.Turn = O;
+		referee.checkWin()
+		if (currGame.isGamming == false){
+			return;
+		}
+	};
+
+	this.oMoveTwoPlayer = function(i,j){
+		currGame.sq[i][j] = O;
+		board.sqUpdate(i, j);
+		currGame.noOfPiece++;
+		currGame.Turn = X;
+		referee.checkWin()
+		if (currGame.isGamming == false){
+			return;
+		}
+	};
+
 }

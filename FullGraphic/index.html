@@ -29,27 +29,28 @@
 			</span>
 
 		</div>
+		<div id="board2"></div>
 		<div id="board"></div>
 		<div id="board-cpanel">
 
-			<button class="btn1" id="newGame" onclick="ctrl.newGame()">
+			<button class="btn1" onclick="ctrl.newGame()">
 				<i class="fa fa-gamepad fa-2x" aria-hidden="true"></i>New game</button>
 
-			<button class="btn1" id="surender" onclick="ctrl.surrender()">
+			<button class="btn1" onclick="ctrl.surrender()">
 				<i class="fa fa-flag-o fa-2x" aria-hidden="true"></i>Surrender</button>
 
-			<button class="btn1" id="rewind" onclick="ctrl.rewind()">
+			<button class="btn1" onclick="ctrl.rewind()">
 				<i class="fa fa-undo fa-2x" aria-hidden="true"></i> Rewind</button>
 
-			<button class="btn1" id="quit" onclick="ctrl.quit()">
+			<button class="btn1" onclick="ctrl.quit()">
 				<i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>Quit</button>
 
 		</div>
+
 	</div>
 
-
 	<h1 id="logo">CARO ONLINE</h1>
-	<center><span style="font-size: 12px; font-weight:bold;">Play with friends</span></center>
+	<!-- <center><span style="font-size: 12px; font-weight:bold;">Play with friends</span></center> -->
 
 
 	<div id = "chat" class="content-area">
@@ -58,12 +59,18 @@
 		<input id="chat-message" class="chat-script" type="text" placeholder="Enter to send">
 		<button id="chat-send" class="btn1" type="submit"><i class="fa fa-paper-plane fa-2x" aria-hidden="true"></i></button>
 	</div>
+	
+	<div style = "clear: both;">
+		<button class="btn1" onclick="ctrl.twoPlayer()">Two Player</button>
+		<button class="btn1" onclick="ctrl.newGame()">AI</button>
+	</div>
 
-	<div id = "notify" class="content-area">
+	<!-- <div id = "notify" class="content-area">
 		<span class="content-area-title"><i class="fa fa-info" aria-hidden="true"></i> System information</span>
 		<div id="notify-content" class="info"></div>
-	</div>
+	</div> -->
 </div>
+
 
 
 

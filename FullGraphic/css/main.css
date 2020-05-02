@@ -15,7 +15,7 @@ body {
   box-sizing: content-box;
   cursor: pointer;
   border: none;
-  font: normal 32px/normal "Passero One", Helvetica, sans-serif;
+  font: normal 50px/normal "Passero One", Helvetica, sans-serif;
   color: rgba(255,255,255,1);
   text-align: left;
   -o-text-overflow: clip;
@@ -45,6 +45,7 @@ body {
 	border: 1px solid #7F4F2A;
 	float: left;
 }
+
 .content-area a {
 	text-decoration: none;
 	color: blue;/*Name*/
