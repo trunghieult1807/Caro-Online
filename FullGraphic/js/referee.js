@@ -64,14 +64,16 @@ var referee = {
 			return 2
 		}
 
+
+
 	},
 	checkWin : function(){
 		var result = referee.isWin();
 		if ( result == 1){	//check from current currGame.sq: has  the current player won?
-			alert('Win!');
+			alert('X win!');
 			currGame.isGamming = false;
 		} else if ( result == 2){
-			alert('Lose!');
+			alert('O win!');
 			currGame.isGamming = false;
 		} else if (result == 3) {  //check draw
 			alert('Draw!');
