@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<title>Online Caro</title>
+	<link rel="stylesheet" type="text/css" href="./font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="./css/main.css">
+	<link rel="stylesheet" type="text/css" href="./css/playing.css">
+</head>
+<body>
+
+<div id = "container">
+
+	<div id = "board-area" class="content-area">
+		<div id="info-board">
+			<span id="oppo1-time" class="time"> 00:00 </span>&nbsp;
+			<img id="ava1" class="oppo-avt" src="img/ava1.jpg">&nbsp;
+			<img id="vs" src="img/vs.png">&nbsp;&nbsp;
+			<img id="ava2" class="oppo-avt" src="img/ava2.jpg">&nbsp;&nbsp;&nbsp;
+			<span id="oppo2-time" class="time"> 00:00 </span>
+			<br/>
+
+			<span>
+				<a href="#" style="font-weight:bold;"> Youth Camp </a>
+				<img style="width:16px;" src="./img/x.png"> fights against
+				<a href="#" style="font-weight:bold;"> Hope Camp </a>
+				<img style="width:16px;" src="./img/o.png">
+			</span>
+
+		</div>
+		<div id="board2"></div>
+		<div id="board"></div>
+		<div id="board-cpanel">
+
+			<button class="btn1" onclick="ctrl.newGame()">
+				<i class="fa fa-gamepad fa-2x" aria-hidden="true"></i>New game</button>
+
+			<button class="btn1" onclick="ctrl.surrender()">
+				<i class="fa fa-flag-o fa-2x" aria-hidden="true"></i>Surrender</button>
+
+			<button class="btn1" onclick="ctrl.rewind()">
+				<i class="fa fa-undo fa-2x" aria-hidden="true"></i> Rewind</button>
+
+			<button class="btn1" onclick="ctrl.quit()">
+				<i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>Quit</button>
+
+		</div>
+
+	</div>
+
+	<h1 id="logo">CARO ONLINE</h1>
+	<!-- <center><span style="font-size: 12px; font-weight:bold;">Play with friends</span></center> -->
+
+
+	<div id = "chat" class="content-area">
+		<span class="content-area-title"><i class="fa fa-comments-o" aria-hidden="true"></i> Chat</span>
+		<div id="chat-content" class="info"></div>
+		<input id="chat-message" class="chat-script" type="text" placeholder="Enter to send">
+		<button id="chat-send" class="btn1" type="submit"><i class="fa fa-paper-plane fa-2x" aria-hidden="true"></i></button>
+	</div>
+	
+	<div style = "clear: both;">
+		<button class="btn1" onclick="ctrl.twoPlayer()">Two Player</button>
+		<button class="btn1" onclick="ctrl.newGame()">AI</button>
+	</div>
+
+	<!-- <div id = "notify" class="content-area">
+		<span class="content-area-title"><i class="fa fa-info" aria-hidden="true"></i> System information</span>
+		<div id="notify-content" class="info"></div>
+	</div> -->
+</div>
+
+
+
+
+
+</body>
+	<script type="text/javascript" src="./js/ai.js"></script>
+	<script type="text/javascript" src="./js/board.js"></script>
+	<script type="text/javascript" src="./js/caro.js"></script>
+	<script type="text/javascript" src="./js/boardCtrl.js"></script>
+	<script type="text/javascript" src="./js/referee.js"></script>
+</html>
