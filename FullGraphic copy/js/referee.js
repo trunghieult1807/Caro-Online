@@ -64,7 +64,7 @@ var referee = {
 			return 2
 		}
 
-		//console.log(valStr);
+
 
 	},
 	checkWin : function(){

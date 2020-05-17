@@ -17,7 +17,6 @@ var board = {
 				board.sqUpdate(i,j);
 			}
 		}
-		//console.log(st);
 	},
 	writeBoardTwoPlayer: function(){
 		var st = '';
