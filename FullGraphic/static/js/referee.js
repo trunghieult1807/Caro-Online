@@ -37,6 +37,7 @@ var referee = {
 				}
 			valStr += '03';
 		}
+		// valStr+='next';
 		// dia from bottom
 		for (var k = 0; k < currGame.noOfCol; k++) {
 			valStr += '0';
@@ -64,7 +65,7 @@ var referee = {
 			return 2
 		}
 
-		//console.log(valStr);
+		console.log(valStr);
 
 	},
 	checkWin : function(){

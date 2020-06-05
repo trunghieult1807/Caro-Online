@@ -52,9 +52,9 @@
 			<div class="chatbox-area">
 				<div class="chatbox-content-area-title"><i class="fa fa-comments-o" aria-hidden="true"></i> Chat</div>
 				<div class="chat-content">
-					<ul id="messageContent">
-						<li>a</li>
-					</ul>
+					<!-- <ul id="messageContent"> -->
+						<p id="messageContent"></p>
+					<!-- </ul> -->
 				</div>
 				<div id = "small-chatbox-content-area">
 					<form style="clear: both">
@@ -64,6 +64,8 @@
 				</div>
 			</div>
 		</div>
+		<!-- <iframe src="http://www.staggeringbeauty.com/" style="border: 1px inset #ddd" width="498" height="598"></iframe> -->
+		<!-- <iframe src="https://bedaudodangghet.imfast.io" style="border: 1px inset #ddd" width="498" height="598"></iframe> -->
 		<div id = "right-half">
 			<div class="content-area">
 				<div id="info-board">
@@ -123,18 +125,19 @@
 	<script type="text/javascript" src="/static/js/caro.js"></script>
 	<script type="text/javascript" src="/static/js/boardCtrl.js"></script>
 	<script type="text/javascript" src="/static/js/referee.js"></script>
+	<!-- <script type="text/javascript" src="/static/js/socket.js"></script> -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
-	<script type="text/javascript" charset="utf-8">
+	<script type="text/javascript">
 		$(document).ready(function(){
 
-	    var socket = io.connect('http://' + document.domain + ':' + location.port );
-	    socket.on('connect', function() {
-	    	socket.send('User has connected!');
-	    });
+			var socket = io.connect('http://' + document.domain + ':' + location.port );
+			socket.on('connect', function() {
+				socket.send('User has connected!');
+			});
 
-	    socket.on('message', function(msg){
-				$("#messageContent").append('<li>'+msg+'</li>');
+			socket.on('message', function(msg){
+				$("#messageContent").append('<p>'+msg+'</p>');
 				console.log("Recieved message");
 				//setTimeout(function(){ alert("After 5 seconds!"); }, 5000);
 			});
@@ -145,5 +148,7 @@
 			});
 
 		});
+
 	</script>
+
 </html>
