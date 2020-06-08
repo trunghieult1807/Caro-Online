@@ -1,0 +1,17 @@
+from caro import *
+
+caro = Caro()
+caro.make_move(1, 1)
+caro.make_move(1, 0)
+caro.make_move(1, 2)
+caro.make_move(5, 12)
+caro.make_move(1, 3)
+caro.make_move(12, 6)
+caro.make_move(1, 4)
+caro.make_move(7, 12)
+caro.make_move(1, 5)
+caro.make_move(7, 14)
+caro.make_move(1, 6)
+caro.print()
+caro.print_history()
+print(caro.get_board_size())
