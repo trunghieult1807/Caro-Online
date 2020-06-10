@@ -1,0 +1,232 @@
+* {
+	padding: 0; margin: 0;
+	box-sizing: border-box;
+	position: relative;
+	font-family: Arial;
+	font-size: 14px;
+}
+body {
+	background: #4aa9d2; /*url("../img/bgr.jpg");*/
+}
+
+#logo {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  cursor: pointer;
+  border: none;
+  font: normal 50px/normal "Passero One", Helvetica, sans-serif;
+  color: #fbcb9b;
+  text-align: left;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  text-shadow: 0 0.5px 0 rgb(204,204,204) , 0 1px 0 rgb(201,201,201) , 0 1.5px 0 rgb(187,187,187) , 0 2px 0 rgb(185,185,185) , 0 2.5px 0 rgb(170,170,170) , 0 3px 1px rgba(0,0,0,0.0980392) , 0 0 2.5px rgba(0,0,0,0.0980392) , 0 1px 1.5px rgba(0,0,0,0.298039) , 0 1.5px 2.5px rgba(0,0,0,0.2) , 0 2.5px 5px rgba(0,0,0,0.247059) , 0 5px 5px rgba(0,0,0,0.2) , 0 10px 10px rgba(0,0,0,0.14902) ;
+  -webkit-transition: all 300ms cubic-bezier(0.15, 0, 0.2, 1);
+  -moz-transition: all 300ms cubic-bezier(0.15, 0, 0.2, 1);
+  -o-transition: all 300ms cubic-bezier(0.15, 0, 0.2, 1);
+  transition: all 300ms cubic-bezier(0.15, 0, 0.2, 1);
+  text-align: center;
+}
+
+#container{
+	width: 100%;
+	margin-top: 20px;
+	/* margin-right: 10px; */
+	position: absolute;
+}
+
+#left-half{
+	float: left;
+	width: 35%;
+}
+
+.chatbox-area{
+	padding-top: 15px;
+	padding-bottom: 15px;
+	background: #fbcb9b;/*areacolor*/
+	border: 1px solid #7F4F2A;
+	margin: auto;
+	border-radius: 20px;
+	width: 90%;
+}
+
+.chatbox-content-area-title{
+	margin-left: 15px;
+	color: black;
+	font-weight: bold;
+	font-size: 20px;
+	text-transform: uppercase;
+}
+
+.chat-content {
+	margin: 15px;
+	height: 250px;
+	border: 2px solid black;
+	text-overflow: auto;
+}
+
+#small-chatbox-content-area{
+	margin: 15px;
+}
+
+.chat-message {
+	width: 70%;
+	height: 40px;
+	border: 2px solid #BF9469;
+	padding-left: 8px;
+	margin: auto;
+}
+
+.chat-send {
+	float: right;
+	width: 30%;
+	height: 40px;
+	font-weight: bold;
+	text-transform: uppercase;
+	background-color: white;
+	border: 2px solid #BF9469;
+	color: black;
+	padding: 10px;
+}
+
+#character-area{
+	margin: auto;
+	border-radius: 20px;
+	width: 85%;
+	display: block;
+	position: relative;
+	height: 300px;
+	margin-bottom: 30px;
+}
+
+#left-half-character-box{
+	margin-left: 5px;
+	width: 45%;
+	position: absolute;
+  left: 0%;
+}
+
+#right-half-character-box{
+	margin-right: 5px;
+	width: 45%;
+	position: absolute;
+  right: 0%;
+}
+
+.character-box{
+	height: 300px;
+	background: #fbcb9b;
+	border-radius: 10px;
+	padding-top: 40px;
+	/* position: relative; */
+}
+
+.character-ava{
+	margin: auto auto;
+	margin-bottom: 10px;
+  width: 80px;
+  height: 80px;
+  border-radius: 30%;
+	display: block;
+	/* vertical-align: middle; */
+}
+
+#return-box{
+	height: 50px;
+	width: 50px;
+	border-radius: 10px;
+	background: #fbcb9b;
+	display: inline-block;
+	margin-left: 30px;
+	margin-top: 20px;
+}
+
+#room-area{
+  right: 0%;
+	margin: auto;
+	border-radius: 20px;
+	width: 70%;
+	display: block;
+	position: relative;
+	margin-bottom: 30px;
+}
+
+.room-box{
+	background: #fbcb9b;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.room-bet{
+	margin: auto;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	border-radius: 15px;
+	width: 70%;
+	background: white;
+	padding: 8px;
+	padding-left: 15px;
+	display: block;
+	position: relative;
+	height: 45px;
+	vertical-align: middle;
+}
+
+#left-room-box{
+	margin: auto;
+	margin-left: 10px;
+	height: 30px;
+	position: absolute;
+  left: 0%;
+}
+
+#right-room-box{
+	margin: auto;
+	width: 85%;
+	position: absolute;
+  left: 20%;
+	font-size: 1.5vw;
+
+}
+
+
+/*----------------------------*/
+
+
+#right-half{
+	float: left;
+	width: 60%;
+}
+.content-area{
+	padding: 10px;
+	background: #fbcb9b;/*areacolor*/
+	border: 1px solid #7F4F2A;
+	margin: auto;
+	border-radius: 20px;
+	max-width: 680px;
+}
+
+
+.content-area a {
+	text-decoration: none;
+	color: blue;/*Name*/
+}
+
+#info-board{
+	padding: 5px;
+	text-align: center;
+}
+
+
+/*Control Elements*/
+.btn1 {
+	font-weight: bold;
+	text-transform: uppercase;
+	background-color: #549bc5;/*new game, send*/
+	border: 2px solid #7F4F2A;
+	border-radius: 8px;
+	color: white;/*Letter new game*/
+	margin-top: 2px;
+	margin-bottom: 2px;
+	padding: 10px;
+}

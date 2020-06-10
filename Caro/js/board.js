@@ -39,8 +39,8 @@ var board = {
 		}
 	},
 	sqUpdate: function(i,j){
-		var OHtml='<img src="./static/img/o.png">';
-		var XHtml='<img src="./static/img/x.png">';
+		var OHtml='<img src="./img/o.png">';
+		var XHtml='<img src="./img/x.png">';
 		if (currGame.sq[i][j] == O){
 			document.getElementById('s'+String('00' + i).slice(-2)+String('00' + j).slice(-2)+'').innerHTML = OHtml;
 		} else if (currGame.sq[i][j] == X){
@@ -67,7 +67,6 @@ var board = {
 	},
 };
 
-////////////////////////////////////////////////
 const X = 1, O = 2, Empty = 0;
 
 var currGame = new game(16, 16);
