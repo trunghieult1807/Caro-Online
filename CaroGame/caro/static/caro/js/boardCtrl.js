@@ -1,8 +1,7 @@
 var ctrl = {
 	newGame : function() {
-		currGame = new game(16, 16);
 		// board.writeBoard();
-		board.writeBoard();
+		// board.drawBoard();
 	},
 	rewind : function() {
 
@@ -31,7 +30,6 @@ var ctrl = {
 	// 	}
 	},
 	twoPlayer : function() {
-		currGame = new game(16, 16);
-		board.writeBoardTwoPlayer();
+		board.drawBoard();
 	}
 };

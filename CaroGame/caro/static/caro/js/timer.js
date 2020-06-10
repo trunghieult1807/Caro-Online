@@ -2,7 +2,7 @@ var timer = {
   setTimer: function(timer1, timer2) {
     var x = setInterval(
       function() {
-        if (currGame.Turn == 1) {
+        if (caro_game.Turn == 1) {
           timer1 -= 1;
         }
         var minutes = Math.floor(timer1/60);
@@ -20,7 +20,7 @@ var timer = {
 
     var y = setInterval(
       function() {
-        if (currGame.Turn == 2) {
+        if (caro_game.Turn == 2) {
           timer2 -= 1;
         }
         var minutes = Math.floor(timer2/60);
@@ -41,28 +41,3 @@ var timer = {
 
   },
 };
-// var timer1 = 300;
-//
-// if(timer1 < 5) {
-//   clearTimer(myVar);
-// }
-//
-// function setTimer() {
-//   if (currGame.Turn == 1) {
-//     timer1 -= 1;
-//   }
-//   var minutes = Math.floor(timer1/60);
-//   var seconds = Math.floor(timer1%60);
-//
-//   document.getElementById("oppo1-time").textContent = String('00' + minutes).slice(-2) + ":" + String('00' + seconds).slice(-2);
-//
-//   // If the count down is over, write some text
-//   if (timer1 < 5) {
-//
-//   }
-// }
-//
-// function clearTimer(myVar) {
-//   clearInterval(myVar);
-//   document.getElementById("oppo1-time").textContent = "";
-// }
