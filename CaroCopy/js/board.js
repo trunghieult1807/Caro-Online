@@ -3,7 +3,7 @@ const Mark = 1, Empty = 0;
 function game(noOfRow, noOfCol) {
 	this.noOfRow = noOfRow, this.noOfCol = noOfCol;
 	this.Turn = 1;
-	this.isGamming = true; //currGame.isGamming or Not.
+	this.isGamming = true; //caro_game.isGamming or Not.
 	this.noOfPiece = 0; //number of Pieces on the table -> to check draw
 	this.sq = new Array(); /* define an array storing XO position */
 	for (var i = 0; i < this.noOfRow; i++) {
@@ -14,22 +14,22 @@ function game(noOfRow, noOfCol) {
 	}
 
 	//With player
-	this.xMoveTwoPlayer = function(i,j){
+	this.xMove = function(i,j){
 		var mes = "This is x move: " + Mark;
 		console.log(mes);
-		currGame.sq[i][j] = Mark;
+		caro_game.sq[i][j] = Mark;
 		board.sqUpdate(i, j);
-		currGame.noOfPiece++;
-		currGame.Turn = 2;
+		caro_game.noOfPiece++;
+		caro_game.Turn = 2;
 	};
 
-	this.oMoveTwoPlayer = function(i,j){
+	this.oMove = function(i,j){
 		var mes = "This is y move: " + Mark;
 		console.log(mes);
-		currGame.sq[i][j] = Mark;
+		caro_game.sq[i][j] = Mark;
 		board.sqUpdate(i, j);
-		currGame.noOfPiece++;
-		currGame.Turn = 1;
+		caro_game.noOfPiece++;
+		caro_game.Turn = 1;
 	};
 }
 
@@ -40,17 +40,17 @@ var board = {
 		timer.setTimer(300, 300);
 		var st = '';
 		st = '<table id="board-table"><tbody>';
-		for(var i=0; i < currGame.noOfRow; i++){
+		for(var i=0; i < caro_game.noOfRow; i++){
 			st += '<tr>';
-			for(var j=0; j < currGame.noOfCol; j++){
+			for(var j=0; j < caro_game.noOfCol; j++){
 				st += '<td class="square" id="s' +String('00' + i).slice(-2) + String('00' + j).slice(-2) + '" onclick="board.sqClickTwoPlayer(' + String(i) + ',' + String(j) + ')"></td>';
 			};
 			st += '</tr>';
 		}
 		st+= '</tbody></table>';
 		document.getElementById('board').innerHTML = st;
-		for(var i = 0; i < currGame.noOfRow; i++){
-			for(var j = 0; j < currGame.noOfCol; j++){
+		for(var i = 0; i < caro_game.noOfRow; i++){
+			for(var j = 0; j < caro_game.noOfCol; j++){
 				board.sqUpdate(i,j);
 			}
 		}
@@ -59,10 +59,10 @@ var board = {
 		var OHtml='<img src="./img/o.png">';
 		var XHtml='<img src="./img/x.png">';
 
-		if (currGame.sq[i][j] == Mark && currGame.Turn == 2){
+		if (caro_game.sq[i][j] == Mark && caro_game.Turn == 2){
 			document.getElementById('s'+String('00' + i).slice(-2)+String('00' + j).slice(-2)+'').innerHTML = OHtml;
 		}
-		else if (currGame.sq[i][j] == Mark && currGame.Turn == 1){
+		else if (caro_game.sq[i][j] == Mark && caro_game.Turn == 1){
 			document.getElementById('s'+String('00' + i).slice(-2)+String('00' + j).slice(-2)+'').innerHTML = XHtml;
 		}
 		else {
@@ -71,15 +71,15 @@ var board = {
 	},
 
 	sqClickTwoPlayer: function(row, col) {
-		if (currGame.isGamming && currGame.sq[row][col] == Empty && currGame.Turn == 1) {
-			currGame.xMoveTwoPlayer(row, col);
+		if (caro_game.isGamming && caro_game.sq[row][col] == Empty && caro_game.Turn == 1) {
+			caro_game.xMove(row, col);
 		}
-		if (currGame.isGamming && currGame.sq[row][col] == Empty && currGame.Turn == 2) {
-			currGame.oMoveTwoPlayer(row, col);
+		if (caro_game.isGamming && caro_game.sq[row][col] == Empty && caro_game.Turn == 2) {
+			caro_game.oMove(row, col);
 		}
 	},
 };
 
 
-var currGame = new game(16, 16);
+var caro_game = new game(3, 3);
 board.drawBoard();
