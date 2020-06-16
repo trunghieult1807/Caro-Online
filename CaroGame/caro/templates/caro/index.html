@@ -29,20 +29,22 @@
 					<div class = "character-box">
 						<img class = "character-ava" src="{% static 'caro/img/lol1.jpg' %}">
 						<div style = "text-align: center; font-weight: bold; font-size: 20px; color: blue;">Caitlyn</div>
-						<div class = "room-bet" style="margin-top: 40px; width: 80%;">
+						<div class = "room-bet" style="margin-top: 30px; width: 80%;">
 							<img id = "left-room-box" src="{% static 'caro/img/coin.png' %}">
 							<div id = "right-room-box">1.000.000</div>
 						</div>
+						<!-- <div class = "readyFont">Ready</div> -->
 					</div>
 				</div>
 				<div id = "right-half-character-box">
 					<div class = "character-box">
 						<img class = "character-ava" src="{% static 'caro/img/lol2.jpg' %}">
 						<div style = "text-align: center; font-weight: bold; font-size: 20px; color: blue;">Shen</div>
-						<div class = "room-bet" style="margin-top: 40px; width: 80%;">
+						<div class = "room-bet" style="margin-top: 30px; width: 80%;">
 							<img id = "left-room-box" src="{% static 'caro/img/coin.png' %}">
 							<div id = "right-room-box">2.000.000</div>
 						</div>
+						<div class = "readyFont">Ready</div>
 					</div>
 				</div>
 			</div>
@@ -64,13 +66,16 @@
 		<!-- <iframe src="http://www.staggeringbeauty.com/" style="border: 1px inset #ddd" width="498" height="598"></iframe> -->
 		<!-- <iframe src="https://bedaudodangghet.imfast.io" style="border: 1px inset #ddd" width="498" height="598"></iframe> -->
 		<div id = "right-half">
-			<div class="content-area">
-				<div id="info-board">
-					<span id="oppo1-time" class="time glow"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<img id="ava1" class="oppo-avt" src="{% static 'caro/img/lol1.jpg' %}">&nbsp;
+
+
+
+			<div class="boardContentArea">
+				<div id="boardInfo">
+					<span id="oppo1-time" class="time timeGlow"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img id="ava1" class="boardOppoAvt" src="{% static 'caro/img/lol1.jpg' %}">&nbsp;
 					<img id="vs" src="{% static 'caro/img/vs.png' %}">&nbsp;&nbsp;
-					<img id="ava2" class="oppo-avt" src="{% static 'caro/img/lol2.jpg' %}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<span id="oppo2-time" class="time glow"></span>
+					<img id="ava2" class="boardOppoAvt" src="{% static 'caro/img/lol2.jpg' %}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<span id="oppo2-time" class="time timeGlow"></span>
 					<br/>
 
 					<span>
@@ -81,23 +86,24 @@
 						<a href="#" style="font-weight:bold;"> Shen </a>
 					</span>
 
+				<!-- Board will be drawn by javascript -->
+				<div id="board">
+
 				</div>
 
-				<!-- Board will be drawn by javascript -->
-				<div id="board"></div>
 
 				<div id="board-cpanel">
 
-					<button class="btn1" onclick="ctrl.newGame()">
+					<button class="optionBtn" onclick="ctrl.newGame()">
 						<i class="fa fa-gamepad fa-2x" aria-hidden="true"></i> New game</button>
 
-					<button class="btn1" onclick="ctrl.surrender()">
+					<button class="optionBtn" onclick="ctrl.surrender()">
 						<i class="fa fa-flag-o fa-2x" aria-hidden="true"></i> Surrender</button>
 
-					<button class="btn1" onclick="ctrl.rewind()">
+					<button class="optionBtn" onclick="ctrl.rewind()">
 						<i class="fa fa-undo fa-2x" aria-hidden="true"></i> Rewind</button>
 
-					<button class="btn1" onclick="ctrl.quit()">
+					<button class="optionBtn" onclick="ctrl.quit()">
 						<i class="fa fa-sign-out fa-2x" aria-hidden="true"></i> Quit</button>
 
 				</div>
@@ -105,9 +111,12 @@
 			</div>
 		</div>
 
+		<div class="readyBtnContainer readyBtn">
+			<a href="#" class="btn specFont" style="color: white;">READY</a>
+		</div>
 
 
-		<div style = "clear: both;">
+		<!-- <div style = "clear: both;">
 			<button class="btn1" onclick="ctrl.twoPlayer()">Two Player</button>
 			<button class="btn1" onclick="ctrl.newGame()">AI</button>
 		</div>
@@ -115,7 +124,9 @@
 		<label class="switch">
 		  <input type="checkbox" checked>
 		  <span class="slider round"></span>
-		</label>
+		</label> -->
+
+
 
 	</div>
 {% endblock %}

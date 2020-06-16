@@ -37,7 +37,7 @@ function game(noOfRow, noOfCol) {
 
 var board = {
 	drawBoard: function(){
-		//timer.setTimer(300, 300);
+		timer.setTimer(300, 300);
 		var st = '';
 		st = '<table id="board-table"><tbody>';
 		for(var i=0; i < caro_game.noOfRow; i++){
