@@ -1,6 +1,6 @@
 var board = {
 	writeBoard: function(){
-
+		timer.setTimer(300, 300);
 		var st = '';
 		st = '<table id="board-table"><tbody>';
 		for(var i=0; i < currGame.noOfRow; i++){
@@ -70,7 +70,7 @@ var board = {
 const X = 1, O = 2, Empty = 0;
 
 var currGame = new game(16, 16);
-board.writeBoardTwoPlayer();
+board.writeBoard();
 
 function game(noOfRow, noOfCol) {
 	this.noOfRow = noOfRow, this.noOfCol = noOfCol;
