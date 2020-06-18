@@ -1,3 +1,4 @@
+
 const Mark = 1, Empty = 0;
 
 function game(noOfRow, noOfCol) {
@@ -56,8 +57,8 @@ var board = {
 		}
 	},
 	sqUpdate: function(i,j){
-		var OHtml='<img src="./static/caro/img/o.png">';
-		var XHtml='<img src="./static/caro/img/x.png">';
+		var OHtml='<img src="../static/caro/img/o.png">';
+		var XHtml='<img src="../static/caro/img/x.png">';
 
 		if (caro_game.sq[i][j] == Mark && caro_game.Turn == 2){
 			document.getElementById('s'+String('00' + i).slice(-2)+String('00' + j).slice(-2)+'').innerHTML = OHtml;
@@ -77,6 +78,12 @@ var board = {
 		if (caro_game.isGamming && caro_game.sq[row][col] == Empty && caro_game.Turn == 2) {
 			caro_game.oMove(row, col);
 		}
+		// 
+		// var message = {
+		// 	'row': row,
+		// 	'col': col,
+		// }
+		// socket.send(JSON.stringify(message));
 	},
 };
 

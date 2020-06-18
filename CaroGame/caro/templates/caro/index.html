@@ -130,3 +130,30 @@
 
 	</div>
 {% endblock %}
+
+{% block script %}
+	<script>
+		// When we're using HTTPS, use WSS too.
+		var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+		const url = ws_scheme + '://' + window.location.host + window.location.pathname;
+		console.log(url);
+		var socket = new WebSocket(url);
+
+		socket.onmessage = function(e) {
+			const data = JSON.parse(e.data);
+			console.log("Socket gain message");
+		};
+
+		socket.onclose = function(e) {
+			console.error("Chat socket closed unexpectedly");
+		};
+
+		document.querySelector('.square').onclick = function(e) {
+			console.log("Square clicked");
+			socket.send(JSON.stringify({
+				'row': 1,
+				'col': 2,
+			}));
+		};
+    </script>
+{% endblock %}
