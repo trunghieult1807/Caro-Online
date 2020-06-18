@@ -27,10 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Channels
+ASGI_APPLICATION = 'CaroGame.routing.application'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'caro.apps.CaroConfig',
     'django.contrib.admin',
     'django.contrib.auth',
