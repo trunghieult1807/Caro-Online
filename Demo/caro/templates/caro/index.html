@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	{% load static %}
+	<title>Online Caro</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'caro/font-awesome/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'caro/css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'caro/css/playing.css' %}">
+</head>
+<body>
+	<h1 id="logo">CARO ONLINE</h1>
+
+	<span id = "return-box"><img src="{% static 'caro/img/return.png' %}" style = "width: 35px; margin-top: 10px; margin-left: 7px"></span>
+	<div style="display: inline-block" id = "container">
+		<div id = "left-half">
+			<div id = "room-area">
+				<div class = "room-box">
+					<div style="text-align: center; font-size: 30px; font-weight: bold;">Room 16</div>
+
+					<div class = "room-bet">
+						<img id = "left-room-box" src="{% static 'caro/img/coin.png' %}">
+						<div id = "right-room-box">1.000.000</div>
+					</div>
+				</div>
+			</div>
+
+			<div id = "character-area">
+				<div id = "left-half-character-box">
+					<div class = "character-box">
+						<img class = "character-ava" src="{% static 'caro/img/lol1.jpg' %}">
+						<div style = "text-align: center; font-weight: bold; font-size: 20px; color: blue;">Caitlyn</div>
+						<div class = "room-bet" style="margin-top: 40px; width: 80%;">
+							<img id = "left-room-box" src="{% static 'caro/img/coin.png' %}">
+							<div id = "right-room-box">1.000.000</div>
+						</div>
+					</div>
+				</div>
+				<div id = "right-half-character-box">
+					<div class = "character-box">
+						<img class = "character-ava" src="{% static 'caro/img/lol2.jpg' %}">
+						<div style = "text-align: center; font-weight: bold; font-size: 20px; color: blue;">Shen</div>
+						<div class = "room-bet" style="margin-top: 40px; width: 80%;">
+							<img id = "left-room-box" src="{% static 'caro/img/coin.png' %}">
+							<div id = "right-room-box">2.000.000</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="chatbox-area">
+				<div class="chatbox-content-area-title"><i class="fa fa-comments-o" aria-hidden="true"></i> Chat</div>
+				<div class="chat-content">
+					<!-- <ul id="messageContent"> -->
+						<p id="messageContent"></p>
+					<!-- </ul> -->
+				</div>
+				<div id = "small-chatbox-content-area">
+					<form style="clear: both">
+						<input id="myMessage" class="chat-message" type="text" placeholder="Enter to send">
+						<button id="sendButton" class = "chat-send" type="button"></button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div id = "right-half">
+			<div class="content-area">
+				<div id="info-board">
+					<span id="oppo1-time" class="time glow"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img id="ava1" class="oppo-avt" src="{% static 'caro/img/lol1.jpg' %}">&nbsp;
+					<img id="vs" src="{% static 'caro/img/vs.png' %}">&nbsp;&nbsp;
+					<img id="ava2" class="oppo-avt" src="{% static 'caro/img/lol2.jpg' %}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<span id="oppo2-time" class="time glow"></span>
+					<br/>
+
+					<span>
+						<a href="#" style="font-weight:bold;"> Caitlyn </a>
+						<img style="width:16px;" src="{% static 'caro/img/x.png' %}"> fights against
+
+						<img style="width:16px;" src="{% static 'caro/img/o.png' %}">
+						<a href="#" style="font-weight:bold;"> Shen </a>
+					</span>
+
+				</div>
+				<div id="board"></div>
+				<div id="board-cpanel">
+
+					<button class="btn1" onclick="ctrl.newGame()">
+						<i class="fa fa-gamepad fa-2x" aria-hidden="true"></i> AI</button>
+
+					<button class="btn1" onclick="ctrl.twoPlayer()">
+						<i class="fa fa-flag-o fa-2x" aria-hidden="true"></i> Two Player</button>
+
+					<button class="btn1" onclick="ctrl.rewind()">
+						<i class="fa fa-undo fa-2x" aria-hidden="true"></i> Rewind</button>
+
+					<button class="btn1" onclick="ctrl.quit()">
+						<i class="fa fa-sign-out fa-2x" aria-hidden="true"></i> Quit</button>
+
+				</div>
+
+			</div>
+		</div>
+
+
+
+		<!-- <div style = "clear: both;">
+			<button class="btn1" onclick="ctrl.twoPlayer()">Two Player</button>
+			<button class="btn1" onclick="ctrl.newGame()">AI</button>
+		</div> -->
+
+
+	</div>
+</body>
+	<script type="text/javascript" src="{% static 'caro/js/timer.js' %}"></script>
+	<script type="text/javascript" src="{% static 'caro/js/ai.js' %}"></script>
+	<script type="text/javascript" src="{% static 'caro/js/board.js' %}"></script>
+	<script type="text/javascript" src="{% static 'caro/js/boardCtrl.js' %}"></script>
+	<script type="text/javascript" src="{% static 'caro/js/referee.js' %}"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+	<!-- <script type="text/javascript">
+		$(document).ready(function(){
+
+			var socket = io.connect('http://' + document.domain + ':' + location.port );
+			socket.on('connect', function() {
+				socket.send('User has connected!');
+			});
+
+			socket.on('message', function(msg){
+				$("#messageContent").append('<p>'+msg+'</p>');
+				console.log("Recieved message");
+				//setTimeout(function(){ alert("After 5 seconds!"); }, 5000);
+			});
+
+			$('#sendButton').on('click', function(){
+				socket.send($('#myMessage').val());
+				$('#myMessage').val('');
+			});
+
+		});
+
+	</script> -->
+
+</html>
