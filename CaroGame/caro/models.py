@@ -87,12 +87,12 @@ class Game(models.Model):
         """
         return GameCell.objects.filter(game=self)
 
-    def get_game_cell(row, col):
+    def get_game_cell(self, row, col):
         """
         Get a cell of the board by its row and col index
         """
         try:
-            return GameCell.objects.get(game=self, cols=col, rows=row)
+            return GameCell.objects.get(game=self, row=row, col=col)
         except GameCell.DoesNotExist:
             return None
 
@@ -318,6 +318,9 @@ class Game(models.Model):
             print("--" * self.cols + "-")
             for j in range(self.cols):
                 cell = self.get_game_cell(i, j)
+                if cell is None:
+                    print(f'({i} - {j}): failed')
+                    return None
                 if cell.status == 'EMPTY':
                     print("| ", end="")
                 else:
@@ -366,14 +369,15 @@ class GameCell(models.Model):
 
         # Set the current turn for the other player if game is not over
         # Check if find winner
-        if self.game.check_win(cell=self):
+        if self.game.check_win(cell=self) or\
+            self.game.get_all_game_cells().filter(status='EMPTY').count() == 0:
             self.game.mark_complete(winner=user)
+            
         # Switch player turn
-        elif self.game.get_all_game_cells().filter(status='EMPTY'):
-            self.game.next_player_turn()
+        self.game.next_player_turn()
 
         # Let the game know about the move and result
-        self.game.send_game_update()
+        # self.game.send_game_update()
 
 
 # GameLog model---------------------------------------------------------------------------------
