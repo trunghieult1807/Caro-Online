@@ -19,39 +19,39 @@ def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.is_active = False
-            user.save()
-            current_site = get_current_site(request)
-            mail_subject = 'Activate your blog account.'
-            message = render_to_string('users/authenticate_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid':urlsafe_base64_encode(force_bytes(user.pk)),
-                'token':account_activation_token.make_token(user),
-            })
-            to_email = form.cleaned_data.get('email')
-            email = EmailMessage(
-                        mail_subject, message, to=[to_email]
-            )
-            email.send()
-            return HttpResponse('Please confirm your email address to complete the registration')
-            # form.save()
-            # messages.success(request, f'Account created successfully!')
-            # return redirect('users-login')
+            # user = form.save(commit=False)
+            # user.is_active = False
+            # user.save()
+            # current_site = get_current_site(request)
+            # mail_subject = 'Activate your blog account.'
+            # message = render_to_string('users/authenticate_email.html', {
+            #     'user': user,
+            #     'domain': current_site.domain,
+            #     'uid':urlsafe_base64_encode(force_bytes(user.pk)),
+            #     'token':account_activation_token.make_token(user),
+            # })
+            # to_email = form.cleaned_data.get('email')
+            # email = EmailMessage(
+            #             mail_subject, message, to=[to_email]
+            # )
+            # email.send()
+            # return HttpResponse('Please confirm your email address to complete the registration')
+            form.save()
+            messages.success(request, f'Account created successfully!')
+            return redirect('login')
     else:
         form = RegistrationForm()
     return render(request, 'users/register.html', {'form': form})
 
-def login(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request.POST)
-        if form.is_valid():
-            messages.success(request, f'Login successfully!')
-            return render(request, 'users/home.html')
-    else:
-        form = AuthenticationForm()
-    return render(request, 'users/login.html', {'form': form})
+# def login(request):
+#     if request.method == 'POST':
+#         form = AuthenticationForm(request.POST)
+#         if form.is_valid():
+#             messages.success(request, f'Login successfully!')
+#             return render(request, 'users/home.html')
+#     else:
+#         form = AuthenticationForm()
+#     return render(request, 'users/login.html', {'form': form})
 
 def activate(request, uidb64, token):
     try:
@@ -67,3 +67,6 @@ def activate(request, uidb64, token):
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
+
+def profile(request):
+    return render(request, 'users/profile.html')
