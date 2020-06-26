@@ -27,14 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Channels
-ASGI_APPLICATION = 'CaroGame.routing.application'
-
 # Application definition
 
 INSTALLED_APPS = [
     'channels',
-    'caro.apps.CaroConfig',
+    'caro',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -72,7 +69,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'CaroGame.wsgi.application'
-
+ASGI_APPLICATION = 'CaroGame.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -122,3 +119,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Channel layer
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379)],
+        },
+    },
+}
