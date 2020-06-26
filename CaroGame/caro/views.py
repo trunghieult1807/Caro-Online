@@ -10,5 +10,7 @@ from . import caro
 caro = caro.Caro()
 
 # Main page
-def index(request):
-    return render(request, "caro/index.html")
+def index(request, room_id):
+    return render(request, "caro/index.html", {
+        'room_id': room_id
+    })
