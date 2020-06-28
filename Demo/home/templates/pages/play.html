@@ -48,13 +48,35 @@
 
 				<div id="table">
 					<ul>
-						<li><a href="/room"><button><p>Table 1</p>Players: 0/2</button></a> <button><p>Table 2</p></button></li>
+						<!-- <li><a href="/room"><button><p>Table 1</p>Players: 0/2</button></a> <button><p>Table 2</p></button></li> -->
+					    <input class="room-id" type="button" value="Room 1" name="1">
+					    <input class="room-id" type="button" value="Room 2" name="2"> <br>
+					    <input class="room-id" type="button" value="Room 3" name="3">
 						<li><button><p>Table 3</p></button> <button><p>Table 4</p></button></li>
 						<li><button><p>Table 5</p></button> <button><p>Table 6</p></button></li>
 						<li><button><p>Table 7</p></button> <button><p>Table 8</p></button></li>
 						<li><button><p>Table 9</p></button> <button><p>Table 10</p></button></li>
 					</ul>
 				</div>
+
+	<script>
+		var elements = document.getElementsByClassName("room-id");
+		//for(var i=0; i<elements.length; i++) { 
+	        elements[0].onclick = function(e) {
+	            var roomName = elements[0].name;
+	            window.location.pathname = '/chat/' + roomName + '/';
+	        };
+	        elements[1].onclick = function(e) {
+	            var roomName = elements[1].name;
+	            window.location.pathname = '/chat/' + roomName + '/';
+	        };
+	        elements[2].onclick = function(e) {
+	            var roomName = elements[2].name;
+	            window.location.pathname = '/chat/' + roomName + '/';
+	        };
+	    //};
+    </script>
+
 			</div>
 
 		</div>

@@ -59,11 +59,11 @@ body{
 
 #menu_top a:hover {
 	background: #ddd;
-	color: #2e8775;
+	color: #4aa9d2;
 }
 
 #menu_top a.activate {
-	background: #2e8775;
+	background: #4aa9d2;
 	color: white;
 }
 
