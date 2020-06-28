@@ -2,13 +2,17 @@
 
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
+from django.contrib.auth import authenticate, login
+from caro.models import User, Game
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 import json
 
 # Create your views here.
 
 # Main page
+@login_required
 def caro_room(request, room_id):
     return render(request, "caro/room.html", {
         'room_id': room_id
