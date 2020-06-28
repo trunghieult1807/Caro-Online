@@ -19,12 +19,10 @@ from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from users import views
 from home import views
-from chat import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
     path('room', include('caro.urls')),
     path('', include('users.urls')),
-    path('', include('chat.urls')),
 ]
