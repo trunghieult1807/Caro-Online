@@ -18,7 +18,6 @@
 		<a class="right-side" href="/login"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
 	</div>
 	<div id="main">
-
 		<div id="mid">
 			<div id="room-level">
 				<img src="{% static 'images/hall.png' %}">
@@ -46,48 +45,79 @@
 
 			<div id="table">
 				<ul>
-					<li><a href="/room"><button><p>Table 1</p>Players: 0/2</button></a> <button><p>Table 2</p></button></li>
-					<li><button><p>Table 3</p></button> <button><p>Table 4</p></button></li>
-					<li><button><p>Table 5</p></button> <button><p>Table 6</p></button></li>
-					<li><button><p>Table 7</p></button> <button><p>Table 8</p></button></li>
-					<li><button><p>Table 9</p></button> <button><p>Table 10</p></button></li>
+					<li>
+						<input class="room-id" type="button" value="Room 1" name="1">
+						<input class="room-id" type="button" value="Room 2" name="2">
+					</li>
+					<li>
+						<input class="room-id" type="button" value="Room 3" name="3">
+						<input class="room-id" type="button" value="Room 4" name="4">
+					</li>
+					<li>
+						<input class="room-id" type="button" value="Room 5" name="5">
+						<input class="room-id" type="button" value="Room 6" name="6">
+					</li>
+					<li>
+						<input class="room-id" type="button" value="Room 7" name="7">
+						<input class="room-id" type="button" value="Room 8" name="8">
+					</li>
+					<li>
+						<input class="room-id" type="button" value="Room 9" name="9">
+						<input class="room-id" type="button" value="Room 10" name="10">
+					</li>
 				</ul>
 			</div>
-		</div>
 
-	</div>
-
-	<div id="footer">
-		<div id="about">
-			<h4>Practice on Software Engineer Project</h4>
-			<div id="info-contact">
-				<p><i class="fas fa-home"></i>: 268 Lý Thường Kiệt, P. 14, Q.10, Tp. Hồ Chí Minh</p>
-				<p><i class="fas fa-phone-alt"></i>: 0859-545-779</p>
-				<p><i class="fas fa-envelope"></i>: anh.tran.2120@hcmut.edu.vn</p>
-			</div>
-		</div>
-
-		<div id="quick-link">
-			<h4>Quick Links</h4>
-			<ul>
-				<li><a href="">Home</a></li>
-				<li><a href="">News</a></li>
-				<li><a href="">Downloads</a></li>
-				<li><a href="">About Us</a></li>
-				<li><a href="">Play Now</a></li>
-			</ul>
-		</div>
-
-		<div id="contact-us">
-			<h4>Contact Us</h4>
-			<div id="enter-mail"><input type="text" name="" placeholder="Your email address"></div>
-			<div id="enter-message"><input type="text" name="" placeholder="Message ..."></div>
-			<button><i class="fas fa-paper-plane"></i>Send</button>
 		</div>
 	</div>
-	<div id="copy-right">
-		<i class="far fa-copyright"></i>
-		All Rights Reserved 2019-2020 | Designed by SomeOne
-	</div>
 
+{% endblock %}
+
+{% block script %}
+	<script>
+		var elements = document.getElementsByClassName("room-id");
+		// for(var i = 0; i < elements.length; i++) {
+		// for(var i = 0; i < 9; i++) {
+			elements[0].onclick = function(e) {
+				var roomId = elements[0].name;
+				window.location.pathname = '/caro/' + roomId + '/';
+			};
+			elements[1].onclick = function(e) {
+				var roomId = elements[1].name;
+				window.location.pathname = '/caro/' + roomId + '/';
+			};
+			elements[2].onclick = function(e) {
+				var roomId = elements[2].name;
+				window.location.pathname = '/caro/' + roomId + '/';
+			};
+			elements[3].onclick = function(e) {
+				var roomId = elements[3].name;
+				window.location.pathname = '/caro/' + roomId + '/';
+			};
+			elements[4].onclick = function(e) {
+				var roomId = elements[4].name;
+				window.location.pathname = '/caro/' + roomId + '/';
+			};
+			elements[5].onclick = function(e) {
+				var roomId = elements[5].name;
+				window.location.pathname = '/caro/' + roomId + '/';
+			};
+			elements[6].onclick = function(e) {
+				var roomId = elements[6].name;
+				window.location.pathname = '/caro/' + roomId + '/';
+			};
+			elements[7].onclick = function(e) {
+				var roomId = elements[7].name;
+				window.location.pathname = '/caro/' + roomId + '/';
+			};
+			elements[8].onclick = function(e) {
+				var roomId = elements[8].name;
+				window.location.pathname = '/caro/' + roomId + '/';
+			};
+			elements[9].onclick = function(e) {
+				var roomId = elements[9].name;
+				window.location.pathname = '/caro/' + roomId + '/';
+			};
+		//};
+	</script>
 {% endblock %}

@@ -160,6 +160,18 @@ body{
 	padding: 15px;
 }
 
+#main #mid #table ul li input {
+	margin-left: 10px;
+	width: 210px;
+	height: 95px;
+
+	cursor: pointer;
+	text-align: left;
+	background: #debeac;
+	border: 2px solid black;
+	border-radius: 5px;
+}
+
 #main #mid #table ul li button {
 	margin-left: 10px;
 	width: 210px;
