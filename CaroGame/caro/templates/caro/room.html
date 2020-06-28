@@ -137,13 +137,12 @@
 					+ '/ws/caro/'
 					+ roomId
 					+ '/';
-		const socket = new WebSocket(url);
+		var socket = new WebSocket(url);
 		console.log(`Create socket ${url}`);
 
 		socket.onmessage = function(e) {
 			const data = JSON.parse(e.data);
-			let message = data['message'];
-			console.log("Socket gain message: " + message);
+			console.log("Socket gain message: " + data.content);
 		};
 
 		socket.onclose = function(e) {
@@ -161,9 +160,11 @@
 	        messageA.innerHTML = 'Ready';
 	        messageB.innerHTML = 'Ready';
 
-			socket.send(JSON.stringify({
-				'message': "Hello from room " + roomId
-			}));
+			const message = "Hello from room " + roomId;
+			console.log(message);
+			// socket.send(JSON.stringify({
+			// 	'content': message
+			// }));
 		};
     </script>
 {% endblock %}

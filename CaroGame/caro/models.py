@@ -1,4 +1,6 @@
 from django.contrib.auth.models import User
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
 from django.db import models
 import json
 from datetime import datetime
@@ -11,6 +13,7 @@ class Game(models.Model):
     Represents a Caro game for two players.
     """
 
+    room_id = models.IntegerField(default=0)
     creator = models.ForeignKey(User, related_name='creator', on_delete=models.CASCADE)
     opponent = models.ForeignKey(User, related_name='opponent',
                                 null=True, blank=True, on_delete=models.CASCADE)
@@ -26,7 +29,7 @@ class Game(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'Game #{self.pk}'
+        return f'Room {self.room_id}: Game #{self.pk}'
 
     @staticmethod
     def get_available_games():
@@ -112,30 +115,25 @@ class Game(models.Model):
         """
         return GameLog.objects.filter(game=self)
 
+    def get_room_id(self):
+        return 'room_{0}'.format(self.room_id)
+
     def send_game_update(self):
         """
         Send updated game information and cells to the game's channel group
         """
-        # Imported here to avoid circular import
-        from serializers import GameCellSerializer, GameLogSerializer, GameSerializer
 
-        cells = self.get_all_game_cells()
-        cell_serializer = GameCellSerializer(cells, many=True)
-
-        # Get game log
-        log = self.get_game_log()
-        log_serializer = GameLogSerializer(log, many=True)
-
-        game_serializer = GameSerializer(self)
-
-        message = {
-            'game': game_serializer.data,
-            'log': log_serializer.data,
-            'cells': cell_serializer.data
+        content = {
+            'type': 'send.game.update',
+            'winner': self.winner,
+            'current_turn': self.current_turn,
+            'completed': completed
         }
 
-        game_group = 'game-{0}'.format(self.id)
-        Group(game_group).send({'text': json.dumps(message)})
+        room = self.get_room_id()
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(room, content)
+
 
     def next_player_turn(self):
         """
@@ -372,12 +370,25 @@ class GameCell(models.Model):
         if self.game.check_win(cell=self) or\
             self.game.get_all_game_cells().filter(status='EMPTY').count() == 0:
             self.game.mark_complete(winner=user)
-            
+
         # Switch player turn
         self.game.next_player_turn()
 
+        # Send cell position has just been marked
+        content = {
+            'type': 'make.move',
+            'game': self.game.id,
+            'owner': self.owner.username,
+            'status': self.status,
+            'row': self.row,
+            'col': self.col,
+        }
+        room = game.get_room_id()
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(room, content)
+
         # Let the game know about the move and result
-        # self.game.send_game_update()
+        self.game.send_game_update()
 
 
 # GameLog model---------------------------------------------------------------------------------

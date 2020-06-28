@@ -44,7 +44,8 @@ var board = {
 		for(var i=0; i < caro_game.noOfRow; i++){
 			st += '<tr>';
 			for(var j=0; j < caro_game.noOfCol; j++){
-				st += '<td class="square" id="s' +String('00' + i).slice(-2) + String('00' + j).slice(-2) + '" onclick="board.sqClickTwoPlayer(' + String(i) + ',' + String(j) + ')"></td>';
+				var n = j + caro_game.noOfCol*i;
+				st += '<td class="square" id="' + n + '" onclick="board.sqClickTwoPlayer(' + n + ')"></td>';
 			};
 			st += '</tr>';
 		}
@@ -61,29 +62,33 @@ var board = {
 		var XHtml='<img src="../static/caro/img/x.png">';
 
 		if (caro_game.sq[i][j] == Mark && caro_game.Turn == 2){
-			document.getElementById('s'+String('00' + i).slice(-2)+String('00' + j).slice(-2)+'').innerHTML = OHtml;
+			document.getElementById(String(j + caro_game.noOfCol*i)).innerHTML = OHtml;
 		}
 		else if (caro_game.sq[i][j] == Mark && caro_game.Turn == 1){
-			document.getElementById('s'+String('00' + i).slice(-2)+String('00' + j).slice(-2)+'').innerHTML = XHtml;
+			document.getElementById(String(j + caro_game.noOfCol*i)).innerHTML = XHtml;
 		}
 		else {
-			document.getElementById('s'+String('00' + i).slice(-2)+String('00' + j).slice(-2)+'').innerHTML = '';
+			document.getElementById(String(j + caro_game.noOfCol*i)).innerHTML = '';
 		}
 	},
 
-	sqClickTwoPlayer: function(row, col) {
+	sqClickTwoPlayer: function(n) {
+		var row = Math.floor(n / caro_game.noOfCol);
+		var col = n % caro_game.noOfCol;
 		if (caro_game.isGamming && caro_game.sq[row][col] == Empty && caro_game.Turn == 1) {
 			caro_game.xMove(row, col);
 		}
 		if (caro_game.isGamming && caro_game.sq[row][col] == Empty && caro_game.Turn == 2) {
 			caro_game.oMove(row, col);
 		}
-		// 
-		// var message = {
-		// 	'row': row,
-		// 	'col': col,
-		// }
-		// socket.send(JSON.stringify(message));
+		console.log("Square click");
+
+		socket.send(JSON.stringify({
+			'content': {
+				'row': row,
+				'col': col
+			}
+		}));
 	},
 };
 

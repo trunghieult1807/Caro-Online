@@ -32,6 +32,9 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'channels',
     'caro',
+    'home',
+    'users',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -100,6 +103,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/play/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
