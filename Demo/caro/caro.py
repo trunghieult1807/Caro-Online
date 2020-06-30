@@ -187,10 +187,10 @@ class Caro():
         diagonal1 = 0
 
         # Check upper branch of diagonal 1
+        i = row
         j = col
         while i >= 0 and j >= 0:
             if self.board[i][j] == player:
-                i = row
                 diagonal1 += 1
             elif self.board[i][j] == EMPTY:
                 break

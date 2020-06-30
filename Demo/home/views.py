@@ -9,3 +9,6 @@ def newsPage(request):
 
 def playPage(request):
 	return render(request, 'pages/play.html')
+
+def profilePage(request):
+	return render(request, 'pages/profile.html')

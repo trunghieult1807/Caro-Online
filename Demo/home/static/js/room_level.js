@@ -1,5 +1,5 @@
 function seeRoomList() {
-	var x = document.getElementById("myDiv");
+	var x = document.getElementById("level");
 	if(x.style.display === "none") {
 		x.style.display = "block";
 	} else {
