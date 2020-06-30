@@ -6,6 +6,8 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     </head>
     <body>
-        <h1>Hi {{ user.username }}!</h1>
+        <h1>Hi there!</h1>
+        <a href="{% url 'logout' %}"> Logout </a>
+        <a href="{% url 'users-profile' %}"> My Profile </a>
     </body>
 </html>

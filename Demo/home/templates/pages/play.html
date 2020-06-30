@@ -15,7 +15,9 @@
 		<a href="{% url 'index' %}"><i class="fas fa-home"></i> HOME</a>
 		<a href="{% url 'news' %}"><i class="fas fa-newspaper"></i> NEWS</a>
 		<a class="right-side" href="/logout"><i class="fas fa-user-plus"></i> LOG OUT</a>
-		<a class="right-side" href="{% url 'profile' %}">Username</a>
+		{% if user.authenticate %}
+			<a class="right-side" href="{% url 'profile' %}"> {{ user.username }}</a>
+		{% endif %}
 	</div>
 	<div id="main">
 

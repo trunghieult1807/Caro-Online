@@ -11,9 +11,16 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
+from django.contrib.auth.decorators import login_required
 
+def home(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    return render(request, 'users/home.html')
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('users-home')
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
@@ -67,4 +74,9 @@ def activate(request, uidb64, token):
         return HttpResponse('Activation link is invalid!')
 
 def profile(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     return render(request, 'users/profile.html')
+
+def login(request):
+    return redirect('login')

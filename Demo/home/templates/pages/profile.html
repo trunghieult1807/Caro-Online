@@ -15,21 +15,21 @@
 		<a href="{% url 'index' %}"><i class="fas fa-home"></i> HOME</a>
 		<a href="{% url 'news' %}"><i class="fas fa-newspaper"></i> NEWS</a>
 		<a class="right-side" href="/logout"><i class="fas fa-user-plus"></i> LOG OUT</a>
-		<a class="right-side" href="{% url 'profile' %}">Username</a>
+		<a class="right-side" href="{% url 'profile' %}">{{ user.username }}</a>
 	</div>
 
 	<div id="main">
 		<div id="left">
 			<img src="{% static 'images/profile/kitty.jpg' %}">
-			<h1>Username</h1>
+			<h1>{{ user.username }}</h1>
 			<button>Upload avatar</button>			
 		</div>
 		
 		<div id="right">
 			<h1>User Informations</h1>
 			<ul>
-				<li>Username: <span>abc</span></li>
-				<li>Email: <span>aaa@hcmut.edu.vn</span></li>
+				<li>Username: <span> {{ user.username }}</span></li>
+				<li>Email: <span>{{ user.email }}</span></li>
 				<li>Phone Number: <span>0859545779</span></li>
 				<li>Date of birth: <span>22/11/2000</span></li>
 			</ul>
