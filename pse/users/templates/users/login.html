@@ -1,22 +1,100 @@
-{% extends 'users/layout.html' %}
-{% load crispy_forms_tags %}
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{% static 'users/images/icons/favicon.ico' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'users/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'users/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'users/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'users/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'users/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'users/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'users/css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
 
-{% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'users/form.css' %}">
-{% endblock head %}
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="{% static 'users/images/hii.png' %}" alt="IMG">
+				</div>
 
-{% block content %}
-    <div class="content-section">
-        <form method="POST" action="">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="mb-4">Login Now!</legend>
-                {{ form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Login</button>
-            </div>
-        </form>
-    </div>
-{% endblock content %}
+				<form class="login100-form validate-form" method="POST">
+					{% csrf_token %}
+					<span class="login100-form-title"> Login </span>
+					<div class="wrap-input100 validate-input" data-validate = "Valid username is required:">
+						{{ form.username }}
+						<!-- <span class="focus-input100"></span> -->
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<!-- <input class="input100" type="password" name="password" placeholder="Password"> -->
+						<!-- <input name="password"  type="password" class="input100" placeholder="Password"> -->
+						<!-- <span class="focus-input100"></span> -->
+						{{ form.password }} 
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" type="submit"> Login </button>
+					</div>
+
+					<div class="text-center p-t-12">
+						<span class="txt1">
+							Forgot
+						</span>
+						<a class="txt2" href="#">
+							Username / Password?
+						</a>
+					</div>
+
+					<div class="text-center p-t-136">
+						<a class="txt2" href="{% url 'register' %}">
+							Create your Account
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+<!--===============================================================================================-->
+	<script src="{% static 'users/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'users/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'users/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'users/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'users/vendor/tilt/tilt.jquery.min.js' %}"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'users/js/main.js' %}"></script>
+
+</body>
+</html>
