@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 from .models import *
+import time
 
 # Create your tests here.
 class GameTestCase(TestCase):
@@ -8,41 +9,155 @@ class GameTestCase(TestCase):
         # Create players
         player1 = User.objects.create_user(username='caitlyn', password='1')
         player2 = User.objects.create_user(username='shen', password='1')
-        game = Game.create_new(player1)
+        player3 = User.objects.create_user(username='thanh', password='1')
 
-        available_game = Game.get_available_games().first()
-        available_game.opponent = player2
-        available_game.save()
+        # Create blank room
+        room1 = Room.objects.create(pk=1)
+        room2 = Room.objects.create(pk=2)
+        room2.enter_room(player1)
+        room2.enter_room(player2)
 
-        # Make some moves
-        cell1 = GameCell.objects.get(game=game, status='EMPTY', row=3, col=5)
-        cell2 = GameCell.objects.get(game=game, status='EMPTY', row=4, col=7)
-        cell3 = GameCell.objects.get(game=game, status='EMPTY', row=3, col=1)
-        cell4 = GameCell.objects.get(game=game, status='EMPTY', row=4, col=1)
-        cell5 = GameCell.objects.get(game=game, status='EMPTY', row=5, col=1)
-        cell6 = GameCell.objects.get(game=game, status='EMPTY', row=4, col=3)
-        cell7 = GameCell.objects.get(game=game, status='EMPTY', row=3, col=4)
+    def test_get_room_by_id(self):
+        room = Room.get_by_id(1)
+        self.assertNotEqual(room, None)
 
-        cell1.make_move(game.current_turn)
-        print(game.current_turn)
-        cell2.make_move(game.current_turn)
-        cell3.make_move(game.current_turn)
-        cell4.make_move(game.current_turn)
-        cell5.make_move(game.current_turn)
-        cell6.make_move(game.current_turn)
-        cell7.make_move(game.current_turn)
+    def test_enter_room(self):
+        room = Room.get_by_id(1)
+        user1 = User.objects.get(pk=1)
+        room.enter_room(user1)
+        self.assertEqual(room.is_available(), True)
 
+        user2 = User.objects.get(pk=2)
+        room.enter_room(user2)
+        self.assertEqual(room.is_available(), False)
 
-    def test_create_game(self):
-        all_games = Game.objects.all()
-        for game in all_games:
-            print(game)
-            print(f'{game.creator} vs {game.opponent}')
-            game.print()
+    def test_create_game_not_two_player(self):
+        room = Room.get_by_id(1)
+        user1 = User.objects.get(pk=1)
+        room.enter_room(user1)
+        game = room.create_game()
+        self.assertEqual(game, None)
 
-        self.assertEqual(all_games.count(), 1)
+    def test_create_game_two_player(self):
+        room = Room.get_by_id(1)
+        user1 = User.objects.get(pk=1)
+        room.enter_room(user1)
+        user2 = User.objects.get(pk=2)
+        room.enter_room(user2)
+        new_game = room.create_game()
+        game = Game.get_by_id(1)
+        self.assertEqual(new_game, game)
 
-    def test_create_game_log(self):
-        game = Game.objects.get(pk=1)
-        for log in game.get_game_log():
-            print(log.text)
+    def test_leave_room(self):
+        room = Room.get_by_id(2)
+        user1 = User.objects.get(pk=1)
+        user2 = User.objects.get(pk=2)
+        room.leave_room(user1)
+        self.assertEqual(room.user1, user2)
+        self.assertEqual(room.user2, None)
+
+    def test_leave_room_and_create_game(self):
+        room = Room.get_by_id(2)
+        user1 = User.objects.get(pk=1)
+        user2 = User.objects.get(pk=2)
+        room.leave_room(user1)
+        game = room.create_game()
+        self.assertEqual(game, None)
+
+    def test_get_room_by_game(self):
+        # Set up
+        room = Room.get_by_id(1)
+        user1 = User.objects.get(pk=1)
+        user2 = User.objects.get(pk=2)
+        room.enter_room(user1)
+        room.enter_room(user2)
+        new_game = room.create_game()
+        # Test
+        game = Game.get_by_id(1)
+        room_get = Room.get_by_game(game=game)
+        self.assertEqual(room_get, room)
+
+    def test_room_delete_game(self):
+        # Set up
+        room = Room.get_by_id(1)
+        user1 = User.objects.get(pk=1)
+        user2 = User.objects.get(pk=2)
+        room.enter_room(user1)
+        room.enter_room(user2)
+        new_game = room.create_game()
+        # Test
+        room.delete_game()
+        self.assertEqual(room.game, None)
+
+    def test_game_is_not_over(self):
+        # Set up
+        room = Room.get_by_id(1)
+        user1 = User.objects.get(pk=1)
+        user2 = User.objects.get(pk=2)
+        room.enter_room(user1)
+        room.enter_room(user2)
+        new_game = room.create_game()
+        # Test
+        game = Game.get_by_id(1)
+        self.assertEqual(game.is_over(), False)
+
+    def test_game_is_over(self):
+        # Set up
+        room = Room.get_by_id(1)
+        user1 = User.objects.get(pk=1)
+        user2 = User.objects.get(pk=2)
+        room.enter_room(user1)
+        room.enter_room(user2)
+        new_game = room.create_game()
+
+        # Test
+        game = Game.get_by_id(1)
+        game.mark_complete(user2)
+        self.assertEqual(game.winner, user2)
+        self.assertEqual(game.is_over(), True)
+
+    def test_count_user(self):
+        # Set up
+        room = Room.get_by_id(1)
+        user1 = User.objects.get(pk=1)
+        user2 = User.objects.get(pk=2)
+        # Test
+        self.assertEqual(room.count_user(), 0)
+        room.enter_room(user1)
+        self.assertEqual(room.count_user(), 1)
+        room.enter_room(user2)
+        self.assertEqual(room.count_user(), 2)
+
+    def test_game_flow(self):
+        # Set up
+        room = Room.get_by_id(1)
+        user1 = User.objects.get(pk=1)
+        user2 = User.objects.get(pk=2)
+        # Test
+        self.assertEqual(room.enter_room(user1), True)
+        self.assertEqual(room.enter_room(user2), True)
+        new_game = room.create_game()
+
+        game = Game.get_by_id(1)
+
+        # print(game.current_turn)
+        self.assertEqual(game.current_turn, user1)
+
+        cell1 = game.get_game_cell(5, 5)
+        cell1.make_move()
+
+        self.assertEqual(cell1.game, game)
+        # print(cell1.game.current_turn)
+        self.assertEqual(cell1.game.current_turn, user2)
+        # self.assertEqual(game.current_turn, user2)
+
+    def test_get_current_game(self):
+        # Set up
+        room = Room.get_by_id(1)
+        user1 = User.objects.get(pk=1)
+        user2 = User.objects.get(pk=2)
+        # Test
+        room.enter_room(user1)
+        room.enter_room(user2)
+        game = room.create_game()
+        self.assertEqual(room.get_current_game(), game)
