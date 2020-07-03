@@ -3,20 +3,15 @@ from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 from django.db import models
 import json
-from datetime import datetime
 
 # Create your models here.
-
 # Game model----------------------------------------------------------------------------
 class Game(models.Model):
     """
     Represents a Caro game for two players.
     """
-
-    room_id = models.IntegerField(default=0)
     creator = models.ForeignKey(User, related_name='creator', on_delete=models.CASCADE)
-    opponent = models.ForeignKey(User, related_name='opponent',
-                                null=True, blank=True, on_delete=models.CASCADE)
+    opponent = models.ForeignKey(User, related_name='opponent', on_delete=models.CASCADE)
     winner = models.ForeignKey(User, related_name='winner',
                                 null=True, blank=True, on_delete=models.CASCADE)
     rows = models.IntegerField(default=16)
@@ -24,12 +19,10 @@ class Game(models.Model):
     current_turn = models.ForeignKey(User, related_name='current_turn', on_delete=models.CASCADE)
 
     # Dates
-    completed = models.DateTimeField(null=True, blank=True)
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
+    completed = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'Room {self.room_id}: Game #{self.pk}'
+        return f'Game #{self.pk}: Winner is {self.winner}'
 
     @staticmethod
     def get_available_games():
@@ -50,17 +43,17 @@ class Game(models.Model):
             return Game.objects.get(pk=id)
         except Game.DoesNotExist:
             # TODO: Handle this exception
-            pass
+            return None
 
     @staticmethod
-    def create_new(user):
+    def create_new(creator, opponent):
         """
         Create a new game and game cells
         :param user: the user that created the game
         :return: a new game object
         """
         # Create new game with user as creator
-        new_game = Game(creator=user, current_turn=user)
+        new_game = Game(creator=creator, opponent=opponent, current_turn=creator)
         new_game.save()
 
         # Initialize cells
@@ -76,6 +69,28 @@ class Game(models.Model):
         # Put first log into GameLog
         new_game.add_log(f'Game created by {new_game.creator.username}')
         return new_game
+
+    def is_over(self):
+        return self.completed
+
+    def send_game_update(self):
+        """
+        Send to client when game is created
+        """
+        content = {
+            'type': 'create.game',
+            'action': 'game_start',
+            'current_turn': self.current_turn.username,
+            'completed': self.completed
+        }
+
+        room = Room.get_by_game(game=self)
+        if room is None:
+            print("Game not in a room")
+            return None
+        room_name = f'room_{room.pk}'
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(room_name, content)
 
     def add_log(self, text, user=None):
         """
@@ -115,40 +130,23 @@ class Game(models.Model):
         """
         return GameLog.objects.filter(game=self)
 
-    def get_room_id(self):
-        return 'room_{0}'.format(self.room_id)
-
-    def send_game_update(self):
-        """
-        Send updated game information and cells to the game's channel group
-        """
-
-        content = {
-            'type': 'send.game.update',
-            'winner': self.winner,
-            'current_turn': self.current_turn,
-            'completed': completed
-        }
-
-        room = self.get_room_id()
-        channel_layer = get_channel_layer()
-        async_to_sync(channel_layer.group_send)(room, content)
-
-
     def next_player_turn(self):
         """
         Set the next player's turn
         """
-        self.current_turn = self.creator if self.current_turn != self.creator else self.opponent
-        self.save()
+        if self.completed is not None:
+            self.current_turn = self.creator if self.current_turn != self.creator else self.opponent
+            self.save()
 
     def mark_complete(self, winner):
         """
         Set a game to completed status and record the winner
         """
+        # print("Run mark_complete")
+        # Game.objects.get(pk=self.pk).update(winner=winner, completed=True)
         self.winner = winner
-        self.completed = datetime.now()
-        self.save()
+        self.completed = True
+        self.save(update_fields=['winner', 'completed'])
 
     def check_win(self, cell):
         """
@@ -264,12 +262,12 @@ class Game(models.Model):
             j += 1
 
         if diagonal1 == 5 and not isBounded:
-            return player
+            return True
 
         ### Diagonal 2
         isBounded = False
         isBoundedOneSide = False
-        diagonal2 = 0
+        diagonal2 = 1
 
         # Check upper branch of diagonal 2
         i = cell.row - 1
@@ -325,6 +323,86 @@ class Game(models.Model):
                     print(f"|{cell.status}", end="")
             print("|")
         print("--" * self.cols + "-")
+        print(f"Completed({self.completed}) - {self.winner}")
+
+# Room model----------------------------------------------------------------------------
+class Room(models.Model):
+    user1 = models.ForeignKey(User, related_name='user1',
+                                null=True, blank=True, on_delete=models.CASCADE)
+    user2 = models.ForeignKey(User, related_name='user2',
+                                null=True, blank=True, on_delete=models.CASCADE)
+    game = models.ForeignKey(Game, related_name='game',
+                             null=True, blank=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Room {self.pk}: {self.user1} vs {self.user2}'
+
+    @staticmethod
+    def get_by_id(id):
+        try:
+            return Room.objects.get(pk=id)
+        except Room.DoesNotExist:
+            # TODO: Handle this exception
+            print("Room not found by id")
+            return None
+
+    @staticmethod
+    def get_by_game(game):
+        try:
+            return Room.objects.get(game=game)
+        except Room.DoesNotExist:
+            print("Room not found by game")
+            return None
+
+    def is_available(self):
+        return self.user1 is None or self.user2 is None
+
+    def count_user(self):
+        count = 0
+        if self.user1 is not None:
+            count += 1
+        if self.user2 is not None:
+            count += 1
+        return count
+
+    def enter_room(self, user):
+        """
+        Update user in room, if room is full -> return None
+        """
+        if self.user1 is None:
+            self.user1 = user
+        elif self.user1 != user and self.user2 is None:
+            self.user2 = user
+        else:
+            return None
+        self.save()
+        return True
+
+    def leave_room(self, user):
+        if self.user1 == user:
+            self.user1 = self.user2
+            self.user2 =  None
+        elif self.user2 == user:
+            self.user2 = None
+        else:
+            return None
+        self.save()
+
+    def create_game(self):
+        if not self.is_available():
+            self.game = Game.create_new(creator=self.user1, opponent=self.user2)
+            self.save(update_fields=['game'])
+            # Send game update message about "game created" only after saved
+            self.game.send_game_update()
+        return self.game
+
+    def delete_game(self):
+        self.game = None
+        self.save()
+
+    def get_current_game(self):
+        return self.game
+
 
 # GameCell model-------------------------------------------------------------------------------
 class GameCell(models.Model):
@@ -340,10 +418,6 @@ class GameCell(models.Model):
     row = models.IntegerField()
     col = models.IntegerField()
 
-    # Dates
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return f'{self.game} - ({self.row}, {self.col})'
 
@@ -354,12 +428,12 @@ class GameCell(models.Model):
         except GameCell.DoesNotExist:
             return None
 
-    def make_move(self, user):
+    def make_move(self):
         """
         Make move on this cell for user
         """
-        self.owner = user
-        self.status = 'X' if user == self.game.creator else 'O'
+        self.owner = self.game.current_turn
+        self.status = 'X' if self.owner == self.game.creator else 'O'
         self.save(update_fields=['status', 'owner'])
 
         # Add log entry for move
@@ -369,26 +443,40 @@ class GameCell(models.Model):
         # Check if find winner
         if self.game.check_win(cell=self) or\
             self.game.get_all_game_cells().filter(status='EMPTY').count() == 0:
-            self.game.mark_complete(winner=user)
+            print("Winnnnnnnn")
+            self.game.mark_complete(winner=self.owner)
 
         # Switch player turn
         self.game.next_player_turn()
 
-        # Send cell position has just been marked
+        # Let the game know about the move and result
+        self.send_game_update()
+
+    def send_game_update(self):
+        """
+        Send to client when made a new move
+        """
         content = {
-            'type': 'make.move',
-            'game': self.game.id,
+            'type': 'send.game.update',
+            'action': 'make_move',
             'owner': self.owner.username,
             'status': self.status,
             'row': self.row,
             'col': self.col,
+            'current_turn': self.game.current_turn.username,
+            'completed': self.game.completed
         }
-        room = game.get_room_id()
-        channel_layer = get_channel_layer()
-        async_to_sync(channel_layer.group_send)(room, content)
 
-        # Let the game know about the move and result
-        self.game.send_game_update()
+        room = Room.get_by_game(game=self.game)
+        if room is None:
+            print("Game not in a room aslkdfjsldf")
+            return None
+        room_name = f'room_{room.pk}'
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(room_name, content)
+
+        if self.game.is_over():
+            room.delete_game()
 
 
 # GameLog model---------------------------------------------------------------------------------
@@ -396,9 +484,6 @@ class GameLog(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     text = models.CharField(max_length=300)
     player = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
-
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'Game #{self.game.id} Log'
