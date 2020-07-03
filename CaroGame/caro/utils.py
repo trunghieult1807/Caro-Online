@@ -12,10 +12,8 @@ def clearSquares():
     Game.objects.filter(pk=6).update(current_turn=user, completed=None)
     GameLog.objects.filter(game__id=6).delete()
 
-def clearRooms():
-    Room.objects.all().update(user1=None, user2=None, game=None)
-
 def clearAll():
+    Room.objects.all().update(user1=None, user2=None, game=None)
     Game.objects.all().delete()
     GameCell.objects.all().delete()
     GameLog.objects.all().delete()
