@@ -2,63 +2,86 @@
 import re
 import logging
 import json
-from channels.generic.websocket import AsyncJsonWebsocketConsumer
-from .models import Game, GameCell
+from channels.generic.websocket import JsonWebsocketConsumer
+from asgiref.sync import async_to_sync
+from .models import Game, GameCell, Room
 
 logger = logging.getLogger(__name__)
 
-class CaroConsumer(AsyncJsonWebsocketConsumer):
+class CaroConsumer(JsonWebsocketConsumer):
     # Set to True to automatically port users from HTTP cookies
     # (you don't need channel_session_user, this implies it)
     http_user = True
 
-    async def connect(self):
+    def connect(self):
         """
         Perform things on connection start
         """
-        await self.accept()
-
         self.room_id = self.scope['url_route']['kwargs']['room_id']
         self.room = f'room_{self.room_id}'
 
         # Join room group
-        await self.channel_layer.group_add(self.room, self.channel_name)
+        async_to_sync(self.channel_layer.group_add)(
+            self.room,
+            self.channel_name
+        )
+        self.accept()
         logger.info(f"Added {self.channel_name} channel to workflow")
 
-
-    async def disconnect(self, close_code):
+    def disconnect(self, close_code):
         """
         Perform things on connection close
         """
         # Leave room channel
-        await self.channel_layer.group_discard(self.room, self.channel_name)
+        async_to_sync(self.channel_layer.group_discard)(
+            self.room,
+            self.channel_name
+        )
         logger.info(f"Removed {self.channel_name} channel from workflow")
 
-    async def receive(self, text_data):
+    def receive(self, text_data):
         """
         Receive message from WebSocket
         """
         http_user = True
-        
+
         text_data_json = json.loads(text_data)
-        content = text_data_json['content']
-        row = content['row']
-        col = content['col']
-        message = f"Move ({row}, {col})"
+        action = text_data_json['action']
 
-        # Send message to room
-        await self.channel_layer.group_send(
-            self.room, {
-                'type': 'send.game.update',
-                'content': message
-            }
-        )
+        if action == 'create_game':
+            username = text_data_json['user']
+            room_id = int(text_data_json['room_id'])
+            room = Room.get_by_id(room_id)
+            if username != room.user1.username:
+                return None
 
-    async def make_move(self, event):
-        await self.send_json(event)
+            game = room.create_game()
+            if game is not None:
+                # game.send_game_update()
+                print("Create new game")
+            else:
+                print("Faileddddd to create game")
+                return None
+
+        if action == 'make_move':
+            # Extract json message
+            username = text_data_json['user']
+            room_id = int(text_data_json['room_id'])
+            row = int(text_data_json['row'])
+            col = int(text_data_json['col'])
+            print(f"Move({row}, {col})")
+            room = Room.get_by_id(room_id)
+            game = room.get_current_game()
+            print(game)
+            cell = game.get_game_cell(row, col)
+            cell.make_move()
+
+    def create_game(self, event):
+        # Send message to WebSocket
+        self.send_json(event)
         logger.info(f"Got message {event} at {self.channel_name}")
 
-    async def send_game_update(self, event):
+    def send_game_update(self, event):
         # Send message to WebSocket
-        await self.send_json(event)
+        self.send_json(event)
         logger.info(f"Got message {event} at {self.channel_name}")
