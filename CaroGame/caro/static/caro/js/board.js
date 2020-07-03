@@ -16,7 +16,7 @@ function game(noOfRow, noOfCol) {
 
 	//With player
 	this.xMove = function(i,j){
-		var mes = "This is x move: " + Mark;
+		var mes = `X move: (${i}, ${j})`;
 		console.log(mes);
 		caro_game.sq[i][j] = Mark;
 		board.sqUpdate(i, j);
@@ -25,7 +25,7 @@ function game(noOfRow, noOfCol) {
 	};
 
 	this.oMove = function(i,j){
-		var mes = "This is y move: " + Mark;
+		var mes = `O move: (${i}, ${j})`;
 		console.log(mes);
 		caro_game.sq[i][j] = Mark;
 		board.sqUpdate(i, j);
@@ -33,8 +33,6 @@ function game(noOfRow, noOfCol) {
 		caro_game.Turn = 1;
 	};
 }
-
-
 
 var board = {
 	drawBoard: function(){
@@ -73,22 +71,22 @@ var board = {
 	},
 
 	sqClickTwoPlayer: function(n) {
-		var row = Math.floor(n / caro_game.noOfCol);
-		var col = n % caro_game.noOfCol;
-		if (caro_game.isGamming && caro_game.sq[row][col] == Empty && caro_game.Turn == 1) {
-			caro_game.xMove(row, col);
+		if (current_turn != username) {
+			console.log(`Not your turn ${username}`);
 		}
-		if (caro_game.isGamming && caro_game.sq[row][col] == Empty && caro_game.Turn == 2) {
-			caro_game.oMove(row, col);
-		}
-		console.log("Square click");
+		else {
+			var row = Math.floor(n / caro_game.noOfCol);
+			var col = n % caro_game.noOfCol;
 
-		socket.send(JSON.stringify({
-			'content': {
+			console.log("Square click");
+			socket.send(JSON.stringify({
+				'action': 'make_move',
+				'user': username,
+				'room_id': roomId,
 				'row': row,
 				'col': col
-			}
-		}));
+			}));
+		}
 	},
 };
 

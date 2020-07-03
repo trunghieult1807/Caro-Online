@@ -15,7 +15,7 @@
 
 			<div id = "room-area">
 				<div class = "room-box">
-					<div style="text-align: center; font-size: 30px; font-weight: bold;">Room 16</div>
+					<div style="text-align: center; font-size: 30px; font-weight: bold;">Room {{ room_id }}</div>
 
 					<div class = "room-bet">
 						<img id = "left-room-box" src="{% static 'caro/img/coin.png' %}">
@@ -28,7 +28,7 @@
 				<div id = "left-half-character-box">
 					<div class = "character-box">
 						<img class = "character-ava" src="{% static 'caro/img/lol1.jpg' %}">
-						<div style = "text-align: center; font-weight: bold; font-size: 20px; color: blue;">Caitlyn</div>
+						<div style = "text-align: center; font-weight: bold; font-size: 20px; color: blue;">{{ request.user }}</div>
 						<div class = "room-bet" style="margin-top: 30px; width: 80%;">
 							<img id = "left-room-box" src="{% static 'caro/img/coin.png' %}">
 							<div id = "right-room-box">1.000.000</div>
@@ -79,7 +79,9 @@
 					<br/>
 
 					<span>
-						<a href="#" style="font-weight:bold;"> Caitlyn </a>
+						{% if request.user.is_authenticated %}
+						<a href="#" style="font-weight:bold;"> {{ request.user }} </a>
+						{% endif %}
 						<img style="width:16px;" src="{% static 'caro/img/x.png' %}"> fights against
 
 						<img style="width:16px;" src="{% static 'caro/img/o.png' %}">
@@ -127,9 +129,13 @@
 
 	</div>
 
+	<!-- Connect socket -->
 	{{ room_id|json_script:"room-id" }}
 	<script>
 		const roomId = JSON.parse(document.querySelector("#room-id").textContent);
+		const username = "{{ request.user }}";
+		var current_turn = null;
+		var completed = null;
 		// When we're using HTTPS, use WSS too.
 		var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
 		const url = ws_scheme + '://'
@@ -142,7 +148,31 @@
 
 		socket.onmessage = function(e) {
 			const data = JSON.parse(e.data);
-			console.log("Socket gain message: " + data.content);
+			current_turn = data.current_turn;
+			completed = data.completed;
+
+			if (data.action == "game_start") {
+				console.log("Game start");
+				console.log(`Current player: ${current_turn}`);
+			}
+
+			if (data.action == "make_move") {
+				let i = data.row;
+				let j = data.col;
+				let status = data.status;
+
+				if (status == 'X') {
+					caro_game.xMove(i, j);
+				}
+				else if (status == 'O') {
+					caro_game.oMove(i, j);
+				}
+
+				if (completed == true) {
+					console.log(`Winner: ${data.owner}`);
+					current_turn = null;
+				}
+			}
 		};
 
 		socket.onclose = function(e) {
@@ -153,18 +183,12 @@
 			console.log("Ready clicked");
 			var button = document.querySelector("#readyButton");
 	        button.style.display = 'none'; // insert this line
-
-	        var messageA = document.querySelector("#messageA");
-	        var messageB = document.querySelector("#messageB");
-
-	        messageA.innerHTML = 'Ready';
-	        messageB.innerHTML = 'Ready';
-
-			const message = "Hello from room " + roomId;
-			console.log(message);
-			// socket.send(JSON.stringify({
-			// 	'content': message
-			// }));
+			console.log(username);
+			socket.send(JSON.stringify({
+				'action': 'create_game',
+				'user': username,
+				'room_id': roomId
+			}));
 		};
     </script>
 {% endblock %}
