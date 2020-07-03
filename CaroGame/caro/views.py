@@ -1,10 +1,12 @@
 # caro/views.py
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from django.contrib.auth import authenticate, login
-from caro.models import User, Game
+from django.urls import reverse
+
+from caro.models import User, Game, Room
+from django.contrib.auth import authenticate, login, get_user
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 import json
@@ -14,24 +16,13 @@ import json
 # Main page
 @login_required
 def caro_room(request, room_id):
+    room = Room.get_by_id(room_id)
+    # Request user
+    user = get_user(request)
+
+    if room.enter_room(user) is None:
+        return HttpResponseRedirect(reverse('play'))
+
     return render(request, "caro/room.html", {
         'room_id': room_id
     })
-
-class RoomView(TemplateView):
-    template_name = 'caro/room.html'
-
-    @login_required
-    def dispatch(self, request, *args, **kwargs):
-        return super(RoomView, self).dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(RoomView, self).get_context_data(**kwargs)
-
-        # Create a list of games that contains just the id (for the link) and the creator
-        available_games = [{'creator': game.creator.username, 'room_id': game.room_id} for game in Game.get_available_games()]
-
-        # For the player's games, return a list of games with the opponent and id
-        player_games = Game.get_games_for_player(self.request.user)
-
-        return context
