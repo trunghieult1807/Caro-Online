@@ -1,6 +1,10 @@
 from caro.models import *
 from django.contrib.auth.models import User
 
+def createRooms():
+    for i in range(10):
+        room = Room(user1=None, user2=None, game=None)
+        room.save()
 
 def clearSquares():
     user = User.objects.get(pk=2)
