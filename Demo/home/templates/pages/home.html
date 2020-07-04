@@ -14,8 +14,8 @@
 		<a href="{% url 'play' %}"><i class="fas fa-gamepad"></i> PLAY NOW</a>
 		<a class="activate" href="{% url 'index' %}"><i class="fas fa-home"></i> HOME</a>
 		<a href="{% url 'news' %}"><i class="fas fa-newspaper"></i> NEWS</a>
-		<a class="right-side" href="/register"><i class="fas fa-user-plus"></i> REGISTER</a>
-		<a class="right-side" href="/login"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
+		<a class="right-side" href="/logout"><i class="fas fa-sign-out-alt"></i> LOG OUT</a>
+		<a class="right-side" href="{% url 'profile' %}"> {{ user.username }}</a>
 	</div>
 	<div id="main">
 		<div id="mid">
@@ -63,11 +63,9 @@
 		<div id="quick-link">
 			<h4>Quick Links</h4>
 			<ul>
-				<li><a href="">Home</a></li>
-				<li><a href="">News</a></li>
-				<li><a href="">Downloads</a></li>
-				<li><a href="">About Us</a></li>
-				<li><a href="">Play Now</a></li>
+				<li><a href="{% url 'play' %}">Play Now</a></li>
+				<li><a href="{% url 'index' %}">Home</a></li>
+				<li><a href="{% url 'news' %}">News</a></li>
 			</ul>
 		</div>
 

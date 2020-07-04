@@ -14,26 +14,39 @@
 		<a href="{% url 'play' %}"><i class="fas fa-gamepad"></i> PLAY NOW</a>
 		<a href="{% url 'index' %}"><i class="fas fa-home"></i> HOME</a>
 		<a href="{% url 'news' %}"><i class="fas fa-newspaper"></i> NEWS</a>
-		<a class="right-side" href="/logout"><i class="fas fa-user-plus"></i> LOG OUT</a>
-		<a class="right-side" href="{% url 'profile' %}">{{ user.username }}</a>
+		<a class="right-side" href="/logout"><i class="fas fa-sign-out-alt"></i> LOG OUT</a>
+		<a class="right-side" href="{% url 'profile' %}"> {{ user.username }}</a>
 	</div>
 
 	<div id="main">
 		<div id="left">
 			<img src="{% static 'images/profile/kitty.jpg' %}">
+			<button>Upload avatar</button>
 			<h1>{{ user.username }}</h1>
-			<button>Upload avatar</button>			
+			<h4><i class="fas fa-star"></i> Rank: <span>NA</span></h4>
+			<h4><i class="fas fa-star"></i> Score: <span>NA</span></h4>
 		</div>
 		
 		<div id="right">
-			<h1>User Informations</h1>
-			<ul>
-				<li>Username: <span> {{ user.username }}</span></li>
-				<li>Email: <span>{{ user.email }}</span></li>
-				<li>Phone Number: <span>0859545779</span></li>
-				<li>Date of birth: <span>22/11/2000</span></li>
-			</ul>
-			<button>Edit profile</button>
+			<div id="info">
+				<h1>INFORMATIONS</h1>
+				<ul>
+					<li>Username: <span> {{ user.username }}</span></li>
+					<li>Email: <span>{{ user.email }}</span></li>
+					<li>Phone Number: <span>0859545779</span></li>
+					<li>Date of birth: <span>22/11/2000</span></li>
+				</ul>
+				<button>Edit profile</button>		
+			</div>
+			<hr>
+			<div id="stats">
+				<h1>PERSONAL STATS</h1>
+					<ul>
+						<li>Total matchs: <span> 0</span></li>
+						<li>Win/Lose: <span>0/0</span></li>
+						<li>Play time: <span>0 hours</span></li>
+					</ul>
+			</div>
 		</div>
 
 	</div>
@@ -51,11 +64,9 @@
 		<div id="quick-link">
 			<h4>Quick Links</h4>
 			<ul>
-				<li><a href="">Home</a></li>
-				<li><a href="">News</a></li>
-				<li><a href="">Downloads</a></li>
-				<li><a href="">About Us</a></li>
-				<li><a href="">Play Now</a></li>
+				<li><a href="{% url 'play' %}">Play Now</a></li>
+				<li><a href="{% url 'index' %}">Home</a></li>
+				<li><a href="{% url 'news' %}">News</a></li>
 			</ul>
 		</div>
 

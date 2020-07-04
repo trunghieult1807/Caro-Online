@@ -14,10 +14,8 @@
 		<a class="activate" href="{% url 'play' %}"><i class="fas fa-gamepad"></i> PLAY NOW</a>
 		<a href="{% url 'index' %}"><i class="fas fa-home"></i> HOME</a>
 		<a href="{% url 'news' %}"><i class="fas fa-newspaper"></i> NEWS</a>
-		<a class="right-side" href="/logout"><i class="fas fa-user-plus"></i> LOG OUT</a>
-		{% if user.authenticate %}
-			<a class="right-side" href="{% url 'profile' %}"> {{ user.username }}</a>
-		{% endif %}
+		<a class="right-side" href="/logout"><i class="fas fa-sign-out-alt"></i> LOG OUT</a>
+		<a class="right-side" href="{% url 'profile' %}"> {{ user.username }}</a>
 	</div>
 	<div id="main">
 
@@ -28,21 +26,21 @@
 				<h6>Online players: 0</h6>
 				<ul>
 					<li><button id="level"><i class="far fa-minus-square"></i> Beginner</button></li>
-						<li><button><i class="fas fa-square"></i> Room 1</button></li>
-						<li><button><i class="fas fa-square"></i> Room 2</button></li>
-						<li><button><i class="fas fa-square"></i> Room 3</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 1</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 2</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 3</button></li>
 					<li><button id="level"><i class="far fa-minus-square"></i> Elementary</button></li>
-						<li><button><i class="fas fa-square"></i> Room 1</button></li>
-						<li><button><i class="fas fa-square"></i> Room 2</button></li>
-						<li><button><i class="fas fa-square"></i> Room 3</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 1</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 2</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 3</button></li>
 					<li><button id="level"><i class="far fa-minus-square"></i> Intermediate</button></li>
-						<li><button><i class="fas fa-square"></i> Room 1</button></li>
-						<li><button><i class="fas fa-square"></i> Room 2</button></li>
-						<li><button><i class="fas fa-square"></i> Room 3</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 1</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 2</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 3</button></li>
 					<li><button id="level"><i class="far fa-minus-square"></i> Advanced</button></li>
-						<li><button><i class="fas fa-square"></i> Room 1</button></li>
-						<li><button><i class="fas fa-square"></i> Room 2</button></li>
-						<li><button><i class="fas fa-square"></i> Room 3</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 1</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 2</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 3</button></li>
 				</ul>
 			</div>
 
@@ -65,52 +63,6 @@
 				</ul>
 			</div>
 		</div>
-		<script>
-		var elements = document.getElementsByClassName("room-id");
-		//for(var i=0; i<elements.length; i++) { 
-	        elements[0].onclick = function(e) {
-	            var roomName = elements[0].name;
-	            window.location.pathname = '/caro/' + roomName + '/';
-	        };
-	        elements[1].onclick = function(e) {
-	            var roomName = elements[1].name;
-	            window.location.pathname = '/caro/' + roomName + '/';
-	        };
-	        elements[2].onclick = function(e) {
-	            var roomName = elements[2].name;
-	            window.location.pathname = '/caro/' + roomName + '/';
-	        };
-	        elements[3].onclick = function(e) {
-	            var roomName = elements[3].name;
-	            window.location.pathname = '/caro/' + roomName + '/';
-	        };
-	        elements[4].onclick = function(e) {
-	            var roomName = elements[4].name;
-	            window.location.pathname = '/caro/' + roomName + '/';
-	        };
-	        elements[5].onclick = function(e) {
-	            var roomName = elements[5].name;
-	            window.location.pathname = '/caro/' + roomName + '/';
-	        };
-	        elements[6].onclick = function(e) {
-	            var roomName = elements[6].name;
-	            window.location.pathname = '/caro/' + roomName + '/';
-	        };
-	        elements[7].onclick = function(e) {
-	            var roomName = elements[7].name;
-	            window.location.pathname = '/caro/' + roomName + '/';
-	        };
-	        elements[8].onclick = function(e) {
-	            var roomName = elements[8].name;
-	            window.location.pathname = '/caro/' + roomName + '/';
-	        };
-	        elements[9].onclick = function(e) {
-	            var roomName = elements[9].name;
-	            window.location.pathname = '/caro/' + roomName + '/';
-	        };
-	    //};
-    </script>
-
 	</div>
 
 	<div id="footer">
@@ -126,11 +78,9 @@
 		<div id="quick-link">
 			<h4>Quick Links</h4>
 			<ul>
-				<li><a href="">Home</a></li>
-				<li><a href="">News</a></li>
-				<li><a href="">Downloads</a></li>
-				<li><a href="">About Us</a></li>
-				<li><a href="">Play Now</a></li>
+				<li><a href="{% url 'play' %}">Play Now</a></li>
+				<li><a href="{% url 'index' %}">Home</a></li>
+				<li><a href="{% url 'news' %}">News</a></li>
 			</ul>
 		</div>
 
@@ -146,4 +96,8 @@
 		All Rights Reserved 2019-2020 | Designed by SomeOne
 	</div>
 
+{% endblock %}
+
+{% block script %}
+	<script type="text/javascript" src="{% static 'js/room_id.js' %}"></script>
 {% endblock %}
