@@ -17,6 +17,11 @@ class GameTestCase(TestCase):
         room2.enter_room(player1)
         room2.enter_room(player2)
 
+        # Create game
+        game1 = Game.create_new()
+        game2 = Game.create_new()
+        game3 = Game.create_new()
+
     def test_get_room_by_id(self):
         room = Room.get_by_id(1)
         self.assertNotEqual(room, None)
@@ -30,6 +35,10 @@ class GameTestCase(TestCase):
         user2 = User.objects.get(pk=2)
         room.enter_room(user2)
         self.assertEqual(room.is_available(), False)
+
+    def test_get_available_game(self):
+        game = Game.get_by_id(1)
+        self.assertEqual(Game.get_available_game(), game)
 
     def test_create_game_not_two_player(self):
         room = Room.get_by_id(1)
@@ -63,6 +72,7 @@ class GameTestCase(TestCase):
         room.leave_room(user1)
         game = room.create_game()
         self.assertEqual(game, None)
+        self.assertEqual(room.user1, user2)
 
     def test_get_room_by_game(self):
         # Set up
