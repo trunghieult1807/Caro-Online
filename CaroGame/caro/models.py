@@ -10,23 +10,35 @@ class Game(models.Model):
     """
     Represents a Caro game for two players.
     """
-    creator = models.ForeignKey(User, related_name='creator', on_delete=models.CASCADE)
-    opponent = models.ForeignKey(User, related_name='opponent', on_delete=models.CASCADE)
+    creator = models.ForeignKey(User, related_name='creator',
+                                null=True, blank=True, on_delete=models.CASCADE)
+    opponent = models.ForeignKey(User, related_name='opponent',
+                                null=True, blank=True, on_delete=models.CASCADE)
     winner = models.ForeignKey(User, related_name='winner',
                                 null=True, blank=True, on_delete=models.CASCADE)
     rows = models.IntegerField(default=16)
     cols = models.IntegerField(default=16)
-    current_turn = models.ForeignKey(User, related_name='current_turn', on_delete=models.CASCADE)
-
-    # Dates
+    current_turn = models.ForeignKey(User, related_name='current_turn',
+                                null=True, blank=True, on_delete=models.CASCADE)
     completed = models.BooleanField(default=False)
 
     def __str__(self):
         return f'Game #{self.pk}: Winner is {self.winner}'
 
+    def clear(self):
+        """
+        Reset original state
+        """
+        self.creator = None
+        self.opponent = None
+        self.winner = None
+        self.current_turn = None
+        self.completed = False
+        self.save()
+
     @staticmethod
-    def get_available_games():
-        return Game.objects.filter(opponent=None, completed=None)
+    def get_available_game():
+        return Game.objects.filter(creator=None, opponent=None, completed=False).first()
 
     @staticmethod
     def created_count(user):
@@ -46,7 +58,7 @@ class Game(models.Model):
             return None
 
     @staticmethod
-    def create_new(creator, opponent):
+    def create_new(creator=None, opponent=None):
         """
         Create a new game and game cells
         :param user: the user that created the game
@@ -67,11 +79,8 @@ class Game(models.Model):
                 new_cell.save()
 
         # Put first log into GameLog
-        new_game.add_log(f'Game created by {new_game.creator.username}')
+        new_game.add_log(f'Game created by {new_game.creator}')
         return new_game
-
-    def is_over(self):
-        return self.completed
 
     def send_game_update(self):
         """
@@ -91,6 +100,9 @@ class Game(models.Model):
         room_name = f'room_{room.pk}'
         channel_layer = get_channel_layer()
         async_to_sync(channel_layer.group_send)(room_name, content)
+
+    def is_over(self):
+        return self.completed
 
     def add_log(self, text, user=None):
         """
@@ -337,6 +349,15 @@ class Room(models.Model):
     def __str__(self):
         return f'Room {self.pk}: {self.user1} vs {self.user2}'
 
+    def clear(self):
+        """
+        Reset original state
+        """
+        self.user1 = None
+        self.user2 = None
+        self.game = None
+        self.save()
+
     @staticmethod
     def get_by_id(id):
         try:
@@ -390,7 +411,11 @@ class Room(models.Model):
 
     def create_game(self):
         if not self.is_available():
-            self.game = Game.create_new(creator=self.user1, opponent=self.user2)
+            self.game = Game.get_available_game()
+            self.game.creator = self.user1
+            self.game.opponent = self.user2
+            self.game.current_turn = self.game.creator
+            self.game.save(update_fields=['creator', 'opponent', 'current_turn'])
             self.save(update_fields=['game'])
             # Send game update message about "game created" only after saved
             self.game.send_game_update()
@@ -421,6 +446,14 @@ class GameCell(models.Model):
     def __str__(self):
         return f'{self.game} - ({self.row}, {self.col})'
 
+    def clear(self):
+        """
+        Reset original state
+        """
+        self.owner = None
+        self.status = 'EMPTY'
+        self.save()
+
     @staticmethod
     def get_by_id(id):
         try:
@@ -437,7 +470,7 @@ class GameCell(models.Model):
         self.save(update_fields=['status', 'owner'])
 
         # Add log entry for move
-        self.game.add_log(f'cell made at ({self.row}, {self.col}) by {self.owner.username}')
+        self.game.add_log(f'cell made at ({self.row}, {self.col}) by {self.owner}')
 
         # Set the current turn for the other player if game is not over
         # Check if find winner
@@ -487,3 +520,11 @@ class GameLog(models.Model):
 
     def __str__(self):
         return f'Game #{self.game.id} Log'
+
+    def clear(self):
+        """
+        Reset original state
+        """
+        self.text = ""
+        self.player = None
+        self.save()
