@@ -18,7 +18,7 @@ def home(request):
         return redirect('login')
     return render(request, 'users/home.html')
 
-def register(request):
+def register_view(request):
     if request.user.is_authenticated:
         return redirect('users-home')
     if request.method == 'POST':
@@ -44,19 +44,30 @@ def register(request):
             form.save()
             messages.success(request, f'Account created successfully!')
             return redirect('login')
+        else:
+            messages.warning(request, f'Error')
     else:
         form = RegistrationForm()
-    return render(request, 'users/register.html', {'form': form})
+    return render(request, 'users/index.html', {'form': form})
 
-# def login(request):
-#     if request.method == 'POST':
-#         form = AuthenticationForm(request.POST)
-#         if form.is_valid():
-#             messages.success(request, f'Login successfully!')
-#             return render(request, 'users/home.html')
-#     else:
-#         form = AuthenticationForm()
-#     return render(request, 'users/login.html', {'form': form})
+def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('index')
+        else:
+            messages.warning(request, f'Error')
+    else:
+        form = LoginForm()
+    return render(request, 'users/login.html', {'form': form})
 
 def activate(request, uidb64, token):
     try:
@@ -77,6 +88,3 @@ def profile(request):
     if not request.user.is_authenticated:
         return redirect('login')
     return render(request, 'users/profile.html')
-
-def login(request):
-    return redirect('login')
