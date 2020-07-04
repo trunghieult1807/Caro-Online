@@ -1,5 +1,4 @@
-
-const Mark = 1, Empty = 0;
+const MARK = 1, EMPTY = 0;
 
 function game(noOfRow, noOfCol) {
 	this.noOfRow = noOfRow, this.noOfCol = noOfCol;
@@ -10,7 +9,7 @@ function game(noOfRow, noOfCol) {
 	for (var i = 0; i < this.noOfRow; i++) {
 		this.sq[i] = new Array();
 		for (var j = 0; j < this.noOfCol; j++) {
-			this.sq[i][j] = Empty;
+			this.sq[i][j] = EMPTY;
 		}
 	}
 
@@ -18,8 +17,8 @@ function game(noOfRow, noOfCol) {
 	this.xMove = function(i,j){
 		var mes = `X move: (${i}, ${j})`;
 		console.log(mes);
-		caro_game.sq[i][j] = Mark;
 		board.sqUpdate(i, j);
+		caro_game.sq[i][j] = MARK;
 		caro_game.noOfPiece++;
 		caro_game.Turn = 2;
 	};
@@ -27,8 +26,8 @@ function game(noOfRow, noOfCol) {
 	this.oMove = function(i,j){
 		var mes = `O move: (${i}, ${j})`;
 		console.log(mes);
-		caro_game.sq[i][j] = Mark;
 		board.sqUpdate(i, j);
+		caro_game.sq[i][j] = MARK;
 		caro_game.noOfPiece++;
 		caro_game.Turn = 1;
 	};
@@ -55,15 +54,15 @@ var board = {
 			}
 		}
 	},
-	sqUpdate: function(i,j){
-		var OHtml='<img src="../static/caro/img/o.png">';
-		var XHtml='<img src="../static/caro/img/x.png">';
-
-		if (caro_game.sq[i][j] == Mark && caro_game.Turn == 2){
+	sqUpdate: function(i,j) {
+		var OHtml = "<img src=url('img/o.png') alt='O'>";
+		var XHtml = "<img src=url('img/x.png') alt='X'>";
+		if (caro_game.sq[i][j] == MARK && caro_game.Turn == 2){
 			document.getElementById(String(j + caro_game.noOfCol*i)).innerHTML = OHtml;
 		}
-		else if (caro_game.sq[i][j] == Mark && caro_game.Turn == 1){
+		else if (caro_game.sq[i][j] == MARK && caro_game.Turn == 1){
 			document.getElementById(String(j + caro_game.noOfCol*i)).innerHTML = XHtml;
+			caro_game.sq[i][j] = MARK;
 		}
 		else {
 			document.getElementById(String(j + caro_game.noOfCol*i)).innerHTML = '';
@@ -75,9 +74,13 @@ var board = {
 			console.log(`Not your turn ${username}`);
 		}
 		else {
+			current_turn = null;
 			var row = Math.floor(n / caro_game.noOfCol);
 			var col = n % caro_game.noOfCol;
 
+			if (caro_game.sq[row][col] == MARK) {
+				return null;
+			}
 			console.log("Square click");
 			socket.send(JSON.stringify({
 				'action': 'make_move',

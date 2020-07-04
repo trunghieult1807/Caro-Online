@@ -117,16 +117,6 @@
 			<a href="#" class="btn specFont" style="color: white;">READY</a>
 		</div>
 
-		<!-- <div style = "clear: both;">
-			<button class="btn1" onclick="ctrl.twoPlayer()">Two Player</button>
-			<button class="btn1" onclick="ctrl.newGame()">AI</button>
-		</div>
-
-		<label class="switch">
-		  <input type="checkbox" checked>
-		  <span class="slider round"></span>
-		</label> -->
-
 	</div>
 
 	<!-- Connect socket -->
@@ -147,6 +137,7 @@
 		console.log(`Create socket ${url}`);
 
 		socket.onmessage = function(e) {
+			// Process response from server
 			const data = JSON.parse(e.data);
 			current_turn = data.current_turn;
 			completed = data.completed;
@@ -155,7 +146,6 @@
 				console.log("Game start");
 				console.log(`Current player: ${current_turn}`);
 			}
-
 			if (data.action == "make_move") {
 				let i = data.row;
 				let j = data.col;
