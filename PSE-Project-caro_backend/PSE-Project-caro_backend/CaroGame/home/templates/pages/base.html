@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        <script src="https://kit.fontawesome.com/39248c2d37.js" crossorigin="anonymous"></script>
+        {% block css %}
+        {% endblock %}
+    </head>
+    <body>
+        <!-- Banner -->
+        <div id="banner">
+    		<img src="{% static 'images/banner.png' %}">
+    	</div>
+
+        {% block body %}
+        {% endblock %}
+
+        <!-- Footer -->
+        <div id="footer">
+            <div id="about">
+                <h4>Practice on Software Engineer Project</h4>
+                <div id="info-contact">
+                    <p><i class="fas fa-home"></i>: 268 Lý Thường Kiệt, P. 14, Q.10, Tp. Hồ Chí Minh</p>
+                    <p><i class="fas fa-phone-alt"></i>: 0859-545-779</p>
+                    <p><i class="fas fa-envelope"></i>: anh.tran.2120@hcmut.edu.vn</p>
+                </div>
+            </div>
+
+            <div id="quick-link">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">News</a></li>
+                    <li><a href="">Downloads</a></li>
+                    <li><a href="">About Us</a></li>
+                    <li><a href="">Play Now</a></li>
+                </ul>
+            </div>
+
+            <div id="contact-us">
+                <h4>Contact Us</h4>
+                <div id="enter-mail"><input type="text" name="" placeholder="Your email address"></div>
+                <div id="enter-message"><input type="text" name="" placeholder="Message ..."></div>
+                <button><i class="fas fa-paper-plane"></i>Send</button>
+            </div>
+        </div>
+        <div id="copy-right">
+            <i class="far fa-copyright"></i>
+            All Rights Reserved 2019-2020 | Designed by SomeOne
+        </div>
+    </body>
+    {% block script %}
+    {% endblock %}
+</html>

@@ -1,0 +1,34 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'caro/font-awesome/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'caro/css/right.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'caro/css/left.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'caro/css/logo.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'caro/css/screen.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Schoolbell&v1" rel="stylesheet">
+    </head>
+    <body>
+        {% block body %}
+        {% endblock %}
+    </body>
+    <script type="text/javascript" src="{% static 'caro/js/timer.js' %}"></script>
+    <script type="text/javascript" src="{% static 'caro/js/ai.js' %}"></script>
+    <script type="text/javascript" src="{% static 'caro/js/board.js' %}"></script>
+    <!-- <script type="text/javascript" src="{% static 'caro/js/caro.js' %}"></script> -->
+    <script type="text/javascript" src="{% static 'caro/js/boardCtrl.js' %}"></script>
+    <!-- <script type="text/javascript" src="{% static 'caro/js/ready.js' %}"></script> -->
+    <!-- <script type="text/javascript" src="{% static 'caro/js/referee.js' %}"></script> -->
+    <!-- <script type="text/javascript" src="/static/js/socket.js"></script> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+    <script src="https://raw.githubusercontent.com/joewalnes/reconnecting-websocket/master/reconnecting-websocket.min.js"></script>
+
+    {% block script %}
+    {% endblock %}
+</html>

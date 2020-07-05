@@ -1,0 +1,48 @@
+{% extends "pages/base.html" %}
+{% load static %}
+
+{% block title %}
+	Caro Online
+{% endblock %}
+
+{% block body %}
+	<div id="menu_top">
+		<a href="{% url 'play' %}"><i class="fas fa-gamepad"></i> PLAY NOW</a>
+		<a class="activate" href="{% url 'index' %}"><i class="fas fa-home"></i> HOME</a>
+		<a href="{% url 'news' %}"><i class="fas fa-newspaper"></i> NEWS</a>
+		<a class="right-side" href="/register"><i class="fas fa-user-plus"></i> REGISTER</a>
+		<a class="right-side" href="/login"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
+	</div>
+	<div id="main">
+		<div id="mid">
+			<div id="news">
+				<img src="{% static 'images/news/menuicon.png' %}">
+				<h3>News</h3>
+				<ul>
+					<li><a href="">Cờ Caro VR, xin tiền má mua VR rồi chơi<span>21/4</span></a></li>
+					<li><a href="">Nguyễn Titha bị loại ngay từ vòng gửi xe của giải ao làng<span>19/4</span></a></li>
+					<li><a href="">Update 1.52: Skin quân cờ Caro được thêm vào cừa hàng<span>19/4</span></a></li>
+					<li><a href="">Danh sách Kỳ thủ bị phạt do sử dụng phần mềm thứ 3<span>18/4</span></a></li>
+					<li><a href="">Có cái tựa nào hay hay không, Caro thì có gì mới :)<span>18/4</span></a></li>
+				</ul>
+			</div>
+
+		</div>
+
+		<div id="right">
+			<img src="{% static 'images/Ranking.png' %}"><h3>Top 10</h3>
+			<ul>
+				<li><h4>1</h4><img src="{% static 'images/avatar.png' %}">Username</li>
+				<li><h4>2</h4><img src="{% static 'images/avatar.png' %}">Username</li>
+				<li><h4>3</h4><img src="{% static 'images/avatar.png' %}">Username</li>
+				<li><h4>4</h4><img src="{% static 'images/avatar.png' %}">Username</li>
+				<li><h4>5</h4><img src="{% static 'images/avatar.png' %}">Username</li>
+				<li><h4>6</h4><img src="{% static 'images/avatar.png' %}">Username</li>
+				<li><h4>7</h4><img src="{% static 'images/avatar.png' %}">Username</li>
+				<li><h4>8</h4><img src="{% static 'images/avatar.png' %}">Username</li>
+				<li><h4>9</h4><img src="{% static 'images/avatar.png' %}">Username</li>
+				<li><h4>10</h4><img src="{% static 'images/avatar.png' %}">Username</li>
+			</ul>
+		</div>
+	</div>
+{% endblock %}

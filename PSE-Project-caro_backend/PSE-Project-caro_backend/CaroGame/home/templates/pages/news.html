@@ -1,0 +1,28 @@
+{% extends "pages/base.html" %}
+{% load static %}
+
+{% block title %}
+	Caro Online
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/new_style.css' %}">
+{% endblock %}
+
+{% block body %}
+	<div id="menu_top">
+		<a href="{% url 'play' %}"><i class="fas fa-gamepad"></i> PLAY NOW</a>
+		<a href="{% url 'index' %}"><i class="fas fa-home"></i> HOME</a>
+		<a class="activate" href="{% url 'news' %}"><i class="fas fa-newspaper"></i> NEWS</a>
+		<a class="right-side" href="/register"><i class="fas fa-user-plus"></i> REGISTER</a>
+		<a class="right-side" href="/login"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
+	</div>
+
+	<div id="main">
+
+		<div id="mid">
+			<h2>Function is still in development</h2>
+		</div>
+
+	</div>
+{% endblock %}
