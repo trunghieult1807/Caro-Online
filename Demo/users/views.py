@@ -20,7 +20,7 @@ def home(request):
 
 def register_view(request):
     if request.user.is_authenticated:
-        return redirect('users-home')
+        return redirect('index')
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
@@ -44,8 +44,8 @@ def register_view(request):
             form.save()
             messages.success(request, f'Account created successfully!')
             return redirect('login')
-        else:
-            messages.warning(request, f'Error')
+        # else:
+        #     messages.warning(request, f'Error')
     else:
         form = RegistrationForm()
     return render(request, 'users/index.html', {'form': form})
@@ -53,8 +53,8 @@ def register_view(request):
 def login_view(request):
     if request.user.is_authenticated:
         return redirect('index')
-    if request.method == "POST":
-        form = LoginForm(request.POST)
+    form = LoginForm(request.POST or None)
+    if request.POST and form.is_valid():
         username = request.POST.get('username')
         password = request.POST.get('password')
 
@@ -63,11 +63,7 @@ def login_view(request):
         if user is not None:
             login(request, user)
             return redirect('index')
-        else:
-            messages.warning(request, f'Error')
-    else:
-        form = LoginForm()
-    return render(request, 'users/login.html', {'form': form})
+    return render(request, 'users/login.html', {'form': form })
 
 def activate(request, uidb64, token):
     try:

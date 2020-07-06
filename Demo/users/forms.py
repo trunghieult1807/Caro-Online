@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from django.contrib.auth import login, authenticate
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField()
@@ -35,3 +36,11 @@ class LoginForm(AuthenticationForm):
         # self.fields['username'].label = False
         self.fields['username'].widget.attrs.update({'class':'input100', 'placeholder':'Username'})
         self.fields['password'].widget.attrs.update({'class':"input100", 'placeholder':"Password"})
+
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+        user = authenticate(username=username, password=password)
+        if not user or not user.is_active:
+            raise forms.ValidationError("Wrong username or password. Please try again.")
+        return self.cleaned_data
