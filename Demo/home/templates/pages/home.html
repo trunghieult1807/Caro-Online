@@ -14,7 +14,7 @@
 		<a href="{% url 'play' %}"><i class="fas fa-gamepad"></i> PLAY NOW</a>
 		<a class="activate" href="{% url 'index' %}"><i class="fas fa-home"></i> HOME</a>
 		<a href="{% url 'news' %}"><i class="fas fa-newspaper"></i> NEWS</a>
-		<a class="right-side" href="/logout"><i class="fas fa-sign-out-alt"></i> LOG OUT</a>
+		<a class="right-side" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> LOG OUT</a>
 		<a class="right-side" href="{% url 'profile' %}"> {{ user.username }}</a>
 	</div>
 	<div id="main">
@@ -36,7 +36,10 @@
 		<div id="right">
 			<img src="{% static 'images/Ranking.png' %}"><h3>Top 10</h3>
 			<ul>
-				<li><h4>1</h4><img src="{% static 'images/avatar.png' %}">Username</li>
+				{% for item in lists %}
+					<li><h4>{{forloop.counter}}</h4><img src="{% static 'images/avatar.png' %}">{{ item.0 }}</li>
+				{% endfor %}
+				<!-- <li><h4>1</h4><img src="{% static 'images/avatar.png' %}">Username</li>
 				<li><h4>2</h4><img src="{% static 'images/avatar.png' %}">Username</li>
 				<li><h4>3</h4><img src="{% static 'images/avatar.png' %}">Username</li>
 				<li><h4>4</h4><img src="{% static 'images/avatar.png' %}">Username</li>
@@ -45,7 +48,7 @@
 				<li><h4>7</h4><img src="{% static 'images/avatar.png' %}">Username</li>
 				<li><h4>8</h4><img src="{% static 'images/avatar.png' %}">Username</li>
 				<li><h4>9</h4><img src="{% static 'images/avatar.png' %}">Username</li>
-				<li><h4>10</h4><img src="{% static 'images/avatar.png' %}">Username</li>
+				<li><h4>10</h4><img src="{% static 'images/avatar.png' %}">Username</li> -->
 			</ul>
 		</div>
 	</div>

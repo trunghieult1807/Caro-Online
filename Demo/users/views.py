@@ -48,7 +48,7 @@ def register_view(request):
         #     messages.warning(request, f'Error')
     else:
         form = RegistrationForm()
-    return render(request, 'users/index.html', {'form': form})
+    return render(request, 'users/register.html', {'form': form})
 
 def login_view(request):
     if request.user.is_authenticated:
