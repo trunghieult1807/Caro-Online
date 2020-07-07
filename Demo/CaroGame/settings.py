@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     'channels',
     'caro',
     'home',
-    'users',
+    'users.apps.UsersConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
