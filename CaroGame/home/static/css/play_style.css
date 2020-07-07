@@ -227,6 +227,10 @@ body{
 	margin-left: 35px;
 }
 
+#footer #quick-link ul li{
+	margin-bottom: 10px;
+}
+
 #footer #quick-link ul li a {
 	text-decoration: none;
 	color: #d3d3d3;

@@ -174,7 +174,6 @@ body{
 	float: left;
 	display: block;
 	margin: -5px 60px 0px -35px;
-	border-right
 	padding: 0px 25px 0px 0px;
 }
 
@@ -215,6 +214,10 @@ body{
 
 #footer #quick-link ul {
 	margin-left: 35px;
+}
+
+#footer #quick-link ul li{
+	margin-bottom: 10px;
 }
 
 #footer #quick-link ul li a {
