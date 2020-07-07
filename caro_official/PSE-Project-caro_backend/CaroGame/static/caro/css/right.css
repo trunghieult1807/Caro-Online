@@ -1,0 +1,169 @@
+#right-half{
+	float: left;
+	width: 60%;
+}
+
+.boardContentArea {
+	padding: 10px;
+	background: #fbcb9b;
+	border: 1px solid #7F4F2A;
+	margin: auto;
+	border-radius: 20px;
+	max-width: 680px;
+}
+
+
+.boardContentArea a {
+	text-decoration: none;
+	color: blue;/*Name*/
+}
+
+#boardInfo {
+	padding: 5px;
+	text-align: center;
+}
+/* Time counter */
+
+.time {
+	font: bold 40px Arial, Helvetica, sans-serif;
+	color: #3F51B5; /*#FFDAB0;*/
+	/* text-shadow:#00c8ff /*#7F6346*/ 2px 2px 2px; */
+}
+.timeGlow {
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 1px #fff, 0 0 3px #00ecdf, 0 0 4px #00ecdf;
+  }
+
+  to {
+    text-shadow: 0 0 2px #fff, 0 0 4px #00ccff, 0 0 5px #00ccff;
+  }
+}
+
+.boardOppoAvt {
+	height: 60px;
+	width: 60px;
+	border: 3px solid #7F6346;
+	border-radius: 7px;
+}
+#vs {
+	height: 32px;
+	width: 32px;
+}
+
+/* Board */
+
+#board{
+	overflow: auto;
+}
+#board-table{
+	width: 100%;
+	border: 1px solid #7F6346;
+	min-width: 300px;
+	table-layout:fixed;
+}
+.square{
+	width: 6.25%;
+	padding: 2px;
+	border: 1px solid #7F6346;
+	cursor: pointer;
+	overflow:hidden;
+}
+.square::before{
+  content:'';
+  float: left;
+	padding-top:100%;
+}
+.square img{
+	width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+#board-cpanel{
+	margin-top: 5px;
+	padding: 10px;
+	z-index: 100;
+	border-radius: 5px;
+	text-align: center;
+}
+.optionBtn {
+	font-weight: bold;
+	text-transform: uppercase;
+	background-color: #549bc5;/*new game, send*/
+	border: 2px solid #7F4F2A;
+	border-radius: 8px;
+	color: white;/*Letter new game*/
+	margin-top: 2px;
+	margin-bottom: 2px;
+	padding: 10px;
+}
+
+
+/* Ready button */
+.readyBtnContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.specFont {
+  font-size: 4rem;
+  padding: 1rem 3rem;
+  text-transform: uppercase;
+	color: blue;
+}
+.btn:absolute{
+	position: relative;
+}
+
+.btn {
+  text-decoration: none;
+  /* border: 1px solid rgb(146, 148, 248); */
+  position: absolute;
+  overflow: hidden;
+	background: gray;
+	padding: 15px;
+	border-radius: 15px;
+	top: -500px;
+}
+
+.btn:hover {
+  box-shadow: 1px 1px 25px 10px rgba(146, 148, 248, 0.4);
+}
+
+.btn:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(146, 148, 248, 0.4),
+    transparent
+  );
+  transition: all 1000ms;
+}
+
+.btn:hover:before {
+  left: 100%;
+}
+
+.readyBtn {
+  font: normal 50px/normal "Passero One", Helvetica, sans-serif;
+  text-shadow: 0 0.5px 0 rgb(204,204,204) , 0 1px 0 rgb(201,201,201) , 0 1.5px 0 rgb(187,187,187) , 0 2px 0 rgb(185,185,185) , 0 2.5px 0 rgb(170,170,170) , 0 3px 1px rgba(0,0,0,0.0980392) , 0 0 2.5px rgba(0,0,0,0.0980392) , 0 1px 1.5px rgba(0,0,0,0.298039) , 0 1.5px 2.5px rgba(0,0,0,0.2) , 0 2.5px 5px rgba(0,0,0,0.247059) , 0 5px 5px rgba(0,0,0,0.2) , 0 10px 10px rgba(0,0,0,0.14902) ;
+  -webkit-transition: all 300ms cubic-bezier(0.15, 0, 0.2, 1);
+  -moz-transition: all 300ms cubic-bezier(0.15, 0, 0.2, 1);
+  -o-transition: all 300ms cubic-bezier(0.15, 0, 0.2, 1);
+  transition: all 300ms cubic-bezier(0.15, 0, 0.2, 1);
+  text-align: center;
+}

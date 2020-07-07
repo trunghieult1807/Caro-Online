@@ -1,0 +1,314 @@
+body{
+	font-family: Arial;
+	background: url(/static/images/body_background.jpg);
+	margin: 0px auto;
+}
+
+#menu_top {
+	background: #554360;
+	height: 50px;
+	overflow: hidden;
+	margin: 0px auto;
+	width: 1000px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+#banner {
+	margin: 0px auto;
+	width: 1000px;
+	background: #febd4b;
+	height: 300px;
+}
+
+#main {
+	margin: 0px auto;
+	width: 1000px;
+	margin-top: 5px;
+}
+
+#main #mid {
+	background: #4aa9d2;
+	height: 700px;
+	width: 1000px;
+	float: left;
+	border-radius: 10px;
+}
+
+#footer {
+	margin: 0px auto;
+	width: 1000px;
+	background: #303036;
+	color: #d3d3d3;
+	height: 240px;
+	clear: left;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+#menu_top a {
+	float: left;
+	color: #f2f2f2;
+	height: 50px;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+#menu_top a:hover {
+	background: #ddd;
+	color: #4aa9d2;
+}
+
+#menu_top a.activate {
+	background: #4aa9d2;
+	color: white;
+}
+
+#menu_top a.right-side {
+	float: right;
+}
+
+#menu_top a i{
+	font-size: 20px;
+}
+
+#banner img {
+	width: 1000px;
+	height: 300px;
+}
+
+#main #mid #room-level {
+	float: left;
+	width: 200px;
+	background: #6f78a9;
+	border-top-left-radius: 10px;
+	height: 658px;
+}
+
+#main #mid #room-level ul {
+	list-style: none;
+	margin-left: -40px;
+}
+
+#main #mid #room-level ul li {
+	background: #285d74;
+	padding: 5px;
+	border: 1px solid #4aa9d2;
+	text-indent: 15px;
+	height: 25px;
+}
+
+#main #mid #room-level ul li:hover {
+	background: #549bc5;
+}
+
+
+#main #mid #room-level #level {
+	text-indent: -13px;
+	color: #f1c40f;
+	line-height: 25px;
+	margin-top: 0px;
+}
+
+#main #mid #room-level #level i {
+	font-size: 13px;
+}
+
+
+#main #mid #room-level ul li button {
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: white;
+}
+
+#main #mid #room-level ul li button i {
+	font-size: 10px;
+	vertical-align: middle;
+}
+
+#main #mid #room-level img{
+	float: left;
+	width: 50px;
+	margin: 8px 15px 0px 15px;
+}
+
+#main #mid #room-level h4 {
+	color: #debeac;
+	margin: 15px 0px 5px 0px;
+}
+
+#main #mid #room-level h6 {
+	margin: 0px 0px 0px 0px;
+}
+
+#main #mid #table {
+	width: 555px;
+	background: #4aa9d2;
+	float: left;
+	border-top-right-radius: 10px;
+}
+
+#main #mid #table ul {
+	width: 555px;
+	list-style: none;
+}
+
+#main #mid #table ul li {
+	padding: 15px;
+}
+
+#main #mid #table ul li input {
+	margin-left: 10px;
+	width: 210px;
+	height: 95px;
+
+	cursor: pointer;
+	text-align: left;
+	background: #debeac;
+	border: 2px solid black;
+	border-radius: 5px;
+}
+
+#main #mid #table ul li button {
+	margin-left: 10px;
+	width: 210px;
+	height: 95px;
+
+	cursor: pointer;
+	text-align: left;
+	background: #debeac;
+	border: 2px solid black;
+	border-radius: 5px;
+}
+
+#main #mid #table ul li button p {
+	background: #777fb1;
+	color: white;
+	font-size: 15px;
+	border-right: 2px solid black;
+	border-bottom: 2px solid black;
+    margin: -45px 100px 0px -6px;
+    padding: 5px;
+    text-indent: 15px;
+}
+
+#footer #about {
+	width: 430px;
+	float: left;
+}
+
+#footer #about h4 {
+	text-indent: 30px;
+	font-size: 20px;
+}
+
+#footer #about #info-contact {
+	text-indent: 9px;
+}
+
+#footer #about #info-contact i {
+	padding: 3px;
+}
+
+#footer #quick-link {
+	width: 270px;
+	float: left;
+}
+
+#footer #quick-link h4 {
+	text-indent: 40px;
+	font-size: 20px;
+}
+
+#footer #quick-link ul {
+	margin-left: 35px;
+}
+
+#footer #quick-link ul li{
+	margin-bottom: 10px;
+}
+
+#footer #quick-link ul li a {
+	text-decoration: none;
+	color: #d3d3d3;
+}
+
+#footer #contact-us {
+	width: 300px;
+	float: left;
+}
+
+#footer #contact-us h4 {
+	font-size: 20px;
+}
+
+#footer #contact-us #enter-mail {
+	overflow: hidden;
+	border-radius: 5px;
+	width: 85%;
+	padding: 6px 0;
+	margin: 6px 0;
+	background: #272727;
+}
+
+#footer #contact-us #enter-mail input{
+	background: none;
+	border: none;
+	outline: none;
+	color: #d3d3d3;
+	font-size: 15px;
+	text-indent: 5px;
+	width: 100%;
+}
+
+#footer #contact-us #enter-message {
+	overflow: hidden;
+	border-radius: 5px;
+	width: 85%;
+	height: 70px;
+	margin: 6px 0;
+	vertical-align: top;
+	background: #272727;
+}
+
+#footer #contact-us #enter-message input{
+	background: none;
+	border: none;
+	outline: none;
+	color: #d3d3d3;
+	font-size: 15px;
+	text-indent: 5px;
+	width: 100%;
+	padding-top: 6px;
+}
+
+#footer #contact-us button {
+	float: right;
+	background: #4aa9d2;
+	border: 2px solid #4aa9d2;
+	border-radius: 5px;
+	color: white;
+	font-size: 14px;
+	padding: 8px;
+	margin-right: 45px;
+	cursor: pointer;
+}
+
+#footer #contact-us button i {
+	margin-right: 10px;
+}
+
+#copy-right {
+	width: 1000px;
+	clear: left;
+	height: 40px;
+	line-height: 40px;
+	color: #d3d3d3;
+	background: #303036;
+	margin: 0px auto;
+	text-align: center;
+	border-top: 2px solid grey;
+}

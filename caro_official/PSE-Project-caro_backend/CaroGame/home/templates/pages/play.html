@@ -1,0 +1,103 @@
+{% extends "pages/base.html" %}
+{% load static %}
+
+{% block title %}
+	Caro Online
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/play_style.css' %}">
+{% endblock %}
+
+{% block body %}
+	<div id="menu_top">
+		<a class="activate" href="{% url 'play' %}"><i class="fas fa-gamepad"></i> PLAY NOW</a>
+		<a href="{% url 'index' %}"><i class="fas fa-home"></i> HOME</a>
+		<a href="{% url 'news' %}"><i class="fas fa-newspaper"></i> NEWS</a>
+		<a class="right-side" href="/logout"><i class="fas fa-sign-out-alt"></i> LOG OUT</a>
+		<a class="right-side" href="{% url 'profile' %}"> {{ user.username }}</a>
+	</div>
+	<div id="main">
+
+		<div id="mid">
+			<div id="room-level">
+				<img src="{% static 'images/hall.png' %}">
+				<h4>Hall</h4>
+				<h6>Online players: 0</h6>
+				<ul>
+					<li><button id="level"><i class="far fa-minus-square"></i> Beginner</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 1</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 2</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 3</button></li>
+					<li><button id="level"><i class="far fa-minus-square"></i> Elementary</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 1</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 2</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 3</button></li>
+					<li><button id="level"><i class="far fa-minus-square"></i> Intermediate</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 1</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 2</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 3</button></li>
+					<li><button id="level"><i class="far fa-minus-square"></i> Advanced</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 1</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 2</button></li>
+						<li><button><i class="fas fa-square"></i> Lobby 3</button></li>
+				</ul>
+			</div>
+
+			<div id="table">
+				<ul>
+					<li><input class="room-id" type="button" value="Room 1" name="1">
+					    <input class="room-id" type="button" value="Room 2" name="2"></li>
+
+					<li><input class="room-id" type="button" value="Room 3" name="3">
+						<input class="room-id" type="button" value="Room 4" name="4"></li>
+
+					<li><input class="room-id" type="button" value="Room 5" name="5">
+						<input class="room-id" type="button" value="Room 6" name="6"></li>
+
+					<li><input class="room-id" type="button" value="Room 7" name="7">
+						<input class="room-id" type="button" value="Room 8" name="8"></li>
+
+					<li><input class="room-id" type="button" value="Room 9" name="9">
+						<input class="room-id" type="button" value="Room 10" name="10"></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div id="footer">
+		<div id="about">
+			<h4>Practice on Software Engineer Project</h4>
+			<div id="info-contact">
+				<p><i class="fas fa-home"></i>: 268 Lý Thường Kiệt, P. 14, Q.10, Tp. Hồ Chí Minh</p>
+				<p><i class="fas fa-phone-alt"></i>: 0859-545-779</p>
+				<p><i class="fas fa-envelope"></i>: anh.tran.2120@hcmut.edu.vn</p>
+			</div>
+		</div>
+
+		<div id="quick-link">
+			<h4>Quick Links</h4>
+			<ul>
+				<li><a href="{% url 'play' %}">Play Now</a></li>
+				<li><a href="{% url 'index' %}">Home</a></li>
+				<li><a href="{% url 'news' %}">News</a></li>
+			</ul>
+		</div>
+
+		<div id="contact-us">
+			<h4>Contact Us</h4>
+			<div id="enter-mail"><input type="text" name="" placeholder="Your email address"></div>
+			<div id="enter-message"><input type="text" name="" placeholder="Message ..."></div>
+			<button><i class="fas fa-paper-plane"></i>Send</button>
+		</div>
+	</div>
+	<div id="copy-right">
+		<i class="far fa-copyright"></i>
+		All Rights Reserved 2019-2020 | Designed by SomeOne
+	</div>
+
+{% endblock %}
+
+{% block script %}
+	<script type="text/javascript" src="{% static 'js/room_id.js' %}"></script>
+{% endblock %}

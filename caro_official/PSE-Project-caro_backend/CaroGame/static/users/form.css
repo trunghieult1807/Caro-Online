@@ -1,0 +1,49 @@
+html, body {
+    font-family: Lato;
+    background-color: #55AFCD;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+
+.row {
+    background-color: white;
+    height: 100%;
+}
+
+.container-fluid{
+    padding-bottom: 0px;
+    width: 500px;
+    height: 100%;
+}
+
+legend{
+    /* border: 1px solid red; */
+    font-size: 40px;
+    font-weight: 700;
+    /* line-height: 0; */
+    text-align: center;
+    /* height: 50px; */
+}
+
+.btn-secondary, .btn-primary-info {
+    background-color: #E15F74;
+    border-radius: 5px;
+    width: 100px;
+    height: 45px;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.form-group{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+input {
+    width: 100%;
+}
+
+.control-group{
+    padding-bottom: 20px;
+}

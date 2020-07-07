@@ -1,0 +1,14 @@
+{% extends "caro/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Test
+{% endblock %}
+
+{% block body %}
+    <h1 id="logo">CARO ONLINE</h1>
+    <span id = "return-box">
+        <img src="{% static 'caro/img/return.png' %}" style = "width: 35px; margin-top: 10px; margin-left: 7px">
+    </span>
+{% endblock %}
