@@ -1,0 +1,80 @@
+{% extends "pages/base.html" %}
+{% load static %}
+
+{% block title %}
+	Caro Online
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/profile_style.css' %}">
+{% endblock %}
+
+{% block body %}
+	<div id="menu_top">
+		<a href="{% url 'play' %}"><i class="fas fa-gamepad"></i> PLAY NOW</a>
+		<a href="{% url 'index' %}"><i class="fas fa-home"></i> HOME</a>
+		<a href="{% url 'news' %}"><i class="fas fa-newspaper"></i> NEWS</a>
+		<a class="right-side" href="/logout"><i class="fas fa-sign-out-alt"></i> LOG OUT</a>
+		<a class="right-side" href="{% url 'profile' %}"> {{ user.username }}</a>
+	</div>
+
+	<div id="main">
+		<div id="left">
+			<img src="{{ user.profile.image.url }}">
+			<button>Upload avatar</button>
+			<h1>{{ user.username }}</h1>
+			<h4><i class="fas fa-star"></i> Score: <span> {{ user.profile.rank }}</span></h4>
+		</div>
+		
+		<div id="right">
+			<div id="info">
+				<h1>INFORMATIONS</h1>
+				<ul>
+					<li>Username: <span> {{ user.username }}</span></li>
+					<li>Email: <span>{{ user.email }}</span></li>
+				</ul>
+				<a href="{% url 'update-profile' %}"><button>Edit profile</button></a>
+			</div>
+			<hr>
+			<div id="stats">
+				<h1>PERSONAL STATS</h1>
+					<ul>
+						<li>Total matchs: <span> 0</span></li>
+						<li>Win/Lose: <span>0/0</span></li>
+					</ul>
+			</div>
+		</div>
+
+	</div>
+
+	<div id="footer">
+		<div id="about">
+			<h4>Practice on Software Engineer Project</h4>
+			<div id="info-contact">
+				<p><i class="fas fa-home"></i>: 268 Lý Thường Kiệt, P. 14, Q.10, Tp. Hồ Chí Minh</p>
+				<p><i class="fas fa-phone-alt"></i>: 0859-545-779</p>
+				<p><i class="fas fa-envelope"></i>: anh.tran.2120@hcmut.edu.vn</p>
+			</div>
+		</div>
+
+		<div id="quick-link">
+			<h4>Quick Links</h4>
+			<ul>
+				<li><a href="{% url 'play' %}">Play Now</a></li>
+				<li><a href="{% url 'index' %}">Home</a></li>
+				<li><a href="{% url 'news' %}">News</a></li>
+			</ul>
+		</div>
+
+		<div id="contact-us">
+			<h4>Contact Us</h4>
+			<div id="enter-mail"><input type="text" name="" placeholder="Your email address"></div>
+			<div id="enter-message"><input type="text" name="" placeholder="Message ..."></div>
+			<button><i class="fas fa-paper-plane"></i>Send</button>
+		</div>
+	</div>
+	<div id="copy-right">
+		<i class="far fa-copyright"></i>
+		All Rights Reserved 2019-2020 | Designed by SomeOne
+	</div>
+{% endblock %}
