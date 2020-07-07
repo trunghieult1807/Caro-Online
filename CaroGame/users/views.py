@@ -13,8 +13,14 @@ from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.contrib.auth.decorators import login_required
 
+<<<<<<< HEAD
 @login_required
 def home(request):
+=======
+def home(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+>>>>>>> f46710c57e80d885c78287a3f54b0613026efe47
     return render(request, 'users/home.html')
 
 def register_view(request):
@@ -79,6 +85,7 @@ def activate(request, uidb64, token):
     else:
         return HttpResponse('Activation link is invalid!')
 
+<<<<<<< HEAD
 @login_required
 def update_profile(request):
     if request.method == 'POST':
@@ -99,3 +106,9 @@ def update_profile(request):
         'p_form': p_form,
     }
     return render(request, 'users/update_profile.html', context)
+=======
+def profile(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    return render(request, 'users/profile.html')
+>>>>>>> f46710c57e80d885c78287a3f54b0613026efe47

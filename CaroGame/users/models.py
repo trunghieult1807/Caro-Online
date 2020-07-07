@@ -7,6 +7,7 @@ from PIL import Image
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+
     rank = models.PositiveIntegerField(default='0')
     wins = models.PositiveIntegerField(default='0')
     loses = models.PositiveIntegerField(default='0')
