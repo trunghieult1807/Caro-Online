@@ -27,7 +27,7 @@ SECRET_KEY = 'p%qc&6k%3ii8ts$ovxxndna+o+jlg@^k^p#2fw-bvqdid3_7xz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -79,13 +79,23 @@ ASGI_APPLICATION = 'CaroGame.routing.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'd7taftcsil8hao',
+#         'USER': 'japbsnfbnmhaoq',
+#         'PASSWORD': 'cdefe2435a675196790eaef03b8620300116db2887ee3e1d14473cd8d71fe8d1',
+#         'HOST': 'ec2-3-222-150-253.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -106,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = 'play'
+LOGOUT_REDIRECT_URL = 'login'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -129,11 +139,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
 
 # Channel layer
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             'hosts': [('127.0.0.1', 6379)],
+#         },
+#     },
+# }
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            'hosts': [('127.0.0.1', 6379)],
-        },
-    },
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
 }

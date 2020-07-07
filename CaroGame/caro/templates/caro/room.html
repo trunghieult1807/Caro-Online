@@ -8,7 +8,8 @@
 {% block body %}
 	<h1 id="logo">CARO ONLINE</h1>
 
-	<span id = "return-box"><img src="{% static 'caro/img/return.png' %}" style = "width: 35px; margin-top: 10px; margin-left: 7px"></span>
+
+	<button id = "return-box"><img src="{% static 'caro/img/return.png' %}" style = "width: 35px; margin-top: 10px; margin-left: 3px"></button>
 	<div style="display: inline-block" id = "container">
 		<div id = "left-half">
 
@@ -33,7 +34,7 @@
 							<img id = "left-room-box" src="{% static 'caro/img/coin.png' %}">
 							<div id = "right-room-box">1.000.000</div>
 						</div>
-						<div id="messageA" class="readyFont"></div>
+						<div id="messageA" class="readyFont" style="display: none">Ready</div>
 						<!-- <div class = "readyFont">Ready</div> -->
 					</div>
 				</div>
@@ -114,7 +115,8 @@
 		</div>
 
 		<div id="readyButton" class="readyBtnContainer readyBtn">
-			<a href="#" class="btn specFont" style="color: white;">READY</a>
+			<!-- <a href="#" class="btn specFont" style="color: white;">READY</a> -->
+			<input onclick="changeWaitingStatus()" class="btn specFont" type="button" value="READY" id="waitingStatus"></input>
 		</div>
 
 	</div>
@@ -145,6 +147,7 @@
 			if (data.action == "game_start") {
 				console.log("Game start");
 				console.log(`Current player: ${current_turn}`);
+				board.readyClick();
 			}
 			if (data.action == "make_move") {
 				let i = data.row;
@@ -171,8 +174,10 @@
 
 		document.querySelector('#readyButton').onclick = function() {
 			console.log("Ready clicked");
-			var button = document.querySelector("#readyButton");
-	        button.style.display = 'none'; // insert this line
+			// var button = document.querySelector("#readyButton");
+			// if(count_ready == 2) {
+
+			// }
 			console.log(username);
 			socket.send(JSON.stringify({
 				'action': 'create_game',
@@ -180,5 +185,16 @@
 				'room_id': roomId
 			}));
 		};
+
+		// Change status waiting
+		function changeWaitingStatus() {
+			if(document.querySelector("#waitingStatus").value == "READY") {
+				document.querySelector("#waitingStatus").value="WAITING...";
+			}
+			else {
+				document.querySelector("#waitingStatus").value="READY";
+			}
+		}
+
     </script>
 {% endblock %}

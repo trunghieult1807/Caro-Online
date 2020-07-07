@@ -52,8 +52,7 @@ class CaroConsumer(JsonWebsocketConsumer):
             username = text_data_json['user']
             room_id = int(text_data_json['room_id'])
             room = Room.get_by_id(room_id)
-            if username != room.user1.username:
-                return None
+            room.increase_count_ready()
 
             game = room.create_game()
             if game is not None:
