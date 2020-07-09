@@ -28,7 +28,7 @@ body{
 }
 
 #main #mid {
-	background: #dadbdb;
+	background: white;
 	height: 700px;
 	width: 1000px;
 	float: left;
@@ -59,11 +59,11 @@ body{
 
 #menu_top a:hover {
 	background: #ddd;
-	color: #4aa9d2;
+	color: linear-gradient(-135deg, #c850c0, #4158d0);
 }
 
 #menu_top a.activate {
-	background: #4aa9d2;
+	background: linear-gradient(-135deg, #c850c0, #4158d0);
 	color: white;
 }
 
@@ -118,7 +118,7 @@ body{
 
 #main #mid .tabcontent ul li h3{
 	margin-left: 170px;
-	color: #4aa9d2;
+	color: linear-gradient(-135deg, #c850c0, #4158d0);
 }
 
 #main #mid .tabcontent ul li p{

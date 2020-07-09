@@ -50,8 +50,14 @@ function game(noOfRow, noOfCol) {
 }
 
 var board = {
-
-
+	closeWinBox: function() {
+		button = document.getElementById('win-box');
+		button.style.visibility = "hidden";
+	},
+	closeLoseBox: function() {
+		button = document.getElementById('lose-box');
+		button.style.visibility = "hidden";
+	},
 	readyClick: function() {
 		button = document.getElementById('readyButton');
 		button.style.display = 'none';

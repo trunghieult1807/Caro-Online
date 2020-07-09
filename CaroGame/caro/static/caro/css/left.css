@@ -1,6 +1,7 @@
 #left-half {
 	float: left;
 	width: 35%;
+	margin-left: 10vh;
 }
 /* #################################################### */
 /* #################################################### */
@@ -14,6 +15,7 @@
 	display: inline-block;
 	margin-left: 30px;
 	margin-top: 20px;
+	position: absolute;
 }
 
 
@@ -138,11 +140,15 @@
 	text-transform: uppercase;
 }
 
-.chat-content {
+#chat-content {
 	margin: 15px;
 	height: 250px;
 	border: 2px solid black;
-	text-overflow: auto;
+	padding-left: 1vh;
+	padding-right: 1vh;
+	padding-top: 0.5vh;
+	word-wrap: break-word;
+	overflow-y: scroll;
 }
 
 #small-chatbox-content-area {
@@ -150,7 +156,7 @@
 }
 
 .chat-message {
-	width: 70%;
+	width: 80%;
 	height: 40px;
 	border: 2px solid #BF9469;
 	padding-left: 8px;
@@ -159,7 +165,7 @@
 
 .chat-send {
 	float: right;
-	width: 30%;
+	width: 20%;
 	height: 40px;
 	font-weight: bold;
 	text-transform: uppercase;

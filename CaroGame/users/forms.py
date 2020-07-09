@@ -2,10 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
-<<<<<<< HEAD
 from .models import Profile
-=======
->>>>>>> f46710c57e80d885c78287a3f54b0613026efe47
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField()
@@ -47,7 +44,6 @@ class LoginForm(AuthenticationForm):
         user = authenticate(username=username, password=password)
         if not user or not user.is_active:
             raise forms.ValidationError("Wrong username or password. Please try again.")
-<<<<<<< HEAD
         return self.cleaned_data
 
 class UserUpdateForm(forms.ModelForm):
@@ -61,6 +57,3 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['image']
-=======
-        return self.cleaned_data
->>>>>>> f46710c57e80d885c78287a3f54b0613026efe47

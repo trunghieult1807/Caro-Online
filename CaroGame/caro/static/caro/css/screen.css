@@ -5,14 +5,25 @@
 	font-family: Arial;
 	font-size: 14px;
 }
+/* html {
+	margin: 0;
+	height: 100%;
+	width: 100%;
+} */
 body {
-	background: #4aa9d2; /*url("../img/bgr.jpg");*/
+	/* background: #4aa9d2; /*url("../img/bgr.jpg");*/ */
+	background: #9053c7;
+	background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
+	background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
+	background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
+	background: linear-gradient(-135deg, #c850c0, #4158d0);
+	height: 1px;
+	/* width: 94%; */
 }
 #container {
 	width: 100%;
 	margin-top: 20px;
-	/* margin-right: 10px; */
-	position: absolute;
+	position: relative;
 }
 input[type="button"]
 {

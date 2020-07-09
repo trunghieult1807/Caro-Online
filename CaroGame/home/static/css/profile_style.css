@@ -30,8 +30,7 @@ body{
 #main #left {
 	height: 700px;
 	width: 300px;
-	/*background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,117,120,1) 0%, rgba(0,255,246,1) 100%);*/
-	background: #3ab9b6;
+	background: linear-gradient(-135deg, #c850c0, #4158d0);
 	float: left;
 	margin-bottom: 5px;
 	border-top-left-radius: 10px;
@@ -41,7 +40,7 @@ body{
 #main #right {
 	height: 700px;
 	width: 698px;
-	background: #CEDDDD;
+	background: white;
 	float: left;
 	border-left: 2px solid black;
 	margin-bottom: 5px;
@@ -72,11 +71,11 @@ body{
 
 #menu_top a:hover {
 	background: #ddd;
-	color: #4aa9d2;
+	color: linear-gradient(-135deg, #c850c0, #4158d0);
 }
 
 #menu_top a.activate {
-	background: #4aa9d2;
+	background: linear-gradient(-135deg, #c850c0, #4158d0);
 	color: white;
 }
 

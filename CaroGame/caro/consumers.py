@@ -48,6 +48,19 @@ class CaroConsumer(JsonWebsocketConsumer):
         text_data_json = json.loads(text_data)
         action = text_data_json['action']
 
+        if action == 'chat':
+            message = text_data_json['message']
+            # Send message to room group
+            async_to_sync(self.channel_layer.group_send)(
+                self.room,
+                {
+                    'type': 'chat.message',
+                    'action': 'chat',
+                    'message': message,
+                    'username': text_data_json['username']
+                }
+            )
+
         if action == 'create_game':
             username = text_data_json['user']
             room_id = int(text_data_json['room_id'])
@@ -82,5 +95,10 @@ class CaroConsumer(JsonWebsocketConsumer):
 
     def send_game_update(self, event):
         # Send message to WebSocket
+        self.send_json(event)
+        logger.info(f"Got message {event} at {self.channel_name}")
+
+    def chat_message(self, event):
+        # Receive message from room group
         self.send_json(event)
         logger.info(f"Got message {event} at {self.channel_name}")
