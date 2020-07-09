@@ -151,6 +151,7 @@ body{
 	background: #554360;
 	padding: 10px;
 	color: #FFF;
+	cursor: pointer;
 }
 
 #main #right hr {
@@ -184,6 +185,33 @@ body{
 #main #right #stats ul li span {
 	float: right;
 	text-align: right;
+}
+
+#main #right #edit-profile{
+	margin-top: 100px;
+	margin-left: 100px;
+	font-size: 25px;
+}
+
+#main #right #edit-profile .control-label {
+	float: left;
+	margin-right: 10px;
+}
+
+#main #right #edit-profile #enter-field input {
+	width: 350px;
+	height: 20px;
+}
+
+#main #right #edit-profile #save-profile {
+	float: right;
+	margin-right: 11%;
+	margin-top: 10px;
+	border: none;
+	background: #554360;
+	padding: 10px;
+	color: #FFF;
+	cursor: pointer;
 }
 
 #footer #about {

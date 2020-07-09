@@ -31,4 +31,8 @@ def playPage(request):
 def profilePage(request):
 	return render(request, 'pages/profile.html')
 
+@login_required
+def editProfile(request):
+	return render(request, 'pages/editprofile.html')
+
 	
