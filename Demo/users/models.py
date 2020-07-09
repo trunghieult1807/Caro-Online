@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from PIL import Image
+from django import forms
 # Create your models here.
 
 class Profile(models.Model):
@@ -23,6 +24,9 @@ class Profile(models.Model):
             output_size = (300, 300)
             image.thumbnail(output_size)
             image.save(self.image.path)
+
+    def RemoveCurrentAvatar(self):
+        image.save("/media/default.JPG")
 
     def AddWinMatch(self):
         self.wins = self.wins + 1

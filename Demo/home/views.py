@@ -29,10 +29,4 @@ def playPage(request):
 
 @login_required
 def profilePage(request):
-	return render(request, 'pages/profile.html')
-
-@login_required
-def editProfile(request):
-	return render(request, 'pages/editprofile.html')
-
-	
+	return render(request, 'pages/profile.html')	

@@ -54,6 +54,7 @@ class UserUpdateForm(forms.ModelForm):
         fields = ['email']
 
 class ProfileUpdateForm(forms.ModelForm):
+    image = forms.ImageField(required=False, error_messages = {'invalid':("Image files only")}, widget=forms.FileInput)
     class Meta:
         model = Profile
         fields = ['image']
