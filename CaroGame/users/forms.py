@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordResetForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from .models import Profile
@@ -63,6 +63,7 @@ class UserUpdateForm(forms.ModelForm):
         self.fields['email'].widget.attrs.update({'class':'input100', 'placeholder':'Email'})
 
 class ProfileUpdateForm(forms.ModelForm):
+    image = forms.ImageField(required=False,widget=forms.FileInput)
     class Meta:
         model = Profile
         fields = ['image']
@@ -74,4 +75,21 @@ class ProfileUpdateForm(forms.ModelForm):
             self.fields[fieldname].help_text = None
         # self.fields['username'].widget = forms.TextInput(attrs={'class': 'input100', 'placeholder': 'Username'})
         # self.fields['username'].label = False
-        self.fields['image'].widget.attrs.update({'style':'display:none'})
+        # self.fields['image'].widget.attrs.update({'style':'display:none'})
+
+class CustomPasswordResetForm(PasswordResetForm):
+    class Meta:
+        model = User
+        fields = ['email']
+
+    def __init__(self, *args, **kwargs):
+        super(PasswordResetForm, self).__init__(*args, **kwargs)
+        self.fields['email'].widget.attrs.update({'class':'input100', 'placeholder':'Email'})
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super(PasswordChangeForm, self).__init__(*args, **kwargs)
+
+        self.fields['new_password1'].widget.attrs.update({'class':"input100", 'placeholder':"New Password", 'font-weight': 'bold', 'font-size': 'large'})
+        self.fields['new_password2'].widget.attrs.update({'class':"input100", 'placeholder':"Confirm New Password"})
+        self.fields['old_password'].widget.attrs.update({'class':"input100", 'placeholder':"Old Password"})

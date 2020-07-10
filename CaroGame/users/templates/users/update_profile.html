@@ -17,14 +17,10 @@
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="mb-4">Profile Edit</legend>
-                <label>Email</label>
+                <label style='font-weight: bold; font-size: large'>Email</label>
                 {{ u_form.email }}
-                <label for="upload">
-                    Avatar
-                    <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-                    {{ p_form.image }}
-
-                </label>
+                <label style='font-weight: bold; font-size: large'>Avatar</label>
+                {{ p_form.image }}
 
             </fieldset>
             <div class="form-group">
