@@ -6,14 +6,26 @@
     <link rel="stylesheet" type="text/css" href="{% static 'users/form.css' %}">
 {% endblock head %}
 
+{% block avatar %}
+    <img src="{{ user.profile.image.url }}">
+    
+{% endblock %}
+
 {% block content %}
     <div class="content-section">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="mb-4">Profile Edit</legend>
-                {{ u_form|crispy }}
-                {{ p_form|crispy }}
+                <label>Email</label>
+                {{ u_form.email }}
+                <label for="upload">
+                    Avatar
+                    <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                    {{ p_form.image }}
+
+                </label>
+
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Update!</button>

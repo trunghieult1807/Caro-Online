@@ -159,6 +159,12 @@ class Game(models.Model):
         self.winner = winner
         self.completed = True
         self.save(update_fields=['winner', 'completed'])
+        if (winner == self.creator):
+            self.creator.profile.add_win_match()
+            self.opponent.profile.add_lose_match()
+        else:
+            self.opponent.profile.add_win_match()
+            self.creator.profile.add_lose_match()
 
     def check_win(self, cell):
         """

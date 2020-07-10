@@ -53,7 +53,25 @@ class UserUpdateForm(forms.ModelForm):
         model = User
         fields = ['email']
 
+    def __init__(self, *args, **kwargs):
+        super(forms.ModelForm, self).__init__(*args, **kwargs)
+
+        for fieldname in ['email']:
+            self.fields[fieldname].help_text = None
+        # self.fields['username'].widget = forms.TextInput(attrs={'class': 'input100', 'placeholder': 'Username'})
+        # self.fields['username'].label = False
+        self.fields['email'].widget.attrs.update({'class':'input100', 'placeholder':'Email'})
+
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['image']
+
+    def __init__(self, *args, **kwargs):
+        super(forms.ModelForm, self).__init__(*args, **kwargs)
+
+        for fieldname in ['image']:
+            self.fields[fieldname].help_text = None
+        # self.fields['username'].widget = forms.TextInput(attrs={'class': 'input100', 'placeholder': 'Username'})
+        # self.fields['username'].label = False
+        self.fields['image'].widget.attrs.update({'style':'display:none'})
