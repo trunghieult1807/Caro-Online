@@ -1,0 +1,170 @@
+#left-half {
+	float: left;
+	width: 35%;
+}
+/* #################################################### */
+/* #################################################### */
+/* #################################################### */
+
+#return-box {
+	height: 50px;
+	width: 50px;
+	border-radius: 10px;
+	background: #fbcb9b;
+	display: inline-block;
+	margin-left: 30px;
+	margin-top: 20px;
+}
+
+
+/* Character area */
+#character-area {
+	margin: auto;
+	border-radius: 20px;
+	width: 85%;
+	display: block;
+	position: relative;
+	height: 300px;
+	margin-bottom: 30px;
+}
+
+#left-half-character-box {
+	margin-left: 5px;
+	width: 45%;
+	position: absolute;
+  left: 0%;
+}
+
+#right-half-character-box {
+	margin-right: 5px;
+	width: 45%;
+	position: absolute;
+  right: 0%;
+}
+
+.character-box {
+	height: 300px;
+	background: #fbcb9b;
+	border-radius: 10px;
+	padding-top: 40px;
+	/* position: relative; */
+}
+
+.character-ava {
+	margin: auto auto;
+	margin-bottom: 10px;
+  width: 80px;
+  height: 80px;
+  border-radius: 30%;
+	display: block;
+	/* vertical-align: middle; */
+}
+
+
+
+#room-area {
+  right: 0%;
+	margin: auto;
+	border-radius: 20px;
+	width: 70%;
+	display: block;
+	position: relative;
+	margin-bottom: 30px;
+}
+
+.room-box {
+	background: #fbcb9b;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.room-bet {
+	margin: auto;
+	margin-bottom: 10px;
+	border-radius: 15px;
+	width: 70%;
+	background: white;
+	padding: 8px;
+	padding-left: 15px;
+	display: block;
+	position: relative;
+	height: 45px;
+	vertical-align: middle;
+}
+
+#left-room-box {
+	margin: auto;
+	margin-left: 10px;
+	height: 30px;
+	position: absolute;
+  left: 0%;
+}
+
+#right-room-box {
+	margin: auto;
+	width: 85%;
+	position: absolute;
+  left: 20%;
+	font-size: 2em;
+
+}
+
+.readyFont{
+	font-family: 'Schoolbell', arial, serif;
+	display: block;
+	position: relative;
+	text-align: center;
+	font-size: 2em;
+	color: blue;
+	font-weight: bold;
+}
+
+/* Chat area */
+.chatbox-area {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	background: #fbcb9b;
+	border: 1px solid #7F4F2A;
+	margin: auto;
+	border-radius: 20px;
+	width: 90%;
+}
+
+.chatbox-content-area-title {
+	margin-left: 15px;
+	color: black;
+	font-weight: bold;
+	font-size: 20px;
+	text-transform: uppercase;
+}
+
+.chat-content {
+	margin: 15px;
+	height: 250px;
+	border: 2px solid black;
+	text-overflow: auto;
+}
+
+#small-chatbox-content-area {
+	margin: 15px;
+}
+
+.chat-message {
+	width: 70%;
+	height: 40px;
+	border: 2px solid #BF9469;
+	padding-left: 8px;
+	margin: auto;
+}
+
+.chat-send {
+	float: right;
+	width: 30%;
+	height: 40px;
+	font-weight: bold;
+	text-transform: uppercase;
+	background-color: white;
+	border: 2px solid #BF9469;
+	color: black;
+	padding: 10px;
+}

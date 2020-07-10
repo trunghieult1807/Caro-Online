@@ -1,0 +1,226 @@
+#left-half {
+	width: 35%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+/* #################################################### */
+/* #################################################### */
+/* #################################################### */
+
+#return-box {
+	height: 50px;
+	width: 50px;
+	border-radius: 10px;
+	margin-right: -10%;
+	margin-left: -5%;
+	background: linear-gradient(322deg, rgba(247,175,101,1) 0%, rgba(251,203,155,1) 54%, rgba(252,174,98,1) 100%);
+}
+
+#return-image {
+	width: 35px;
+	margin-top: 10px;
+	margin-left: 3px;
+}
+/* Character area */
+#character-area {
+	border-radius: 20px;
+	width: 85%;
+	display: flex;
+	justify-content: space-between;
+	height: 300px;
+	margin-bottom: 30px;
+}
+
+#left-half-character-box {
+	width: 45%;
+}
+
+#right-half-character-box {
+	width: 45%;
+}
+
+.character-box {
+	height: 300px;
+	background: linear-gradient(322deg, rgba(247,175,101,1) 0%, rgba(251,203,155,1) 54%, rgba(252,174,98,1) 100%);
+	border-radius: 10px;
+	padding-top: 40px;
+	/* position: relative; */
+
+	border: 4px solid transparent;
+  border-radius: 16px;
+  background-clip: padding-box;
+  padding: 10px;
+  /* just to show box-shadow still works fine */
+  box-shadow: 0 3px 9px black, inset 0 0 9px white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.character-box::after {
+    top: -4px; bottom: -4px;
+    left: -4px; right: -4px;
+    background: linear-gradient(red, blue);
+    content: '';
+    z-index: -1;
+    border-radius: 16px;
+}
+
+.character-ava {
+	margin-top: 10px;
+  width: 80px;
+  height: 80px;
+  border-radius: 30%;
+	display: block;
+	/* vertical-align: middle; */
+}
+
+
+
+#room-area {
+	border-radius: 20px;
+	width: 70%;
+	margin-bottom: 30px;
+}
+
+.room-box {
+	background: linear-gradient(322deg, rgba(247,175,101,1) 0%, rgba(251,203,155,1) 54%, rgba(252,174,98,1) 100%);
+	border-radius: 10px;
+	padding: 10px;
+
+	border: 4px solid transparent;
+  border-radius: 16px;
+  background-clip: padding-box;
+  padding: 10px;
+  /* just to show box-shadow still works fine */
+  box-shadow: 0 3px 9px black, inset 0 0 9px white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.room-box::after {
+    top: -4px; bottom: -4px;
+    left: -4px; right: -4px;
+    background: linear-gradient(red, blue);
+    content: '';
+    z-index: -1;
+    border-radius: 16px;
+}
+
+.room-bet {
+	border-radius: 15px;
+	width: 100%;
+	height: 45px;
+	margin: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#ranking-medal {
+	height: 170%;
+	margin-bottom: 5%;
+}
+
+#ranking-name {
+	font-size: 2em;
+
+}
+
+.readyFont{
+	font-family: 'Schoolbell', arial, serif;
+	display: block;
+	position: relative;
+	text-align: center;
+	font-size: 2em;
+	color: blue;
+	font-weight: bold;
+}
+
+/* Chat area */
+.chatbox-area {
+	padding-top: 15px;
+	background: linear-gradient(322deg, rgba(247,175,101,1) 0%, rgba(251,203,155,1) 54%, rgba(252,174,98,1) 100%);
+	border: 1px solid #7F4F2A;
+	border-radius: 20px;
+	width: 90%;
+
+	border: 4px solid transparent;
+	border-radius: 16px;
+	background-clip: padding-box;
+	padding: 10px;
+	/* just to show box-shadow still works fine */
+	box-shadow: 0 3px 9px black, inset 0 0 9px white;
+}
+
+.chatbox-area::after {
+    top: -4px; bottom: -4px;
+    left: -4px; right: -4px;
+    background: linear-gradient(red, blue);
+    content: '';
+    z-index: -1;
+    border-radius: 16px;
+}
+
+.chatbox-content-area-title {
+	margin-left: 15px;
+	color: black;
+	font-weight: bold;
+	font-size: 20px;
+	text-transform: uppercase;
+}
+
+#chat-content {
+	margin: 15px;
+	height: 250px;
+	border: 2px solid black;
+	padding-left: 1vh;
+	padding-right: 1vh;
+	padding-top: 0.5vh;
+	word-wrap: break-word;
+	overflow-y: scroll;
+}
+
+#small-chatbox-content-area {
+	margin: 15px;
+}
+
+.chat-message {
+	width: 80%;
+	height: 40px;
+	border: 2px solid #BF9469;
+	padding-left: 8px;
+	margin: auto;
+}
+
+.chat-send {
+	float: right;
+	width: 20%;
+	height: 40px;
+	font-weight: bold;
+	text-transform: uppercase;
+	background-color: white;
+	border: 2px solid #BF9469;
+	color: black;
+	padding: 10px;
+}
+
+/* Text */
+.room-text {
+	font-family: "Inter", sans-serif;
+	font-size: 30pt;
+	font-weight: bold;
+}
+.name-text {
+	font-family: "Inter", sans-serif;
+  font-size: 20pt;
+  font-weight: bold;
+  color: brown;
+}
+.ranking-text {
+	font-family: "Inter", sans-serif;
+	font-weight: bold;
+	color: black;
+}

@@ -1,0 +1,156 @@
+{% extends "pages/base.html" %}
+{% load static %}
+
+{% block title %}
+	Caro Online
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/new_style.css' %}">
+{% endblock %}
+
+{% block body %}
+	<div id="menu_top">
+		<a href="{% url 'play' %}"><i class="fas fa-gamepad"></i> PLAY NOW</a>
+		<a href="{% url 'index' %}"><i class="fas fa-home"></i> HOME</a>
+		<a class="activate" href="{% url 'news' %}"><i class="fas fa-newspaper"></i> NEWS</a>
+		<a class="right-side" href="/logout"><i class="fas fa-sign-out-alt"></i> LOG OUT</a>
+		<a class="right-side" href="{% url 'profile' %}"> {{ user.username }}</a>
+	</div>
+
+	<div id="main">	
+		<div id="mid">
+			<div id="news-detail-1" class="tabcontent">
+			  <ul>
+			    <li><a href="">
+			    	<img src="{% static 'images/news/upgrade.jpg' %}">
+			    	<h3>Update Log #11</h3>
+			    	<p>Upgrade Login UI.</p>
+			    </a></li>
+			      
+			    <li><a href="">
+			    	<img src="{% static 'images/news/cup.jpg' %}">
+			    	<h3>Online Tournament #1</h3>
+			    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent euismod ultrices ante, ac laoreet nulla vestibulum adipiscing. Nam quis justo in augue auctor imperdiet.</p>
+			    </a></li>
+
+			    <li><a href="">
+			    	<img src="{% static 'images/news/upgrade.jpg' %}">
+			    	<h3>Update Log #10</h3>
+			    	<p>Adding contents to news page.</p>
+			    </a></li>
+
+			    <li><a href="">
+			    	<img src="{% static 'images/news/upgrade.jpg' %}">
+			    	<h3>Update Log #9</h3>
+			    	<p>...</p>
+			    </a></li>
+			  </ul>
+			</div>
+
+
+
+			<div id="news-detail-2" class="tabcontent">
+			  <ul>
+			    <li><a href="">
+			    	<img src="{% static 'images/news/upgrade.jpg' %}">
+			    	<h3>Update Log #8</h3>
+			    	<p>...</p>
+			    </a></li>
+			    
+			    <li><a href="">
+			    	<img src="{% static 'images/news/upgrade.jpg' %}">
+			    	<h3>Update Log #7</h3>
+			    	<p>...</p>
+			    </a></li>
+
+			    <li><a href="">
+			    	<img src="{% static 'images/news/upgrade.jpg' %}">
+			    	<h3>Update Log #6</h3>
+			    	<p>...</p>
+			    </a></li>
+
+			    <li><a href="">
+			    	<img src="{% static 'images/news/upgrade.jpg' %}">
+			    	<h3>Update Log #5</h3>
+			    	<p>...</p>
+			    </a></li>
+			  </ul>
+			</div>
+
+
+
+			<div id="news-detail-3" class="tabcontent">
+			  <ul>
+			    <li><a href="">
+			    	<img src="{% static 'images/news/upgrade.jpg' %}">
+			    	<h3>Update Log #4</h3>
+			    	<p>...</p>
+			    </a></li>
+			    
+			    <li><a href="">
+			    	<img src="{% static 'images/news/upgrade.jpg' %}">
+			    	<h3>Update Log #3</h3>
+			    	<p>...</p>
+			    </a></li>
+
+			    <li><a href="">
+			    	<img src="{% static 'images/news/upgrade.jpg' %}">
+			    	<h3>Update Log #2</h3>
+			    	<p>...</p>
+			    </a></li>
+
+			    <li><a href="">
+			    	<img src="{% static 'images/news/upgrade.jpg' %}">
+			    	<h3>Update Log #1</h3>
+			    	<p>...</p>
+			    </a></li>
+			  </ul>
+			</div>
+
+			<div id="news-list">
+				<i class="fas fa-angle-double-left"></i> <i class="fas fa-angle-left"></i> 
+					<a class="tablink" onclick="openPage('news-detail-1', this)" id="defaultOpen"> 1</a>, 
+					<a class="tablink" onclick="openPage('news-detail-2', this)"> 2</a>,
+					<a class="tablink" onclick="openPage('news-detail-3', this)"> 3 </a> 
+				<i class="fas fa-angle-right"></i> <i class="fas fa-angle-double-right"></i>
+			</div>
+
+		</div>
+	</div>
+
+	<div id="footer">
+		<div id="about">
+			<h4>Practice on Software Engineer Project</h4>
+			<div id="info-contact">
+				<p><i class="fas fa-home"></i>: 268 Lý Thường Kiệt, P. 14, Q.10, Tp. Hồ Chí Minh</p>
+				<p><i class="fas fa-phone-alt"></i>: 0859-545-779</p>
+				<p><i class="fas fa-envelope"></i>: anh.tran.2120@hcmut.edu.vn</p>
+			</div>
+		</div>
+
+		<div id="quick-link">
+			<h4>Quick Links</h4>
+			<ul>
+				<li><a href="{% url 'play' %}">Play Now</a></li>
+				<li><a href="{% url 'index' %}">Home</a></li>
+				<li><a href="{% url 'news' %}">News</a></li>
+			</ul>
+		</div>
+
+		<div id="contact-us">
+			<h4>Contact Us</h4>
+			<div id="enter-mail"><input type="text" name="" placeholder="Your email address"></div>
+			<div id="enter-message"><input type="text" name="" placeholder="Message ..."></div>
+			<button><i class="fas fa-paper-plane"></i>Send</button>
+		</div>
+	</div>
+	<div id="copy-right">
+		<i class="far fa-copyright"></i>
+		All Rights Reserved 2019-2020 | Designed by SomeOne
+	</div>
+{% endblock %}
+
+{% block script %}
+	<script type="text/javascript" src="{% static 'js/news_list.js' %}"></script>
+{% endblock %}
