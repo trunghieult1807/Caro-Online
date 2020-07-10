@@ -1,9 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate, update_session_auth_hash
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib import messages
-from .forms import RegistrationForm, LoginForm, UserUpdateForm, ProfileUpdateForm
+from .forms import RegistrationForm, LoginForm, UserUpdateForm, ProfileUpdateForm, CustomPasswordChangeForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -81,3 +81,16 @@ def update_profile(request):
         'p_form': p_form,
     }
     return render(request, 'users/update_profile.html', context)
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = CustomPasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('profile')
+    else:
+        form = CustomPasswordChangeForm(request.user)
+    return render(request, 'users/password_change.html', {'form': form})

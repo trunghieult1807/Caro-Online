@@ -25,10 +25,15 @@ class Profile(models.Model):
             image.thumbnail(output_size)
             image.save(self.image.path)
 
-    def AddWinMatch(self):
+    def add_win_match(self):
         self.wins = self.wins + 1
+        self.rank = self.rank + 10
         self.save()
     
-    def AddLoseMatch(self):
+    def add_lose_match(self):
         self.loses = self.loses + 1
+        if self.rank - 5 < 0:
+            self.rank = 0
+        else:
+            self.rank = self.rank - 5
         self.save()

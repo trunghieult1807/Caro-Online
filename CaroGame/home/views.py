@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.views.generic.detail import DetailView
 from users.models import Profile
 
 # Create your views here.
@@ -30,5 +31,4 @@ def playPage(request):
 @login_required
 def profilePage(request):
 	return render(request, 'pages/profile.html')
-
 	

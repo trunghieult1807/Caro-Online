@@ -174,3 +174,24 @@ class GameTestCase(TestCase):
         room.enter_room(user2)
         game = room.create_game()
         self.assertEqual(room.get_current_game(), game)
+
+    def test_number_of_win_game(self):
+        # Set up
+        room = Room.get_by_id(1)
+        user1 = User.objects.get(pk=1)
+        user2 = User.objects.get(pk=2)
+        room.enter_room(user1)
+        room.enter_room(user2)
+        room.increase_count_ready()
+        room.increase_count_ready()
+        new_game = room.create_game()
+
+        # Test
+        new_game.mark_complete(user1)
+        self.assertEqual(user1.profile.wins, 1)
+        self.assertEqual(user1.profile.loses, 0)
+        self.assertEqual(user1.profile.rank, 10)
+
+        self.assertEqual(user2.profile.wins, 0)
+        self.assertEqual(user2.profile.loses, 1)
+        self.assertEqual(user2.profile.rank, 0)
