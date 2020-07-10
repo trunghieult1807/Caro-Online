@@ -9,8 +9,9 @@ Caro Online
 <h1 id="logo">CARO ONLINE</h1>
 
 
-<button id="return-box" href="{% url 'play' %}"><img src="{% static 'caro/img/return.png' %}" style="width: 35px; margin-top: 10px; margin-left: 3px"></button>
-<div style="display: inline-block" id="container">
+
+<div id="container">
+	<button id="return-box" href="{% url 'play' %}"><img id = "return-image" src="{% static 'caro/img/return.png' %}"></button>
 	<div id="left-half">
 		<div id="room-area">
 			<div class="room-box">
@@ -106,10 +107,12 @@ Caro Online
 
 			</div>
 		</div>
-		<div id="readyButton" class="readyBtnContainer readyBtn">
-			<input onclick="changeWaitingStatus()" class="btn specFont" type="button" value="READY" id="waitingStatus"></input>
+		<div id="readyButton" class="readyBtnContainer">
+			<div class =  "readyBtn">
+				<input onclick="changeWaitingStatus()" class="btn specFont" type="button" value="READY" id="waitingStatus"></input>
+			</div>
 		</div>
-		<div id="win-box" class="readyBtnContainer" style="visibility: hidden">
+		<div id="win-box" style="visibility: hidden;">
 			<div id="alert-box" class="alert-box-general">
 				<div id="success-box">
 					<div class="dot"></div>
@@ -130,7 +133,7 @@ Caro Online
 				</div>
 			</div>
 		</div>
-		<div id="lose-box" class="readyBtnContainer" style="visibility: hidden">
+		<div id="lose-box" style="visibility: hidden">
 			<div id="alert-box" class="alert-box-general">
 				<div id="error-box">
 					<div class="dot"></div>

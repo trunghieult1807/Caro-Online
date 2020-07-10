@@ -1,15 +1,29 @@
 #right-half{
-	float: left;
-	width: 55%;
+	/* width: 48%; */
 }
 
 .boardContentArea {
 	padding: 10px;
-	background: #fbcb9b;
+	background: linear-gradient(322deg, rgba(247,175,101,1) 0%, rgba(251,203,155,1) 54%, rgba(252,174,98,1) 100%);
 	border: 1px solid #7F4F2A;
-	margin: auto;
 	border-radius: 20px;
-	max-width: 680px;
+	max-width: 700px;
+
+  border: 4px solid transparent;
+  border-radius: 16px;
+  background-clip: padding-box;
+  padding: 10px;
+  /* just to show box-shadow still works fine */
+  box-shadow: 0 3px 9px black, inset 0 0 9px white;
+}
+
+.boardContentArea::after {
+    top: -4px; bottom: -4px;
+    left: -4px; right: -4px;
+    background: linear-gradient(red, blue);
+    content: '';
+    z-index: -1;
+    border-radius: 16px;
 }
 
 
@@ -19,7 +33,8 @@
 }
 
 #boardInfo {
-	padding: 5px;
+	padding: 25px;
+	padding-bottom: 15px;
 	text-align: center;
 }
 /* Time counter */
@@ -88,15 +103,17 @@
 
 #board-cpanel{
 	margin-top: 5px;
-	padding: 10px;
+	padding-top: 15px;
 	z-index: 100;
 	border-radius: 5px;
 	text-align: center;
+	display: flex;
+	justify-content: space-evenly;
 }
 .optionBtn {
 	font-weight: bold;
 	text-transform: uppercase;
-	background-color: #549bc5;/*new game, send*/
+	background: linear-gradient(-135deg, #c850c0, #4158d0);/*new game, send*/
 	border: 2px solid #7F4F2A;
 	border-radius: 8px;
 	color: white;/*Letter new game*/
@@ -110,14 +127,13 @@
 .readyBtnContainer {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .specFont {
   font-size: 4rem;
   padding: 1rem 3rem;
   text-transform: uppercase;
-	color: blue;
+	color: lightgray;
 }
 .btn:absolute{
 	position: relative;
@@ -126,9 +142,8 @@
 .btn {
   text-decoration: none;
   /* border: 1px solid rgb(146, 148, 248); */
-  position: absolute;
   overflow: hidden;
-	background: gray;
+	background: linear-gradient(-135deg, #c850c0, #4158d0);
 	padding: 15px;
 	border-radius: 15px;
 	top: -500px;
@@ -165,5 +180,4 @@
   -moz-transition: all 300ms cubic-bezier(0.15, 0, 0.2, 1);
   -o-transition: all 300ms cubic-bezier(0.15, 0, 0.2, 1);
   transition: all 300ms cubic-bezier(0.15, 0, 0.2, 1);
-  text-align: center;
 }

@@ -1,6 +1,6 @@
 html, body {
     font-family: Lato;
-    background-color: #55AFCD;
+    background: linear-gradient(-135deg, #c850c0, #4158d0);
     margin: 0px;
     padding: 0px;
     height: 100%;
@@ -8,7 +8,7 @@ html, body {
 
 .row {
     background-color: white;
-    height: 100%;
+    height: 100%;  
 }
 
 .container-fluid{

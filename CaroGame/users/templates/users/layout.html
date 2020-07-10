@@ -11,13 +11,18 @@
 
     <!-- Lato Font from Google API-->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
-
+  	<link rel="stylesheet" type="text/css" href="{% static 'users/css/main.css' %}">
     {% block head %} {% endblock %}
     <title>{{ title }}</title>
 
 </head>
 <body>
-    <main role="main" class="container-fluid">
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login100">
+        <div> <p>Hahaha</p>
+        </div>
+
         <div class="row">
             <div class="col">
                 {% if messages %}
@@ -30,7 +35,7 @@
                 {% block content %}{% endblock %}
             </div>
         </div>
-    </main>
+    </div></div></div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

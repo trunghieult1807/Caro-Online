@@ -5,25 +5,28 @@
 	font-family: Arial;
 	font-size: 14px;
 }
-/* html {
-	margin: 0;
-	height: 100%;
+html {
+	position:fixed;
+  padding:0;
+  margin:0;
+	top:0;
+  left:0;
 	width: 100%;
-} */
-body {
-	/* background: #4aa9d2; /*url("../img/bgr.jpg");*/ */
-	background: #9053c7;
+  height: 100%;
 	background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
 	background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
 	background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
 	background: linear-gradient(-135deg, #c850c0, #4158d0);
-	height: 1px;
-	/* width: 94%; */
+}
+body {
+	/* background: #4aa9d2; /*url("../img/bgr.jpg");*/ */
+
 }
 #container {
 	width: 100%;
 	margin-top: 20px;
-	position: relative;
+	display: flex;
+	justify-content: space-around;
 }
 input[type="button"]
 {
