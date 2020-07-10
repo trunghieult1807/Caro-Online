@@ -24,32 +24,34 @@
 				<img src="{% static 'images/news/menuicon.png' %}">
 				<h3>News</h3>
 				<ul>
-					<li><a href="">Cờ Caro VR, xin tiền má mua VR rồi chơi<span>21/4</span></a></li>
-					<li><a href="">Nguyễn Titha bị loại ngay từ vòng gửi xe của giải ao làng<span>19/4</span></a></li>
-					<li><a href="">Update 1.52: Skin quân cờ Caro được thêm vào cừa hàng<span>19/4</span></a></li>
-					<li><a href="">Danh sách Kỳ thủ bị phạt do sử dụng phần mềm thứ 3<span>18/4</span></a></li>
-					<li><a href="">Có cái tựa nào hay hay không, Caro thì có gì mới :)<span>18/4</span></a></li>
+					<li><a href="">Update Log #11<span>21/4</span></a></li>
+					<li><a href="">Online Tournament #1 - Winner Prize: 1.000$<span>19/4</span></a></li>
+					<li><a href="">Update Log #10<span>19/4</span></a></li>
+					<li><a href="">Update Log #9<span>18/4</span></a></li>
+					<li><a href="">Update Log #8<span>18/4</span></a></li>
+					<li><a href="">Update Log #7<span>21/4</span></a></li>
+					<li><a href="">Update Log #6<span>19/4</span></a></li>
+					<li><a href="">Update Log #5<span>19/4</span></a></li>
+					<li><a href="">Update Log #4<span>18/4</span></a></li>
+					<li><a href="">Update Log #3<span>18/4</span></a></li>
 				</ul>
 			</div>
 
+			<div id="stats">
+				<img src="{% static 'images/news/menuicon.png' %}">
+				<h3>Stats</h3>
+				<ul>
+
+				</ul>
+			</div>
 		</div>
 
 		<div id="right">
 			<img src="{% static 'images/Ranking.png' %}"><h3>Top 10</h3>
 			<ul>
 				{% for item in lists %}
-					<li><h4>{{forloop.counter}}</h4><img src="{% static 'images/avatar.png' %}">{{ item.0 }}</li>
+					<li><h4>{{forloop.counter}}</h4>{{ item.0 }}<span>500</span></li>
 				{% endfor %}
-				<!-- <li><h4>1</h4><img src="{% static 'images/avatar.png' %}">Username</li>
-				<li><h4>2</h4><img src="{% static 'images/avatar.png' %}">Username</li>
-				<li><h4>3</h4><img src="{% static 'images/avatar.png' %}">Username</li>
-				<li><h4>4</h4><img src="{% static 'images/avatar.png' %}">Username</li>
-				<li><h4>5</h4><img src="{% static 'images/avatar.png' %}">Username</li>
-				<li><h4>6</h4><img src="{% static 'images/avatar.png' %}">Username</li>
-				<li><h4>7</h4><img src="{% static 'images/avatar.png' %}">Username</li>
-				<li><h4>8</h4><img src="{% static 'images/avatar.png' %}">Username</li>
-				<li><h4>9</h4><img src="{% static 'images/avatar.png' %}">Username</li>
-				<li><h4>10</h4><img src="{% static 'images/avatar.png' %}">Username</li> -->
 			</ul>
 		</div>
 	</div>
