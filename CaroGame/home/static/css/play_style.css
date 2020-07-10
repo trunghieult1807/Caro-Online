@@ -3,6 +3,28 @@ body{
 	background: url(/static/images/body_background.jpg);
 	margin: 0px auto;
 }
+.row-room-container {
+	display: flex;
+	justify-content: space-around;
+}
+.room-container {
+	display: flex;
+	position: relative;
+}
+
+.room-box {
+	position: relative;
+
+}
+
+.player-count {
+	font-size: 8pt;
+	position: absolute;
+	z-index: 1;
+	top: 5px;
+	right: 5px;
+}
+
 
 #menu_top {
 	background: #554360;
@@ -29,10 +51,10 @@ body{
 
 #main #mid {
 	background: linear-gradient(-135deg, #c850c0, #4158d0);
-	height: 700px;
 	width: 1000px;
-	float: left;
 	border-radius: 10px;
+	display: flex;
+	justify-content: flex-start;
 }
 
 #footer {
@@ -145,14 +167,13 @@ body{
 }
 
 #main #mid #table {
-	width: 1px;
-	background: linear-gradient(-135deg, #c850c0, #4158d0);
-	float: left;
-	border-top-right-radius: 10px;
+	width: 900px;
+	display: flex;
+	justify-content: center;
 }
 
 #main #mid #table ul {
-	width: 555px;
+	width: 755px;
 	list-style: none;
 }
 
@@ -161,12 +182,11 @@ body{
 }
 
 #main #mid #table ul li input {
-	margin-left: 10px;
 	width: 210px;
 	height: 95px;
 
 	cursor: pointer;
-	text-align: left;
+	text-align: center;
 	background: #debeac;
 	border: 2px solid black;
 	border-radius: 5px;
