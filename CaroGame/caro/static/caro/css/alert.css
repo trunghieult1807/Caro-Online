@@ -56,7 +56,7 @@ button, .dot {
 #success-box {
     width: 35%;
     height: 100%;
-    top: -220%;
+    top: 85%;
     background: linear-gradient(to bottom right, #B0DB7D 40%, #99DBB4 100%);
     border-radius: 20px;
     box-shadow: 5px 5px 10px gray;
@@ -65,7 +65,7 @@ button, .dot {
 #error-box {
     width: 35%;
     height: 100%;
-    top: -320%;
+    top: -15%;
     background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%);
     border-radius: 20px;
     box-shadow: 5px 5px 10px gray;
@@ -237,4 +237,34 @@ button, .dot {
     100% {
         left: 25%;
     }
+}
+
+
+
+
+/* Ready button */
+.readyBtnContainer {
+  display: flex;
+  justify-content: center;
+
+  display: grid;
+  font-family: "Lato", sans-serif;
+
+}
+.text-align {
+  font-family: "Lato", sans-serif;
+  background-color: transparent;
+  font-size: 300%;
+  color: lightgray;
+}
+
+.readyBtn {
+  width: 300px;
+  height: 100px;
+  top: 360%;
+  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px gray;
+  display: flex;
+  justify-content: center;
 }

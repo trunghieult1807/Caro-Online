@@ -15,22 +15,17 @@ Caro Online
 	<div id="left-half">
 		<div id="room-area">
 			<div class="room-box">
-				<div style="text-align: center; font-size: 30px; font-weight: bold;">Room {{ room_id }}</div>
-
-				<div class="room-bet">
-					<img id="left-room-box" src="{% static 'caro/img/coin.png' %}">
-					<div id="right-room-box">1.000.000.000</div>
-				</div>
+				<div class="room-text">Room {{ room_id }}</div>
 			</div>
 		</div>
 		<div id="character-area">
 			<div id="left-half-character-box">
 				<div class="character-box">
-					<img class="character-ava" src="{% static 'caro/img/lol1.jpg' %}">
-					<div style="text-align: center; font-weight: bold; font-size: 20px; color: blue;">{{ request.user }}</div>
-					<div class="room-bet" style="margin-top: 30px; width: 80%;">
-						<img id="left-room-box" src="{% static 'caro/img/coin.png' %}">
-						<div id="right-room-box">1.000.000</div>
+					<img class="character-ava" src="{{ request.user.profile.image.url }}">
+					<div class="name-text">{{ room.user1 }}</div>
+					<div class="room-bet">
+						<img id="ranking-medal" src="{% static 'caro/img/rank/Rank1.png' %}">
+						<div id="ranking-name" class="ranking-text">{{ request.user.profile.rank }}</div>
 					</div>
 					<div id="messageA" class="readyFont" style="display: none">Ready</div>
 					<!-- <div class = "readyFont">Ready</div> -->
@@ -39,10 +34,14 @@ Caro Online
 			<div id="right-half-character-box">
 				<div class="character-box">
 					<img class="character-ava" src="{% static 'caro/img/lol2.jpg' %}">
-					<div style="text-align: center; font-weight: bold; font-size: 20px; color: blue;">Shen</div>
-					<div class="room-bet" style="margin-top: 30px; width: 80%;">
-						<img id="left-room-box" src="{% static 'caro/img/coin.png' %}">
-						<div id="right-room-box">2.000.000</div>
+					{% if room.user2 %}
+						<div class="name-text">{{ room.user2 }}</div>
+					{% else %}
+						<div class="name-text">None</div>
+					{% endif %}
+					<div class="room-bet">
+						<img id="ranking-medal" src="{% static 'caro/img/rank/Rank1.png' %}">
+						<div id="ranking-name" class="ranking-text">2.000.000</div>
 					</div>
 					<div id="messageB" class="readyFont"></div>
 				</div>
@@ -51,7 +50,7 @@ Caro Online
 		<div class="chatbox-area">
 			<div class="chatbox-content-area-title"><i class="fa fa-comments-o" aria-hidden="true"></i> Chat</div>
 			<div id="chat-content">
-				<ul id="messageContent">
+				<ul id="messageContent" class = "nobr">
 				</ul>
 			</div>
 			<div id="small-chatbox-content-area">
@@ -67,7 +66,7 @@ Caro Online
 		<div class="boardContentArea">
 			<div id="boardInfo">
 				<span id="oppo1-time" class="time timeGlow"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<img id="ava1" class="boardOppoAvt" src="{% static 'caro/img/lol1.jpg' %}">&nbsp;
+				<img id="ava1" class="boardOppoAvt" src="{{ request.user.profile.image.url }}">&nbsp;
 				<img id="vs" src="{% static 'caro/img/vs.png' %}">&nbsp;&nbsp;
 				<img id="ava2" class="boardOppoAvt" src="{% static 'caro/img/lol2.jpg' %}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<span id="oppo2-time" class="time timeGlow"></span>
@@ -109,7 +108,7 @@ Caro Online
 		</div>
 		<div id="readyButton" class="readyBtnContainer">
 			<div class =  "readyBtn">
-				<input onclick="changeWaitingStatus()" class="btn specFont" type="button" value="READY" id="waitingStatus"></input>
+				<input onclick="changeWaitingStatus()" class="text-align" type="button" value="READY" id="waitingStatus"></input>
 			</div>
 		</div>
 		<div id="win-box" style="visibility: hidden;">
@@ -202,11 +201,26 @@ Caro Online
 		const data = JSON.parse(e.data);
 		if (data.action == 'chat') {
 			console.log("Socket gain message: " + data.message);
-			var tag = document.createElement("P");
-			var text = data.username + ': ' + data.message;
-			var msg = document.createTextNode(text);
-			tag.appendChild(msg);
-			document.querySelector('#messageContent').appendChild(tag);
+			// var nameE = document.createElement("B");
+			// var messageE = document.createElement("div");
+			// var nameC = data.username;
+			// var messageC = ': ' + data.message;
+			// var nameN = document.createTextNode(nameC)
+			// var messageN = document.createTextNode(messageC);
+			// nameE.appendChild(nameN);
+			// messageE.appendChild(messageN);
+			// document.querySelector('#messageContent').appendChild(nameE);
+			// document.querySelector('#messageContent').appendChild(messageE);
+
+			// var print = "<p><b>" + data.username + ":" + "</b>" + data.message + "</p";
+			// document.querySelector('#messageContent').innerHTML = print;
+
+
+			var messageE = document.createElement("p");
+			var messageC = data.username + ": " + data.message;
+			var messageN = document.createTextNode(messageC);
+			messageE.appendChild(messageN);
+			document.querySelector('#messageContent').appendChild(messageE);
 			scrollToBottom();
 			return null;
 		}

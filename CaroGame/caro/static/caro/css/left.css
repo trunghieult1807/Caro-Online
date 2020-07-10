@@ -12,6 +12,8 @@
 	height: 50px;
 	width: 50px;
 	border-radius: 10px;
+	margin-right: -10%;
+	margin-left: -5%;
 	background: linear-gradient(322deg, rgba(247,175,101,1) 0%, rgba(251,203,155,1) 54%, rgba(252,174,98,1) 100%);
 }
 
@@ -51,6 +53,9 @@
   padding: 10px;
   /* just to show box-shadow still works fine */
   box-shadow: 0 3px 9px black, inset 0 0 9px white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .character-box::after {
@@ -63,9 +68,7 @@
 }
 
 .character-ava {
-	margin: auto auto;
-	margin-bottom: 10px;
-	margin-top: 20px;
+	margin-top: 10px;
   width: 80px;
   height: 80px;
   border-radius: 30%;
@@ -92,6 +95,9 @@
   padding: 10px;
   /* just to show box-shadow still works fine */
   box-shadow: 0 3px 9px black, inset 0 0 9px white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .room-box::after {
@@ -104,32 +110,21 @@
 }
 
 .room-bet {
-	margin: auto;
-	margin-bottom: 10px;
 	border-radius: 15px;
-	width: 70%;
-	background: white;
-	padding: 8px;
-	padding-left: 15px;
-	display: block;
-	position: relative;
+	width: 100%;
 	height: 45px;
-	vertical-align: middle;
+	margin: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
-#left-room-box {
-	margin: auto;
-	margin-left: 10px;
-	height: 30px;
-	position: absolute;
-  left: 0%;
+#ranking-medal {
+	height: 170%;
+	margin-bottom: 5%;
 }
 
-#right-room-box {
-	margin: auto;
-	width: 85%;
-	position: absolute;
-  left: 20%;
+#ranking-name {
 	font-size: 2em;
 
 }
@@ -210,4 +205,22 @@
 	border: 2px solid #BF9469;
 	color: black;
 	padding: 10px;
+}
+
+/* Text */
+.room-text {
+	font-family: "Inter", sans-serif;
+	font-size: 30pt;
+	font-weight: bold;
+}
+.name-text {
+	font-family: "Inter", sans-serif;
+  font-size: 20pt;
+  font-weight: bold;
+  color: brown;
+}
+.ranking-text {
+	font-family: "Inter", sans-serif;
+	font-weight: bold;
+	color: black;
 }
