@@ -50,7 +50,7 @@
 			<img src="{% static 'images/Ranking.png' %}"><h3>Top 10</h3>
 			<ul>
 				{% for item in lists %}
-					<li><h4>{{forloop.counter}}</h4>{{ item.0 }}<span>500</span></li>
+					<li><h4>{{forloop.counter}}</h4>{{ item.0 }}<span>{{ item.1 }}</span></li>
 				{% endfor %}
 			</ul>
 		</div>
