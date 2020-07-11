@@ -77,9 +77,13 @@
 
 		<div id="contact-us">
 			<h4>Contact Us</h4>
-			<div id="enter-mail"><input type="text" name="" placeholder="Your email address"></div>
-			<div id="enter-message"><input type="text" name="" placeholder="Message ..."></div>
-			<button><i class="fas fa-paper-plane"></i>Send</button>
+			<form method="post" id="contact-form">
+				{% csrf_token %}
+				<div id="enter-mail"><input type="text" name="sender" placeholder="Your name"></div>
+				<div id="enter-message"><input type="text" name="sender-message" placeholder="Message ..."></div>
+				
+				<input type="submit" value="Send" id="submit-button">				
+			</form>
 		</div>
 	</div>
 	<div id="copy-right">

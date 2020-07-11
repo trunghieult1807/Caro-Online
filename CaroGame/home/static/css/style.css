@@ -53,7 +53,7 @@ body{
 	width: 1000px;
 	background: #303036;
 	color: #d3d3d3;
-	height: 240px;
+	height: 250px;
 	clear: left;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
@@ -311,7 +311,7 @@ body{
 	outline: none;
 	color: #d3d3d3;
 	font-size: 15px;
-	text-indent: 5px;
+	text-indent: 15px;
 	width: 100%;
 }
 
@@ -331,12 +331,12 @@ body{
 	outline: none;
 	color: #d3d3d3;
 	font-size: 15px;
-	text-indent: 5px;
+	text-indent: 15px;
 	width: 100%;
 	padding-top: 6px;
 }
 
-#footer #contact-us button {
+#footer #contact-us #submit-button {
 	float: right;
 	background: linear-gradient(-135deg, #c850c0, #4158d0);
 	border: 2px solid linear-gradient(-135deg, #c850c0, #4158d0);
@@ -348,12 +348,9 @@ body{
 	cursor: pointer;
 }
 
-#footer #contact-us button i {
-	margin-right: 10px;
-}
-
 #copy-right {
 	width: 1000px;
+	font-size: 20px;
 	clear: left;
 	height: 40px;
 	line-height: 40px;

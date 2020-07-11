@@ -141,6 +141,15 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# Send mail
+EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'zone2120vn@gmail.com'
+EMAIL_HOST_PASSWORD = '22112000'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
 # Channel layer
 # CHANNEL_LAYERS = {
 #     'default': {
