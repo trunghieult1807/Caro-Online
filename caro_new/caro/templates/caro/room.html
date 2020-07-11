@@ -6,12 +6,12 @@ Caro Online
 {% endblock %}
 
 {% block body %}
-<h1 id="logo">CARO ONLINE</h1>
-
-
+<h1 id="logo">CẢO ONLINE</h1>
 
 <div id="container">
-	<a id="return-box" href="{% url 'play' %}"><img id = "return-image" src="{% static 'caro/img/return.png' %}"></a>
+	<!-- Back button -->
+	<a id="return-box"><img id = "return-image" src="{% static 'caro/img/return.png' %}"></a>
+
 	<div id="left-half">
 		<div id="room-area">
 			<div class="room-box">
@@ -121,7 +121,7 @@ Caro Online
 		</div>
 		<div id="readyButton" class="readyBtnContainer">
 			<div class =  "readyBtn">
-				<input onclick="changeWaitingStatus()" class="text-align" type="button" value="READY" id="waitingStatus"></input>
+				<input class="text-align" type="button" value="READY" id="waitingStatus"></input>
 			</div>
 		</div>
 		<div id="win-box" style="visibility: hidden;">
@@ -191,43 +191,11 @@ Caro Online
 	var socket = new WebSocket(url);
 	console.log(`Create socket ${url}`);
 
-	// Chat system
-	document.querySelector('#chat-message-input').focus();
-	document.querySelector('#chat-message-input').onkeyup = function(e) {
-		if (e.keyCode === 13) {
-			document.querySelector('#chat-message-submit').click();
-		}
-	};
-	document.querySelector('#chat-message-submit').onclick = function(e) {
-		const messageInputDom = document.querySelector('#chat-message-input');
-		const message = messageInputDom.value;
-		socket.send(JSON.stringify({
-			'action': 'chat',
-			'message': message,
-			'username': username,
-		}));
-		messageInputDom.value = '';
-	};
-
-	// Socket listens message
+	// Socket listens messages
 	socket.onmessage = function(e) {
 		const data = JSON.parse(e.data);
 		if (data.action == 'chat') {
 			console.log("Socket gain message: " + data.message);
-			// var nameE = document.createElement("B");
-			// var messageE = document.createElement("div");
-			// var nameC = data.username;
-			// var messageC = ': ' + data.message;
-			// var nameN = document.createTextNode(nameC)
-			// var messageN = document.createTextNode(messageC);
-			// nameE.appendChild(nameN);
-			// messageE.appendChild(messageN);
-			// document.querySelector('#messageContent').appendChild(nameE);
-			// document.querySelector('#messageContent').appendChild(messageE);
-
-			// var print = "<p><b>" + data.username + ":" + "</b>" + data.message + "</p";
-			// document.querySelector('#messageContent').innerHTML = print;
-
 
 			var messageE = document.createElement("p");
 			var messageC = data.username + ": " + data.message;
@@ -273,24 +241,26 @@ Caro Online
 		console.error("Chat socket closed unexpectedly");
 	};
 
-	// Send message to server when clicks ready button
-	document.querySelector('#readyButton').onclick = function() {
-		console.log("Ready clicked");
-		console.log(username);
-		socket.send(JSON.stringify({
-			'action': 'create_game',
-			'user': username,
-			'room_id': roomId
-		}));
-	};
-
-	// Change status waiting
-	function changeWaitingStatus() {
-		if (document.querySelector("#waitingStatus").value == "READY") {
-			document.querySelector("#waitingStatus").value = "WAITING...";
-		} else {
-			document.querySelector("#waitingStatus").value = "READY";
+	// Chat system
+	document.querySelector('#chat-message-input').focus();
+	document.querySelector('#chat-message-input').onkeyup = function(e) {
+		if (e.keyCode === 13) {
+			document.querySelector('#chat-message-submit').click();
 		}
-	}
+	};
+	document.querySelector('#chat-message-submit').onclick = function(e) {
+		const messageInputDom = document.querySelector('#chat-message-input');
+		const message = messageInputDom.value;
+		socket.send(JSON.stringify({
+			'action': 'chat',
+			'message': message,
+			'username': username,
+		}));
+		messageInputDom.value = '';
+	};
 </script>
+{% endblock %}
+
+{% block script %}
+	<script type="text/javascript" src="{% static 'caro/js/control.js' %}"></script>
 {% endblock %}
