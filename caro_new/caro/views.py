@@ -24,6 +24,5 @@ def caro_room(request, room_id):
         return HttpResponseRedirect(reverse('play'))
 
     return render(request, "caro/room.html", {
-        'room_id': room_id,
         'room': room
     })
