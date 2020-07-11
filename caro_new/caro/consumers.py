@@ -5,6 +5,7 @@ import json
 from channels.generic.websocket import JsonWebsocketConsumer
 from asgiref.sync import async_to_sync
 from .models import Game, GameCell, Room
+from django.contrib.auth.models import User
 
 logger = logging.getLogger(__name__)
 
@@ -88,10 +89,37 @@ class CaroConsumer(JsonWebsocketConsumer):
             cell = game.get_game_cell(row, col)
             cell.make_move()
 
-    def create_game(self, event):
-        # Send message to WebSocket
-        self.send_json(event)
-        logger.info(f"Got message {event} at {self.channel_name}")
+        if action == 'leave_room':
+            username = text_data_json['user']
+            room_id = int(text_data_json['room_id'])
+
+            # Find room by id
+            room = Room.get_by_id(room_id)
+            if room.user1 is not None and username == room.user1.username:
+                room.leave_room(user=room.user1)
+                # Send socket message to leave room
+                content = {
+                    'action': 'leave_room'
+                }
+                self.send_json(content)
+                logger.info(f"Got message {content} at {self.channel_name}")
+                # End the game if currently being played
+                if room.game is not None and not room.game.is_over():
+                    room.game.mark_complete(winner=room.user2)
+                    room.game.send_game_update()
+
+            elif room.user2 is not None and username == room.user2.username:
+                room.leave_room(user=room.user2)
+                # Send socket message to leave room
+                content = {
+                    'action': 'leave_room'
+                }
+                self.send_json(content)
+                logger.info(f"Got message {content} at {self.channel_name}")
+                # End the game if currently being played
+                if room.game is not None and not room.game.is_over():
+                    room.game.mark_complete(winner=room.user1)
+                    room.game.send_game_update()
 
     def send_game_update(self, event):
         # Send message to WebSocket

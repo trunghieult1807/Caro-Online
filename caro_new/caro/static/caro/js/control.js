@@ -24,9 +24,6 @@ document.querySelector('#return-box').onclick = function() {
 		'user': username,
 		'room_id': roomId
 	}))
-
-	// Redirect
-	window.location.pathname = '/';
 };
 
 var ctrl = {
@@ -42,7 +39,7 @@ var ctrl = {
 		// currGame.isGamming = false;
 	},
 	quit : function() {
-
+		// Quit the game
 	},
 	twoPlayer : function() {
 		board.drawBoard();

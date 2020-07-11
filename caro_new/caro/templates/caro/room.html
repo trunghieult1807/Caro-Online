@@ -194,6 +194,7 @@ Caro Online
 	// Socket listens messages
 	socket.onmessage = function(e) {
 		const data = JSON.parse(e.data);
+
 		if (data.action == 'chat') {
 			console.log("Socket gain message: " + data.message);
 
@@ -206,15 +207,28 @@ Caro Online
 			return null;
 		}
 
-		current_turn = data.current_turn;
-		completed = data.completed;
+		if (data.action == "game_update") {
+			current_turn = data.current_turn;
+			completed = data.completed;
 
-		if (data.action == "game_start") {
-			console.log("Game start");
-			console.log(`Current player: ${current_turn}`);
-			board.readyClick();
+			if (completed == true) {
+				// Winner is the only 1 in room
+				if (data.winner == username) {
+					console.log(`Winner: ${data.winner}`);
+					document.getElementById('win-box').style.visibility = "visible";
+					current_turn = null;
+				}
+			}
+			else {
+				console.log("Game start");
+				console.log(`Current player: ${current_turn}`);
+				board.readyClick();
+			}
 		}
 		if (data.action == "make_move") {
+			current_turn = data.current_turn;
+			completed = data.completed;
+
 			let i = data.row;
 			let j = data.col;
 			let status = data.status;
@@ -234,6 +248,9 @@ Caro Online
 				}
 				current_turn = null;
 			}
+		}
+		if (data.action == 'leave_room') {
+			window.location.pathname = '/';
 		}
 	};
 
