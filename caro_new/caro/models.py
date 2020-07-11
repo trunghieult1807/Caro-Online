@@ -86,9 +86,11 @@ class Game(models.Model):
         """
         Send to client when game is created
         """
+        winner_name = self.winner.username if self.winner else None
         content = {
-            'type': 'create.game',
-            'action': 'game_start',
+            'type': 'send.game.update',
+            'action': 'game_update',
+            'winner': winner_name,
             'current_turn': self.current_turn.username,
             'completed': self.completed
         }
@@ -100,6 +102,8 @@ class Game(models.Model):
         room_name = f'room_{room.pk}'
         channel_layer = get_channel_layer()
         async_to_sync(channel_layer.group_send)(room_name, content)
+        if self.is_over():
+            room.delete_game()
 
     def is_over(self):
         return self.completed
@@ -400,7 +404,7 @@ class Room(models.Model):
         """
         Update user in room, if room is full -> return None
         """
-        if self.user1 is None:
+        if self.user1 is None and self.user2 != user:
             self.user1 = user
         elif self.user1 != user and self.user2 is None:
             self.user2 = user
@@ -411,8 +415,7 @@ class Room(models.Model):
 
     def leave_room(self, user):
         if self.user1 == user:
-            self.user1 = self.user2
-            self.user2 =  None
+            self.user1 =  None
         elif self.user2 == user:
             self.user2 = None
         else:
