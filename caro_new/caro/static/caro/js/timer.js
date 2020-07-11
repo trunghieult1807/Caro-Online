@@ -42,10 +42,7 @@ var timer = {
   },
 };
 
-
-
-
-//BACK button
+// BACK button
 (function(window, location) {
     history.replaceState(null, document.title, location.pathname+"#!/stealingyourhistory");
     history.pushState(null, document.title, location.pathname);
@@ -59,4 +56,4 @@ var timer = {
             },0);
       }
     }, false);
-}(window, location));
+} (window, location));
