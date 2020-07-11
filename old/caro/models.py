@@ -345,7 +345,7 @@ class Room(models.Model):
                                 null=True, blank=True, on_delete=models.CASCADE)
     game = models.ForeignKey(Game, related_name='game',
                              null=True, blank=True, on_delete=models.CASCADE)
-
+    count_ready = models.IntegerField(default=0)
     def __str__(self):
         return f'Room {self.pk}: {self.user1} vs {self.user2}'
 
@@ -356,6 +356,10 @@ class Room(models.Model):
         self.user1 = None
         self.user2 = None
         self.game = None
+        self.save()
+
+    def increase_count_ready(self):
+        self.count_ready += 1
         self.save()
 
     @staticmethod
@@ -410,7 +414,8 @@ class Room(models.Model):
         self.save()
 
     def create_game(self):
-        if not self.is_available():
+        if not self.is_available() and self.count_ready == 2:
+            print("Run create_game")
             self.game = Game.get_available_game()
             self.game.creator = self.user1
             self.game.opponent = self.user2
@@ -423,7 +428,8 @@ class Room(models.Model):
 
     def delete_game(self):
         self.game = None
-        self.save()
+        self.count_ready = 0
+        self.save(update_fields=['game', 'count_ready'])
 
     def get_current_game(self):
         return self.game
@@ -467,6 +473,9 @@ class GameCell(models.Model):
         """
         self.owner = self.game.current_turn
         self.status = 'X' if self.owner == self.game.creator else 'O'
+        ####
+        #Random turn??
+        ####
         self.save(update_fields=['status', 'owner'])
 
         # Add log entry for move

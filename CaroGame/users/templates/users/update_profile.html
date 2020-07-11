@@ -1,0 +1,23 @@
+{% extends 'users/layout.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'users/form.css' %}">
+{% endblock head %}
+
+{% block content %}
+    <div class="content-section">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="mb-4">Profile Edit</legend>
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update!</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

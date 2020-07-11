@@ -3,6 +3,28 @@ body{
 	background: url(/static/images/body_background.jpg);
 	margin: 0px auto;
 }
+.row-room-container {
+	display: flex;
+	justify-content: space-around;
+}
+.room-container {
+	display: flex;
+	position: relative;
+}
+
+.room-box {
+	position: relative;
+
+}
+
+.player-count {
+	font-size: 8pt;
+	position: absolute;
+	z-index: 1;
+	top: 5px;
+	right: 5px;
+}
+
 
 #menu_top {
 	background: #554360;
@@ -28,11 +50,11 @@ body{
 }
 
 #main #mid {
-	background: #4aa9d2;
-	height: 700px;
+	background: linear-gradient(-135deg, #c850c0, #4158d0);
 	width: 1000px;
-	float: left;
 	border-radius: 10px;
+	display: flex;
+	justify-content: flex-start;
 }
 
 #footer {
@@ -58,11 +80,11 @@ body{
 
 #menu_top a:hover {
 	background: #ddd;
-	color: #4aa9d2;
+	color: linear-gradient(-135deg, #c850c0, #4158d0);
 }
 
 #menu_top a.activate {
-	background: #4aa9d2;
+	background: linear-gradient(-135deg, #c850c0, #4158d0);
 	color: white;
 }
 
@@ -93,9 +115,9 @@ body{
 }
 
 #main #mid #room-level ul li {
-	background: #285d74;
+	background: linear-gradient(90deg, rgba(3,55,115,1) 0%, rgba(2,63,154,1) 54%, rgba(20,59,181,1) 100%);
 	padding: 5px;
-	border: 1px solid #4aa9d2;
+	border: 1px solid linear-gradient(-135deg, #c850c0, #4158d0);
 	text-indent: 15px;
 	height: 25px;
 }
@@ -145,14 +167,13 @@ body{
 }
 
 #main #mid #table {
-	width: 555px;
-	background: #4aa9d2;
-	float: left;
-	border-top-right-radius: 10px;
+	width: 900px;
+	display: flex;
+	justify-content: center;
 }
 
 #main #mid #table ul {
-	width: 555px;
+	width: 755px;
 	list-style: none;
 }
 
@@ -161,12 +182,11 @@ body{
 }
 
 #main #mid #table ul li input {
-	margin-left: 10px;
 	width: 210px;
 	height: 95px;
 
 	cursor: pointer;
-	text-align: left;
+	text-align: center;
 	background: #debeac;
 	border: 2px solid black;
 	border-radius: 5px;
@@ -227,6 +247,10 @@ body{
 	margin-left: 35px;
 }
 
+#footer #quick-link ul li{
+	margin-bottom: 10px;
+}
+
 #footer #quick-link ul li a {
 	text-decoration: none;
 	color: #d3d3d3;
@@ -283,8 +307,8 @@ body{
 
 #footer #contact-us button {
 	float: right;
-	background: #4aa9d2;
-	border: 2px solid #4aa9d2;
+	background: linear-gradient(-135deg, #c850c0, #4158d0);
+	border: 2px solid linear-gradient(-135deg, #c850c0, #4158d0);
 	border-radius: 5px;
 	color: white;
 	font-size: 14px;

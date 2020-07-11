@@ -59,11 +59,11 @@ body{
 
 #menu_top a:hover {
 	background: #ddd;
-	color: #2e8775;
+	color: linear-gradient(-135deg, #c850c0, #4158d0);
 }
 
 #menu_top a.activate {
-	background: #2e8775;
+	background: linear-gradient(-135deg, #c850c0, #4158d0);
 	color: white;
 }
 
@@ -80,12 +80,71 @@ body{
 	height: 300px;
 }
 
-
-#main #mid h2 {
-	text-align: center;
+#main #mid .tabcontent {
+	display: none;
 }
 
+#main #mid .tabcontent ul {
+	margin-top: 40px;
+	margin-left: 47px;
+	list-style-type: none;
+	width: 800px;
+	border: 6px solid gray;
+	padding: 0px 90px 0px 0px;
+}
 
+#main #mid .tabcontent ul li img {
+	width: 130px;
+	float: left;
+	margin: 0 15px 0 0;
+	border: 1px solid #000;
+}
+
+#main #mid .tabcontent ul li {
+	width: 880px;
+	padding: 5px;
+  	overflow: auto;
+  	border-bottom: 1px solid grey;
+}
+
+#main #mid .tabcontent ul li:hover {
+  	background: #eee;
+  	cursor: pointer;
+}
+
+#main #mid .tabcontent ul li a{
+	text-decoration: none;
+}
+
+#main #mid .tabcontent ul li h3{
+	margin-left: 170px;
+	color: linear-gradient(-135deg, #c850c0, #4158d0);
+}
+
+#main #mid .tabcontent ul li p{
+	margin-left: 170px;
+	color: #000;
+}
+
+#main #mid #news-list {
+	text-align: center;
+	font-size: 18px;
+}
+
+#main #mid #news-list a {
+	text-decoration: none;
+	color: #000;
+}
+
+#main #mid #news-list a:hover {
+	color: red;
+	cursor: pointer;
+}
+
+#main #mid #news-list i:hover {
+	color: red;
+	cursor: pointer;
+}
 
 #footer #about {
 	width: 400px;
@@ -113,6 +172,10 @@ body{
 
 #footer #quick-link ul {
 	margin-left: 45px;
+}
+
+#footer #quick-link ul li{
+	margin-bottom: 10px;
 }
 
 #footer #quick-link ul li a {

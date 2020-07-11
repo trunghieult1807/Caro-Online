@@ -2,91 +2,86 @@
 {% load static %}
 
 {% block title %}
-	Caro Online
+Caro Online
 {% endblock %}
 
 {% block body %}
-	<h1 id="logo">CARO ONLINE</h1>
-
-	<span id = "return-box"><img src="{% static 'caro/img/return.png' %}" style = "width: 35px; margin-top: 10px; margin-left: 7px"></span>
-	<div style="display: inline-block" id = "container">
-		<div id = "left-half">
+<h1 id="logo">CARO ONLINE</h1>
 
 
-			<div id = "room-area">
-				<div class = "room-box">
-					<div style="text-align: center; font-size: 30px; font-weight: bold;">Room {{ room_id }}</div>
 
-					<div class = "room-bet">
-						<img id = "left-room-box" src="{% static 'caro/img/coin.png' %}">
-						<div id = "right-room-box">1.000.000.000</div>
-					</div>
-				</div>
-			</div>
+<div id="container">
+	<button id="return-box" href="{% url 'play' %}"><img id = "return-image" src="{% static 'caro/img/return.png' %}"></button>
+	<div id="left-half">
+		<div id="room-area">
+			<div class="room-box">
+				<div style="text-align: center; font-size: 30px; font-weight: bold;">Room {{ room_id }}</div>
 
-			<div id = "character-area">
-				<div id = "left-half-character-box">
-					<div class = "character-box">
-						<img class = "character-ava" src="{% static 'caro/img/lol1.jpg' %}">
-						<div style = "text-align: center; font-weight: bold; font-size: 20px; color: blue;">{{ request.user }}</div>
-						<div class = "room-bet" style="margin-top: 30px; width: 80%;">
-							<img id = "left-room-box" src="{% static 'caro/img/coin.png' %}">
-							<div id = "right-room-box">1.000.000</div>
-						</div>
-						<div id="messageA" class="readyFont"></div>
-						<!-- <div class = "readyFont">Ready</div> -->
-					</div>
-				</div>
-				<div id = "right-half-character-box">
-					<div class = "character-box">
-						<img class = "character-ava" src="{% static 'caro/img/lol2.jpg' %}">
-						<div style = "text-align: center; font-weight: bold; font-size: 20px; color: blue;">Shen</div>
-						<div class = "room-bet" style="margin-top: 30px; width: 80%;">
-							<img id = "left-room-box" src="{% static 'caro/img/coin.png' %}">
-							<div id = "right-room-box">2.000.000</div>
-						</div>
-						<div id="messageB" class="readyFont"></div>
-					</div>
-				</div>
-			</div>
-			<div class="chatbox-area">
-				<div class="chatbox-content-area-title"><i class="fa fa-comments-o" aria-hidden="true"></i> Chat</div>
-				<div class="chat-content">
-					<!-- <ul id="messageContent"> -->
-						<p id="messageContent"></p>
-					<!-- </ul> -->
-				</div>
-				<div id = "small-chatbox-content-area">
-					<form style="clear: both">
-						<input id="myMessage" class="chat-message" type="text" placeholder="Enter to send">
-						<button id="sendButton" class = "chat-send" type="button"></button>
-					</form>
+				<div class="room-bet">
+					<img id="left-room-box" src="{% static 'caro/img/coin.png' %}">
+					<div id="right-room-box">1.000.000.000</div>
 				</div>
 			</div>
 		</div>
-		<!-- <iframe src="http://www.staggeringbeauty.com/" style="border: 1px inset #ddd" width="498" height="598"></iframe> -->
-		<!-- <iframe src="https://bedaudodangghet.imfast.io" style="border: 1px inset #ddd" width="498" height="598"></iframe> -->
-		<div id = "right-half">
+		<div id="character-area">
+			<div id="left-half-character-box">
+				<div class="character-box">
+					<img class="character-ava" src="{% static 'caro/img/lol1.jpg' %}">
+					<div style="text-align: center; font-weight: bold; font-size: 20px; color: blue;">{{ request.user }}</div>
+					<div class="room-bet" style="margin-top: 30px; width: 80%;">
+						<img id="left-room-box" src="{% static 'caro/img/coin.png' %}">
+						<div id="right-room-box">1.000.000</div>
+					</div>
+					<div id="messageA" class="readyFont" style="display: none">Ready</div>
+					<!-- <div class = "readyFont">Ready</div> -->
+				</div>
+			</div>
+			<div id="right-half-character-box">
+				<div class="character-box">
+					<img class="character-ava" src="{% static 'caro/img/lol2.jpg' %}">
+					<div style="text-align: center; font-weight: bold; font-size: 20px; color: blue;">Shen</div>
+					<div class="room-bet" style="margin-top: 30px; width: 80%;">
+						<img id="left-room-box" src="{% static 'caro/img/coin.png' %}">
+						<div id="right-room-box">2.000.000</div>
+					</div>
+					<div id="messageB" class="readyFont"></div>
+				</div>
+			</div>
+		</div>
+		<div class="chatbox-area">
+			<div class="chatbox-content-area-title"><i class="fa fa-comments-o" aria-hidden="true"></i> Chat</div>
+			<div id="chat-content">
+				<ul id="messageContent">
+				</ul>
+			</div>
+			<div id="small-chatbox-content-area">
+				<form style="clear: both">
+					<input id="chat-message-input" class="chat-message" type="text" placeholder="Enter to send">
+					<button id="chat-message-submit" class="chat-send" type="button">send</button>
+				</form>
+			</div>
+		</div>
+	</div>
 
+	<div id="right-half">
+		<div class="boardContentArea">
+			<div id="boardInfo">
+				<span id="oppo1-time" class="time timeGlow"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<img id="ava1" class="boardOppoAvt" src="{% static 'caro/img/lol1.jpg' %}">&nbsp;
+				<img id="vs" src="{% static 'caro/img/vs.png' %}">&nbsp;&nbsp;
+				<img id="ava2" class="boardOppoAvt" src="{% static 'caro/img/lol2.jpg' %}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<span id="oppo2-time" class="time timeGlow"></span>
+				<br />
 
-			<div class="boardContentArea">
-				<div id="boardInfo">
-					<span id="oppo1-time" class="time timeGlow"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<img id="ava1" class="boardOppoAvt" src="{% static 'caro/img/lol1.jpg' %}">&nbsp;
-					<img id="vs" src="{% static 'caro/img/vs.png' %}">&nbsp;&nbsp;
-					<img id="ava2" class="boardOppoAvt" src="{% static 'caro/img/lol2.jpg' %}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<span id="oppo2-time" class="time timeGlow"></span>
-					<br/>
+				<span>
+					{% if request.user.is_authenticated %}
+					<a href="#" style="font-weight:bold;"> {{ request.user }} </a>
+					{% endif %}
+					<img style="width:16px;" src="{% static 'caro/img/x.png' %}"> fights against
 
-					<span>
-						{% if request.user.is_authenticated %}
-						<a href="#" style="font-weight:bold;"> {{ request.user }} </a>
-						{% endif %}
-						<img style="width:16px;" src="{% static 'caro/img/x.png' %}"> fights against
-
-						<img style="width:16px;" src="{% static 'caro/img/o.png' %}">
-						<a href="#" style="font-weight:bold;"> Shen </a>
-					</span>
+					<img style="width:16px;" src="{% static 'caro/img/o.png' %}">
+					<a href="#" style="font-weight:bold;"> Shen </a>
+				</span>
 
 				<!-- Board will be drawn by javascript -->
 				<div id="board">
@@ -112,73 +107,163 @@
 
 			</div>
 		</div>
-
-		<div id="readyButton" class="readyBtnContainer readyBtn">
-			<a href="#" class="btn specFont" style="color: white;">READY</a>
+		<div id="readyButton" class="readyBtnContainer">
+			<div class =  "readyBtn">
+				<input onclick="changeWaitingStatus()" class="btn specFont" type="button" value="READY" id="waitingStatus"></input>
+			</div>
 		</div>
-
+		<div id="win-box" style="visibility: hidden;">
+			<div id="alert-box" class="alert-box-general">
+				<div id="success-box">
+					<div class="dot"></div>
+					<div class="dot two"></div>
+					<div class="face">
+						<div class="eye"></div>
+						<div class="eye right"></div>
+						<div class="mouth happy"></div>
+					</div>
+					<div class="shadow scale"></div>
+					<div class="message">
+						<h1 class="alert alert-box-h1">You won!</h1>
+						<p class="alert-box-p"><br>yay, you are the winner.</p>
+					</div>
+					<button class="button-box">
+						<h1 id="close-win-box" class="green alert-box-h1" onclick="board.closeWinBox()">continue</h1>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div id="lose-box" style="visibility: hidden">
+			<div id="alert-box" class="alert-box-general">
+				<div id="error-box">
+					<div class="dot"></div>
+					<div class="dot two"></div>
+					<div class="face2">
+						<div class="eye"></div>
+						<div class="eye right"></div>
+						<div class="mouth sad"></div>
+					</div>
+					<div class="shadow move"></div>
+					<div class="message">
+						<h1 class="alert alert-box-h1">You lose!</h1>
+						<p class="alert-box-p"><br>oh no, you were defeated.
+					</div>
+					<button class="button-box">
+						<h1 id="close-lose-box" class="red alert-box-h1" onclick="board.closeLoseBox()">try again</h1>
+					</button>
+				</div>
+			</div>
+		</div>
 	</div>
+</div>
 
-	<!-- Connect socket -->
-	{{ room_id|json_script:"room-id" }}
-	<script>
-		const roomId = JSON.parse(document.querySelector("#room-id").textContent);
-		const username = "{{ request.user }}";
-		var current_turn = null;
-		var completed = null;
-		// When we're using HTTPS, use WSS too.
-		var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
-		const url = ws_scheme + '://'
-					+ window.location.host
-					+ '/ws/caro/'
-					+ roomId
-					+ '/';
-		var socket = new WebSocket(url);
-		console.log(`Create socket ${url}`);
+<!-- Connect socket -->
+{{ room_id|json_script:"room-id" }}
+<script>
+	function scrollToBottom() {
+		var messages = document.querySelector('#chat-content');
+		messages.scrollTop = messages.scrollHeight;
+	}
 
-		socket.onmessage = function(e) {
-			// Process response from server
-			const data = JSON.parse(e.data);
-			current_turn = data.current_turn;
-			completed = data.completed;
+	const roomId = JSON.parse(document.querySelector("#room-id").textContent);
+	const username = "{{ request.user }}";
+	var current_turn = null;
+	var completed = null;
+	// When we're using HTTPS, use WSS too.
+	var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+	const url = ws_scheme + '://' +
+		window.location.host +
+		'/ws/caro/' +
+		roomId +
+		'/';
+	var socket = new WebSocket(url);
+	console.log(`Create socket ${url}`);
 
-			if (data.action == "game_start") {
-				console.log("Game start");
-				console.log(`Current player: ${current_turn}`);
+	// Chat system
+	document.querySelector('#chat-message-input').focus();
+	document.querySelector('#chat-message-input').onkeyup = function(e) {
+		if (e.keyCode === 13) {
+			document.querySelector('#chat-message-submit').click();
+		}
+	};
+	document.querySelector('#chat-message-submit').onclick = function(e) {
+		const messageInputDom = document.querySelector('#chat-message-input');
+		const message = messageInputDom.value;
+		socket.send(JSON.stringify({
+			'action': 'chat',
+			'message': message,
+			'username': username,
+		}));
+		messageInputDom.value = '';
+	};
+
+	// Socket listens message
+	socket.onmessage = function(e) {
+		const data = JSON.parse(e.data);
+		if (data.action == 'chat') {
+			console.log("Socket gain message: " + data.message);
+			var tag = document.createElement("P");
+			var text = data.username + ': ' + data.message;
+			var msg = document.createTextNode(text);
+			tag.appendChild(msg);
+			document.querySelector('#messageContent').appendChild(tag);
+			scrollToBottom();
+			return null;
+		}
+
+		current_turn = data.current_turn;
+		completed = data.completed;
+
+		if (data.action == "game_start") {
+			console.log("Game start");
+			console.log(`Current player: ${current_turn}`);
+			board.readyClick();
+		}
+		if (data.action == "make_move") {
+			let i = data.row;
+			let j = data.col;
+			let status = data.status;
+
+			if (status == 'X') {
+				caro_game.xMove(i, j);
+			} else if (status == 'O') {
+				caro_game.oMove(i, j);
 			}
-			if (data.action == "make_move") {
-				let i = data.row;
-				let j = data.col;
-				let status = data.status;
 
-				if (status == 'X') {
-					caro_game.xMove(i, j);
+			if (completed == true) {
+				console.log(`Winner: ${data.owner}`);
+				if (data.owner == username) {
+					document.getElementById('win-box').style.visibility = "visible";
+				} else {
+					document.getElementById('lose-box').style.visibility = "visible";
 				}
-				else if (status == 'O') {
-					caro_game.oMove(i, j);
-				}
-
-				if (completed == true) {
-					console.log(`Winner: ${data.owner}`);
-					current_turn = null;
-				}
+				current_turn = null;
 			}
-		};
+		}
+	};
 
-		socket.onclose = function(e) {
-			console.error("Chat socket closed unexpectedly");
-		};
+	socket.onclose = function(e) {
+		console.error("Chat socket closed unexpectedly");
+	};
 
-		document.querySelector('#readyButton').onclick = function() {
-			console.log("Ready clicked");
-			var button = document.querySelector("#readyButton");
-	        button.style.display = 'none'; // insert this line
-			console.log(username);
-			socket.send(JSON.stringify({
-				'action': 'create_game',
-				'user': username,
-				'room_id': roomId
-			}));
-		};
-    </script>
+	// Send message to server when clicks ready button
+	document.querySelector('#readyButton').onclick = function() {
+		console.log("Ready clicked");
+		console.log(username);
+		socket.send(JSON.stringify({
+			'action': 'create_game',
+			'user': username,
+			'room_id': roomId
+		}));
+	};
+
+	// Change status waiting
+	function changeWaitingStatus() {
+		if (document.querySelector("#waitingStatus").value == "READY") {
+			document.querySelector("#waitingStatus").value = "WAITING...";
+		} else {
+			document.querySelector("#waitingStatus").value = "READY";
+		}
+	}
+</script>
 {% endblock %}

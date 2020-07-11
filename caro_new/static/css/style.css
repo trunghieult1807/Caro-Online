@@ -1,5 +1,8 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400|Passion+One:400");
 body{
-	font-family: Arial;
+	/* font-family: Arial; */
+	font-family: "Source Sans Pro", sans-serif;
+	font-size: 18pt;
 	background: url('/static/images/body_background.jpg');
 	margin: 0px auto;
 }
@@ -68,11 +71,11 @@ body{
 
 #menu_top a:hover {
 	background: #ddd;
-	color: #4aa9d2;
+	color: linear-gradient(-135deg, #c850c0, #4158d0);
 }
 
 #menu_top a.activate {
-	background: #4aa9d2;
+	background: linear-gradient(-135deg, #c850c0, #4158d0);
 	color: white;
 }
 
@@ -98,7 +101,7 @@ body{
 	padding: 5px 15px 10px 10px;
 	list-style-type: none;
 	clear: both;
-	border: 3px solid #4aa9d2;
+	border: 3px solid linear-gradient(-135deg, #c850c0, #4158d0);
 	border-top:none;
 }
 
@@ -126,7 +129,7 @@ body{
 #main #mid #news h3 {
     height: 40px;
     line-height: 43px;
-    background: #4aa9d2;
+    background: linear-gradient(-135deg, #c850c0, #4158d0);
     margin-top: 0px;
     margin-bottom: 10px;
     border-top-left-radius: 10px;
@@ -167,20 +170,20 @@ body{
 	border-bottom: 2px solid #f7c044;
 	padding: 15px 0px 15px 60px;
 	clear: left;
+	font-size: 14pt;
 }
 
 #main #right ul li h4 {
-	font-size: 20px;
+	/* font-size: 20px; */
 	float: left;
 	display: block;
-	margin: -5px 60px 0px -35px;
-	border-right
+	margin: 0px 60px 0px -35px;
 	padding: 0px 25px 0px 0px;
 }
 
 #main #right ul li img {
 	width: 30px;
-    margin: -9px 25px 0px -30px;
+    margin: -5px 0px 0px -70px;
 	float: left;
 }
 
@@ -215,6 +218,10 @@ body{
 
 #footer #quick-link ul {
 	margin-left: 35px;
+}
+
+#footer #quick-link ul li{
+	margin-bottom: 10px;
 }
 
 #footer #quick-link ul li a {
@@ -273,8 +280,8 @@ body{
 
 #footer #contact-us button {
 	float: right;
-	background: #4aa9d2;
-	border: 2px solid #4aa9d2;
+	background: linear-gradient(-135deg, #c850c0, #4158d0);
+	border: 2px solid linear-gradient(-135deg, #c850c0, #4158d0);
 	border-radius: 5px;
 	color: white;
 	font-size: 14px;

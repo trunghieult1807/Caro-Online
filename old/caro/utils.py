@@ -24,7 +24,7 @@ def initialize():
     print("Finish.")
 
 def clear():
-    Room.objects.all().update(user1=None, user2=None, game=None)
+    Room.objects.all().update(user1=None, user2=None, game=None, count_ready=0)
     Game.objects.all().update(creator=None, opponent=None, winner=None,
                               current_turn=None, completed=False)
     GameCell.objects.all().update(owner=None, status='EMPTY')

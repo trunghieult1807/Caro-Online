@@ -17,28 +17,52 @@ function game(noOfRow, noOfCol) {
 	this.xMove = function(i,j){
 		var mes = `X move: (${i}, ${j})`;
 		console.log(mes);
-
 		caro_game.sq[i][j] = MARK;
 		board.sqUpdate(i, j);
-		
 		caro_game.noOfPiece++;
 		caro_game.Turn = 2;
+	};
+	this.xMoveDisplay = function(i,j){
+		var mes = `X move: (${i}, ${j})`;
+		console.log(mes);
+		// caro_game.sq[i][j] = MARK;
+		board.sqUpdateDisplay(i, j);
+		// caro_game.noOfPiece++;
+		// caro_game.Turn = 2;
 	};
 
 	this.oMove = function(i,j){
 		var mes = `O move: (${i}, ${j})`;
 		console.log(mes);
-
 		caro_game.sq[i][j] = MARK;
 		board.sqUpdate(i, j);
-
 		caro_game.noOfPiece++;
 		caro_game.Turn = 1;
+	};
+	this.oMoveDisplay = function(i,j){
+		var mes = `O move: (${i}, ${j})`;
+		console.log(mes);
+		// caro_game.sq[i][j] = MARK;
+		board.sqUpdateDisplay(i, j);
+		// caro_game.noOfPiece++;
+		// caro_game.Turn = 1;
 	};
 }
 
 var board = {
-	drawBoard: function(){
+	closeWinBox: function() {
+		button = document.getElementById('win-box');
+		button.style.visibility = "hidden";
+	},
+	closeLoseBox: function() {
+		button = document.getElementById('lose-box');
+		button.style.visibility = "hidden";
+	},
+	readyClick: function() {
+		button = document.getElementById('readyButton');
+		button.style.display = 'none';
+	},
+	drawBoard: function() {
 		timer.setTimer(300, 300);
 		var st = '';
 		st = '<table id="board-table"><tbody>';
@@ -72,16 +96,36 @@ var board = {
 			document.getElementById(String(j + caro_game.noOfCol*i)).innerHTML = '';
 		}
 	},
+	sqUpdateDisplay: function(i,j) {
+		var OHtml = '<img src="../../static/caro/img/o.png">';
+		var XHtml = '<img src="../../static/caro/img/x.png">';
+		if (caro_game.Turn == 2){
+			document.getElementById(String(j + caro_game.noOfCol*i)).innerHTML = OHtml;
+		}
+		else if (caro_game.Turn == 1){
+			document.getElementById(String(j + caro_game.noOfCol*i)).innerHTML = XHtml;
+		}
+		else {
+			document.getElementById(String(j + caro_game.noOfCol*i)).innerHTML = '';
+		}
+	},
 
 	sqClickTwoPlayer: function(n) {
+		var row = Math.floor(n / caro_game.noOfCol);
+		var col = n % caro_game.noOfCol;
 		if (current_turn != username) {
 			console.log(`Not your turn ${username}`);
 		}
 		else {
+			if (caro_game.Turn == 1) {
+				caro_game.xMoveDisplay(row, col);
+			}
+			else if (caro_game.Turn == 2) {
+				caro_game.oMoveDisplay(row, col);
+			}
 			current_turn = null;
-			var row = Math.floor(n / caro_game.noOfCol);
-			var col = n % caro_game.noOfCol;
 
+			// caro_game.xMove()
 			if (caro_game.sq[row][col] == MARK) {
 				return null;
 			}

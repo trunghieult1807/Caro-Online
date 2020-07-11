@@ -53,6 +53,9 @@ class GameTestCase(TestCase):
         room.enter_room(user1)
         user2 = User.objects.get(pk=2)
         room.enter_room(user2)
+
+        room.increase_count_ready()
+        room.increase_count_ready()
         new_game = room.create_game()
         game = Game.get_by_id(1)
         self.assertEqual(new_game, game)
