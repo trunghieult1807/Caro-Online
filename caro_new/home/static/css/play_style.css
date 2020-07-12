@@ -1,14 +1,13 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400|Passion+One:400");
 body{
-	font-family: Arial;
+	/* font-family: Arial; */
+	font-family: "Source Sans Pro", sans-serif;
 	background: url(/static/images/body_background.jpg);
 	margin: 0px auto;
 }
 .row-room-container {
 	display: flex;
 	justify-content: space-around;
-	width: 50%;
-  margin-bottom: 2%;
-	margin-top: 2%
 }
 .room-container {
 	display: flex;
@@ -50,6 +49,7 @@ body{
 	margin: 0px auto;
 	width: 1000px;
 	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 #main #mid {
@@ -65,7 +65,7 @@ body{
 	width: 1000px;
 	background: #303036;
 	color: #d3d3d3;
-	height: 240px;
+	height: 250px;
 	clear: left;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
@@ -181,11 +181,7 @@ body{
 }
 
 #main #mid #table ul li {
-	margin-left: -4%;
 	padding: 15px;
-	display: flex;
-  justify-content: space-around;
-	flex-wrap: wrap;
 }
 
 #main #mid #table ul li input {
@@ -236,6 +232,10 @@ body{
 	text-indent: 9px;
 }
 
+#footer #about #info-contact p {
+	font-size: 19px;
+}
+
 #footer #about #info-contact i {
 	padding: 3px;
 }
@@ -256,6 +256,7 @@ body{
 
 #footer #quick-link ul li{
 	margin-bottom: 10px;
+	font-size: 19px;
 }
 
 #footer #quick-link ul li a {
@@ -287,7 +288,7 @@ body{
 	outline: none;
 	color: #d3d3d3;
 	font-size: 15px;
-	text-indent: 5px;
+	text-indent: 15px;
 	width: 100%;
 }
 
@@ -307,12 +308,12 @@ body{
 	outline: none;
 	color: #d3d3d3;
 	font-size: 15px;
-	text-indent: 5px;
+	text-indent: 15px;
 	width: 100%;
 	padding-top: 6px;
 }
 
-#footer #contact-us button {
+#footer #contact-us #submit-button {
 	float: right;
 	background: linear-gradient(-135deg, #c850c0, #4158d0);
 	border: 2px solid linear-gradient(-135deg, #c850c0, #4158d0);
@@ -324,12 +325,9 @@ body{
 	cursor: pointer;
 }
 
-#footer #contact-us button i {
-	margin-right: 10px;
-}
-
 #copy-right {
 	width: 1000px;
+	font-size: 20px;
 	clear: left;
 	height: 40px;
 	line-height: 40px;
