@@ -44,6 +44,9 @@ class GameTestCase(TestCase):
         room = Room.get_by_id(1)
         user1 = User.objects.get(pk=1)
         room.enter_room(user1)
+        room.increase_count_ready()
+        room.increase_count_ready()
+
         game = room.create_game()
         self.assertEqual(game, None)
 
@@ -61,21 +64,28 @@ class GameTestCase(TestCase):
         self.assertEqual(new_game, game)
 
     def test_leave_room(self):
+        # Setup
         room = Room.get_by_id(2)
         user1 = User.objects.get(pk=1)
         user2 = User.objects.get(pk=2)
+
+        # Test
         room.leave_room(user1)
-        self.assertEqual(room.user1, user2)
-        self.assertEqual(room.user2, None)
+        self.assertEqual(room.user1, None)
+        self.assertEqual(room.user2, user2)
 
     def test_leave_room_and_create_game(self):
+        # Setup
         room = Room.get_by_id(2)
         user1 = User.objects.get(pk=1)
         user2 = User.objects.get(pk=2)
+
+        # Test
         room.leave_room(user1)
         game = room.create_game()
         self.assertEqual(game, None)
-        self.assertEqual(room.user1, user2)
+        self.assertEqual(room.user1, None)
+        self.assertEqual(room.user2, user2)
 
     def test_get_room_by_game(self):
         # Set up
@@ -84,6 +94,8 @@ class GameTestCase(TestCase):
         user2 = User.objects.get(pk=2)
         room.enter_room(user1)
         room.enter_room(user2)
+        room.increase_count_ready()
+        room.increase_count_ready()
         new_game = room.create_game()
         # Test
         game = Game.get_by_id(1)
@@ -97,6 +109,8 @@ class GameTestCase(TestCase):
         user2 = User.objects.get(pk=2)
         room.enter_room(user1)
         room.enter_room(user2)
+        room.increase_count_ready()
+        room.increase_count_ready()
         new_game = room.create_game()
         # Test
         room.delete_game()
@@ -109,6 +123,8 @@ class GameTestCase(TestCase):
         user2 = User.objects.get(pk=2)
         room.enter_room(user1)
         room.enter_room(user2)
+        room.increase_count_ready()
+        room.increase_count_ready()
         new_game = room.create_game()
         # Test
         game = Game.get_by_id(1)
@@ -121,6 +137,8 @@ class GameTestCase(TestCase):
         user2 = User.objects.get(pk=2)
         room.enter_room(user1)
         room.enter_room(user2)
+        room.increase_count_ready()
+        room.increase_count_ready()
         new_game = room.create_game()
 
         # Test
@@ -149,6 +167,8 @@ class GameTestCase(TestCase):
         # Test
         self.assertEqual(room.enter_room(user1), True)
         self.assertEqual(room.enter_room(user2), True)
+        room.increase_count_ready()
+        room.increase_count_ready()
         new_game = room.create_game()
 
         game = Game.get_by_id(1)
@@ -172,6 +192,8 @@ class GameTestCase(TestCase):
         # Test
         room.enter_room(user1)
         room.enter_room(user2)
+        room.increase_count_ready()
+        room.increase_count_ready()
         game = room.create_game()
         self.assertEqual(room.get_current_game(), game)
 
@@ -195,3 +217,32 @@ class GameTestCase(TestCase):
         self.assertEqual(user2.profile.wins, 0)
         self.assertEqual(user2.profile.loses, 1)
         self.assertEqual(user2.profile.rank, 0)
+
+    def test_swap_two_users(self):
+        # Set up
+        room = Room.get_by_id(1)
+        user1 = User.objects.get(pk=1)
+        user2 = User.objects.get(pk=2)
+        room.enter_room(user1)
+        room.enter_room(user2)
+
+        # Test
+        room.swap_user()
+        self.assertEqual(room.count_user(), 2)
+        self.assertEqual(room.user1, user2)
+        self.assertEqual(room.user2, user1)
+
+    def test_swap_one_user(self):
+        # Set up
+        room = Room.get_by_id(1)
+        user1 = User.objects.get(pk=1)
+        user2 = User.objects.get(pk=2)
+        room.enter_room(user1)
+        room.enter_room(user2)
+        room.leave_room(user1)
+
+        # Test
+        room.swap_user()
+        self.assertEqual(room.count_user(), 1)
+        self.assertEqual(room.user1, user2)
+        self.assertEqual(room.user2, None)

@@ -422,6 +422,9 @@ class Room(models.Model):
             return None
         self.save()
 
+    def swap_user(self):
+        self.user1, self.user2 = self.user2, self.user1
+
     def create_game(self):
         if not self.is_available() and self.count_ready == 2:
             print("Run create_game")
