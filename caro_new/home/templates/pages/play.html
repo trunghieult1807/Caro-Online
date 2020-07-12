@@ -46,16 +46,16 @@
 
 			<div id="table">
 				<ul>
-					{% for room in room_list %}
-						<li>
+					<li>
+						{% for room in room_list %}
 							<div class="row-room-container">
 								<div class = "room-container">
 									<input class="room-id room-box" type="button" value="Room {{ room.pk }}" name="{{ room.pk }}">
 									<div class="player-count">{{ room.count_user }}/2</div>
 								</div>
 							</div>
-						</li>
-					{% endfor %}
+							{% endfor %}
+					</li>
 					<!-- <li>
 						<div class="row-room-container">
 							<div class = "room-container">
