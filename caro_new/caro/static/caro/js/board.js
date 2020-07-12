@@ -74,6 +74,7 @@ var board = {
 		document.getElementById('board').innerHTML = st;
 		for(var i = 0; i < caro_game.noOfRow; i++){
 			for(var j = 0; j < caro_game.noOfCol; j++){
+				caro_game.sq[i][j] = 0;
 				board.sqUpdate(i,j);
 			}
 		}

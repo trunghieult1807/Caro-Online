@@ -142,8 +142,8 @@ Caro Online
 						<h1 class="alert alert-box-h1">You won!</h1>
 						<p class="alert-box-p"><br>yay, you are the winner.</p>
 					</div>
-					<button class="button-box">
-						<h1 id="close-win-box" class="green alert-box-h1" onclick="board.closeWinBox()">continue</h1>
+					<button class="button-box return-new-game">
+						<h1 id="close-win-box" class="green alert-box-h1" onclick="board.closeWinBox(); board.drawBoard()">continue</h1>
 					</button>
 				</div>
 			</div>
@@ -163,8 +163,8 @@ Caro Online
 						<h1 class="alert alert-box-h1">You lose!</h1>
 						<p class="alert-box-p"><br>oh no, you were defeated.
 					</div>
-					<button class="button-box">
-						<h1 id="close-lose-box" class="red alert-box-h1" onclick="board.closeLoseBox()">try again</h1>
+					<button class="button-box return-new-game">
+						<h1 id="close-lose-box" class="red alert-box-h1" onclick="board.closeLoseBox(); board.drawBoard()">try again</h1>
 					</button>
 				</div>
 			</div>
@@ -175,6 +175,8 @@ Caro Online
 <!-- Connect socket -->
 {{ room.pk|json_script:"room-id" }}
 <script>
+
+
 	function scrollToBottom() {
 		var messages = document.querySelector('#chat-content');
 		messages.scrollTop = messages.scrollHeight;

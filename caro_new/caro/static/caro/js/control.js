@@ -29,7 +29,7 @@ document.querySelector('#return-box').onclick = function() {
 var ctrl = {
 	newGame : function() {
 		// board.writeBoard();
-		// board.drawBoard();
+		board.drawBoard();
 	},
 	rewind : function() {
 
