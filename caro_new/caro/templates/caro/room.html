@@ -18,7 +18,9 @@ Caro Online
 				<div class="room-text">Room {{ room.pk }}</div>
 			</div>
 		</div>
+
 		<div id="character-area">
+			<!-- Display user1 information -->
 			<div id="left-half-character-box">
 				<div class="character-box">
 					<img class="character-ava" src="{{ room.user1.profile.image.url }}">
@@ -31,8 +33,8 @@ Caro Online
 					<!-- <div class = "readyFont">Ready</div> -->
 				</div>
 			</div>
+			<!-- Display user2 information -->
 			<div id="right-half-character-box">
-
 				{% if room.user2 %}
 					<div class="character-box">
 						<img class="character-ava" src="{{ room.user2.profile.image.url }}">
@@ -54,9 +56,10 @@ Caro Online
 						<div id="messageB" class="readyFont"></div>
 					</div>
 				{% endif %}
-
 			</div>
 		</div>
+
+		<!-- Chat box -->
 		<div class="chatbox-area">
 			<div class="chatbox-content-area-title"><i class="fa fa-comments-o" aria-hidden="true"></i> Chat</div>
 			<div id="chat-content">
@@ -70,6 +73,7 @@ Caro Online
 				</form>
 			</div>
 		</div>
+
 	</div>
 
 	<div id="right-half">
@@ -100,9 +104,8 @@ Caro Online
 
 				</div>
 
-
+				<!-- Control buttons -->
 				<div id="board-cpanel">
-
 					<button class="optionBtn" onclick="ctrl.newGame()">
 						<i class="fa fa-gamepad fa-2x" aria-hidden="true"></i> New game</button>
 
@@ -114,11 +117,11 @@ Caro Online
 
 					<button class="optionBtn" onclick="ctrl.quit()">
 						<i class="fa fa-sign-out fa-2x" aria-hidden="true"></i> Quit</button>
-
 				</div>
-
 			</div>
 		</div>
+
+		<!-- Additional elements -->
 		<div id="readyButton" class="readyBtnContainer">
 			<div class =  "readyBtn">
 				<input class="text-align" type="button" value="READY" id="waitingStatus"></input>
@@ -226,19 +229,20 @@ Caro Online
 			}
 		}
 		if (data.action == "make_move") {
-			current_turn = data.current_turn;
+			current_turn = data.current_turn;		// New current turn (not for display latest move)
 			completed = data.completed;
-
+			let status = data.status;
 			let i = data.row;
 			let j = data.col;
-			let status = data.status;
 
+			// Display
 			if (status == 'X') {
 				caro_game.xMove(i, j);
 			} else if (status == 'O') {
 				caro_game.oMove(i, j);
 			}
 
+			// Check end game
 			if (completed == true) {
 				console.log(`Winner: ${data.owner}`);
 				if (data.owner == username) {

@@ -1,4 +1,6 @@
 const MARK = 1, EMPTY = 0;
+const OHtml = '<img src="../../static/caro/img/o.png">';
+const XHtml = '<img src="../../static/caro/img/x.png">';
 
 function game(noOfRow, noOfCol) {
 	this.noOfRow = noOfRow, this.noOfCol = noOfCol;
@@ -13,7 +15,7 @@ function game(noOfRow, noOfCol) {
 		}
 	}
 
-	//With player
+	// Moving option
 	this.xMove = function(i,j){
 		var mes = `X move: (${i}, ${j})`;
 		console.log(mes);
@@ -22,15 +24,6 @@ function game(noOfRow, noOfCol) {
 		caro_game.noOfPiece++;
 		caro_game.Turn = 2;
 	};
-	this.xMoveDisplay = function(i,j){
-		var mes = `X move: (${i}, ${j})`;
-		console.log(mes);
-		// caro_game.sq[i][j] = MARK;
-		board.sqUpdateDisplay(i, j);
-		// caro_game.noOfPiece++;
-		// caro_game.Turn = 2;
-	};
-
 	this.oMove = function(i,j){
 		var mes = `O move: (${i}, ${j})`;
 		console.log(mes);
@@ -39,13 +32,16 @@ function game(noOfRow, noOfCol) {
 		caro_game.noOfPiece++;
 		caro_game.Turn = 1;
 	};
+
+	this.xMoveDisplay = function(i,j){
+		var mes = `X move: (${i}, ${j})`;
+		console.log(mes);
+		board.sqUpdateDisplay(i, j);
+	};
 	this.oMoveDisplay = function(i,j){
 		var mes = `O move: (${i}, ${j})`;
 		console.log(mes);
-		// caro_game.sq[i][j] = MARK;
 		board.sqUpdateDisplay(i, j);
-		// caro_game.noOfPiece++;
-		// caro_game.Turn = 1;
 	};
 }
 
@@ -83,8 +79,6 @@ var board = {
 		}
 	},
 	sqUpdate: function(i,j) {
-		var OHtml = '<img src="../../static/caro/img/o.png">';
-		var XHtml = '<img src="../../static/caro/img/x.png">';
 		if (caro_game.sq[i][j] == MARK && caro_game.Turn == 2){
 			document.getElementById(String(j + caro_game.noOfCol*i)).innerHTML = OHtml;
 		}
@@ -97,8 +91,6 @@ var board = {
 		}
 	},
 	sqUpdateDisplay: function(i,j) {
-		var OHtml = '<img src="../../static/caro/img/o.png">';
-		var XHtml = '<img src="../../static/caro/img/x.png">';
 		if (caro_game.Turn == 2){
 			document.getElementById(String(j + caro_game.noOfCol*i)).innerHTML = OHtml;
 		}
@@ -113,31 +105,33 @@ var board = {
 	sqClickTwoPlayer: function(n) {
 		var row = Math.floor(n / caro_game.noOfCol);
 		var col = n % caro_game.noOfCol;
+
+		// Check move condition
+		if (caro_game.sq[row][col] == MARK) {
+			return null;
+		}
 		if (current_turn != username) {
 			console.log(`Not your turn ${username}`);
+			return null;
 		}
-		else {
-			if (caro_game.Turn == 1) {
-				caro_game.xMoveDisplay(row, col);
-			}
-			else if (caro_game.Turn == 2) {
-				caro_game.oMoveDisplay(row, col);
-			}
-			current_turn = null;
 
-			// caro_game.xMove()
-			if (caro_game.sq[row][col] == MARK) {
-				return null;
-			}
-			console.log("Square click");
-			socket.send(JSON.stringify({
-				'action': 'make_move',
-				'user': username,
-				'room_id': roomId,
-				'row': row,
-				'col': col
-			}));
+		// Make move
+		current_turn = null;
+		if (caro_game.Turn == 1) {
+			caro_game.xMoveDisplay(row, col);
 		}
+		else if (caro_game.Turn == 2) {
+			caro_game.oMoveDisplay(row, col);
+		}
+
+		console.log("Square click");
+		socket.send(JSON.stringify({
+			'action': 'make_move',
+			'user': username,
+			'room_id': roomId,
+			'row': row,
+			'col': col
+		}));
 	},
 };
 
