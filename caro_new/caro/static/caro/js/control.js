@@ -1,11 +1,11 @@
 // Send message to server when clicks ready button
 document.querySelector('#readyButton').onclick = function() {
-	if (document.querySelector("#waitingStatus").value == "READY") {
-		document.querySelector("#waitingStatus").value = "WAITING...";
-	}
-	else {
-		return false;
-	}
+	// if (document.querySelector("#waitingStatus").value == "READY") {
+	// 	document.querySelector("#waitingStatus").value = "WAITING...";
+	// }
+	// else {
+	// 	return false;
+	// }
 
 	console.log("Ready clicked");
 	console.log(username);

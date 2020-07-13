@@ -1,6 +1,8 @@
+var x;
+var y;
 var timer = {
   setTimer: function(timer1, timer2) {
-    var x = setInterval(
+    x = setInterval(
       function() {
         if (caro_game.Turn == 1 && current_turn != null) {
           timer1 -= 1;
@@ -18,7 +20,7 @@ var timer = {
       }, 1000
     );
 
-    var y = setInterval(
+    y = setInterval(
       function() {
         if (caro_game.Turn == 2 && current_turn != null) {
           timer2 -= 1;
@@ -38,9 +40,14 @@ var timer = {
   },
 
   clearTimer: function() {
-
-  },
+    clearInterval(x);
+    clearInterval(y);
+    document.getElementById("oppo1-time").textContent = '';
+    document.getElementById("oppo2-time").textContent = '';
+    console.log("Hi");
+  }
 };
+
 
 // BACK button
 (function(window, location) {

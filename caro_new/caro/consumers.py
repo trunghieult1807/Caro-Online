@@ -85,7 +85,7 @@ class CaroConsumer(JsonWebsocketConsumer):
             print(f"Move({row}, {col})")
             room = Room.get_by_id(room_id)
             game = room.get_current_game()
-            print(game)
+            print(game.current_turn)
             cell = game.get_game_cell(row, col)
             cell.make_move()
 

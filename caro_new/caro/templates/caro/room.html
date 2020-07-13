@@ -143,7 +143,7 @@ Caro Online
 						<p class="alert-box-p"><br>yay, you are the winner.</p>
 					</div>
 					<button class="button-box return-new-game">
-						<h1 id="close-win-box" class="green alert-box-h1" onclick="board.closeWinBox(); board.drawBoard()">continue</h1>
+						<h1 id="close-win-box" class="green alert-box-h1" onclick="board.closeWinBox(); board.drawBoard(); board.tryAgainClick()">continue</h1>
 					</button>
 				</div>
 			</div>
@@ -164,7 +164,7 @@ Caro Online
 						<p class="alert-box-p"><br>oh no, you were defeated.
 					</div>
 					<button class="button-box return-new-game">
-						<h1 id="close-lose-box" class="red alert-box-h1" onclick="board.closeLoseBox(); board.drawBoard()">try again</h1>
+						<h1 id="close-lose-box" class="red alert-box-h1" onclick="board.closeLoseBox(); board.drawBoard(); board.tryAgainClick()">try again</h1>
 					</button>
 				</div>
 			</div>

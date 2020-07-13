@@ -46,18 +46,28 @@ function game(noOfRow, noOfCol) {
 }
 
 var board = {
+	clearTimer: function() {
+		timer.clearTimer();
+	},
 	closeWinBox: function() {
 		button = document.getElementById('win-box');
 		button.style.visibility = "hidden";
+		board.clearTimer();
 	},
 	closeLoseBox: function() {
 		button = document.getElementById('lose-box');
 		button.style.visibility = "hidden";
+		board.clearTimer();
 	},
 	readyClick: function() {
 		button = document.getElementById('readyButton');
-		button.style.display = 'none';
+		button.style.visibility = 'hidden';
 	},
+	tryAgainClick: function() {
+		button = document.getElementById('readyButton');
+		button.style.visibility = 'visible';
+	},
+
 	drawBoard: function() {
 		timer.setTimer(300, 300);
 		var st = '';
@@ -78,6 +88,7 @@ var board = {
 				board.sqUpdate(i,j);
 			}
 		}
+		caro_game.Turn = 1;
 	},
 	sqUpdate: function(i,j) {
 		if (caro_game.sq[i][j] == MARK && caro_game.Turn == 2){
