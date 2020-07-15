@@ -6,41 +6,23 @@
 {% endblock %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/new_style.css' %}">
 {% endblock %}
 
 {% block body %}
 	<div id="menu_top">
 		<a href="{% url 'play' %}"><i class="fas fa-gamepad"></i> PLAY NOW</a>
-		<a class="activate" href="{% url 'index' %}"><i class="fas fa-home"></i> HOME</a>
-		<a href="{% url 'news' %}"><i class="fas fa-newspaper"></i> NEWS</a>
-		<a class="right-side" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> LOG OUT</a>
+		<a href="{% url 'index' %}"><i class="fas fa-home"></i> HOME</a>
+		<a class="activate" href="{% url 'news' %}"><i class="fas fa-newspaper"></i> NEWS</a>
+		<a class="right-side" href="/logout"><i class="fas fa-sign-out-alt"></i> LOG OUT</a>
 		<a class="right-side" href="{% url 'profile' %}"> {{ user.username }}</a>
 	</div>
 
-	<div id="main">
+	<div id="main">	
 		<div id="mid">
-			<div id="news">
-				<img src="{% static 'images/news/menuicon.png' %}">
-				<h3>News</h3>
-				<ul>
-					<li><a href="">Cờ Caro VR, xin tiền má mua VR rồi chơi<span>21/4</span></a></li>
-					<li><a href="">Nguyễn Titha bị loại ngay từ vòng gửi xe của giải ao làng<span>19/4</span></a></li>
-					<li><a href="">Update 1.52: Skin quân cờ Caro được thêm vào cừa hàng<span>19/4</span></a></li>
-					<li><a href="">Danh sách Kỳ thủ bị phạt do sử dụng phần mềm thứ 3<span>18/4</span></a></li>
-					<li><a href="">Có cái tựa nào hay hay không, Caro thì có gì mới :)<span>18/4</span></a></li>
-				</ul>
-			</div>
-
-		</div>
-
-		<div id="right">
-			<img src="{% static 'images/Ranking.png' %}"><h3>Top 10</h3>
-			<ul>
-				{% for item in lists %}
-					<li><h4>{{forloop.counter}}</h4><img src="{% static 'images/avatar.png' %}">{{ item.0 }}</li>
-				{% endfor %}
-			</ul>
+			<h3>{{ article.title }}</h3>
+			<p>{{ article.body }}</p>
+			<p>{{ article.date }}</p>
 		</div>
 	</div>
 
@@ -78,4 +60,8 @@
 		<i class="far fa-copyright"></i>
 		All Rights Reserved 2019-2020 | Designed by SomeOne
 	</div>
+{% endblock %}
+
+{% block script %}
+	<script type="text/javascript" src="{% static 'js/news_list.js' %}"></script>
 {% endblock %}

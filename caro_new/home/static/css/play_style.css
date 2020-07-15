@@ -8,9 +8,6 @@ body{
 .row-room-container {
 	display: flex;
 	justify-content: space-around;
-	width: 50%;
-	margin-bottom: 2%;
-	margin-top: 2%
 }
 .room-container {
 	display: flex;
@@ -184,11 +181,7 @@ body{
 }
 
 #main #mid #table ul li {
-	margin-left: -4%;
 	padding: 15px;
-	display: flex;
-	justify-content: space-around;
-	flex-wrap: wrap;
 }
 
 #main #mid #table ul li input {
