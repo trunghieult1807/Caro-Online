@@ -1,0 +1,285 @@
+{% extends "caro/base.html" %}
+{% load static %}
+
+{% block title %}
+Caro Online
+{% endblock %}
+
+{% block body %}
+<h1 id="logo">CẢO ONLINE</h1>
+
+<div id="container">
+	<!-- Back button -->
+	<a id="return-box"><img id = "return-image" src="{% static 'caro/img/return.png' %}"></a>
+
+	<div id="left-half">
+		<div id="room-area">
+			<div class="room-box">
+				<div class="room-text">Room {{ room.pk }}</div>
+			</div>
+		</div>
+
+		<div id="character-area">
+			<!-- Display user1 information -->
+			<div id="left-half-character-box">
+				<div class="character-box">
+					<img class="character-ava" src="{{ room.user1.profile.image.url }}">
+					<div class="name-text">{{ room.user1 }}</div>
+					<div class="room-bet">
+						<img id="ranking-medal" src="{% static 'caro/img/rank/Rank1.png' %}">
+						<div id="ranking-name" class="ranking-text">{{ room.user1.profile.rank }}</div>
+					</div>
+					<div id="messageA" class="readyFont" style="display: none">Ready</div>
+					<!-- <div class = "readyFont">Ready</div> -->
+				</div>
+			</div>
+			<!-- Display user2 information -->
+			<div id="right-half-character-box">
+				{% if room.user2 %}
+					<div class="character-box">
+						<img class="character-ava" src="{{ room.user2.profile.image.url }}">
+							<div class="name-text">{{ room.user2 }}</div>
+						<div class="room-bet">
+							<img id="ranking-medal" src="{% static 'caro/img/rank/Rank1.png' %}">
+							<div id="ranking-name" class="ranking-text">{{ room.user2.profile.rank }}</div>
+						</div>
+						<div id="messageB" class="readyFont"></div>
+					</div>
+				{% else %}
+					<div class="character-box">
+						<img class="character-ava" src="{% static 'caro/img/lol2.jpg' %}">
+							<div class="name-text">None</div>
+						<div class="room-bet">
+							<img id="ranking-medal" src="{% static 'caro/img/rank/Rank1.png' %}">
+							<div id="ranking-name" class="ranking-text">2.000.000</div>
+						</div>
+						<div id="messageB" class="readyFont"></div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+
+		<!-- Chat box -->
+		<div class="chatbox-area">
+			<div class="chatbox-content-area-title"><i class="fa fa-comments-o" aria-hidden="true"></i> Chat</div>
+			<div id="chat-content">
+				<ul id="messageContent" class = "nobr">
+				</ul>
+			</div>
+			<div id="small-chatbox-content-area">
+				<form style="clear: both">
+					<input id="chat-message-input" class="chat-message" type="text" placeholder="Enter to send">
+					<button id="chat-message-submit" class="chat-send" type="button">send</button>
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+	<div id="right-half">
+		<div class="boardContentArea">
+			<div id="boardInfo">
+				<span id="oppo1-time" class="time timeGlow"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<img id="ava1" class="boardOppoAvt" src="{{ room.user1.profile.image.url }}">&nbsp;
+				<img id="vs" src="{% static 'caro/img/vs.png' %}">&nbsp;&nbsp;
+
+				{% if room.user2 %}
+					<img id="ava2" class="boardOppoAvt" src="{{ room.user2.profile.image.url }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				{% else %}
+					<img id="ava2" class="boardOppoAvt" src="{% static 'caro/img/lol2.jpg' %}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				{% endif %}
+
+				<span id="oppo2-time" class="time timeGlow"></span>
+				<br />
+
+				<span>
+					<a href="#" style="font-weight:bold;"> {{ room.user1 }} </a>
+					<img style="width:16px;" src="{% static 'caro/img/x.png' %}"> fights against
+					<img style="width:16px;" src="{% static 'caro/img/o.png' %}">
+					<a href="#" style="font-weight:bold;"> {{ room.user2 }} </a>
+				</span>
+
+				<!-- Board will be drawn by javascript -->
+				<div id="board">
+
+				</div>
+
+				<!-- Control buttons -->
+				<div id="board-cpanel">
+					<button class="optionBtn" onclick="ctrl.newGame()">
+						<i class="fa fa-gamepad fa-2x" aria-hidden="true"></i> New game</button>
+
+					<button class="optionBtn" onclick="ctrl.surrender()">
+						<i class="fa fa-flag-o fa-2x" aria-hidden="true"></i> Surrender</button>
+
+					<button class="optionBtn" onclick="ctrl.rewind()">
+						<i class="fa fa-undo fa-2x" aria-hidden="true"></i> Rewind</button>
+
+					<button class="optionBtn" onclick="ctrl.quit()">
+						<i class="fa fa-sign-out fa-2x" aria-hidden="true"></i> Quit</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Additional elements -->
+		<div id="readyButton" class="readyBtnContainer">
+			<div class =  "readyBtn">
+				<input class="text-align" type="button" value="READY" id="waitingStatus"></input>
+			</div>
+		</div>
+		<div id="win-box" style="visibility: hidden;">
+			<div id="alert-box" class="alert-box-general">
+				<div id="success-box">
+					<div class="dot"></div>
+					<div class="dot two"></div>
+					<div class="face">
+						<div class="eye"></div>
+						<div class="eye right"></div>
+						<div class="mouth happy"></div>
+					</div>
+					<div class="shadow scale"></div>
+					<div class="message">
+						<h1 class="alert alert-box-h1">You won!</h1>
+						<p class="alert-box-p"><br>yay, you are the winner.</p>
+					</div>
+					<button class="button-box return-new-game">
+						<h1 id="close-win-box" class="green alert-box-h1" onclick="board.closeWinBox(); board.drawBoard(); board.tryAgainClick()">continue</h1>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div id="lose-box" style="visibility: hidden">
+			<div id="alert-box" class="alert-box-general">
+				<div id="error-box">
+					<div class="dot"></div>
+					<div class="dot two"></div>
+					<div class="face2">
+						<div class="eye"></div>
+						<div class="eye right"></div>
+						<div class="mouth sad"></div>
+					</div>
+					<div class="shadow move"></div>
+					<div class="message">
+						<h1 class="alert alert-box-h1">You lose!</h1>
+						<p class="alert-box-p"><br>oh no, you were defeated.
+					</div>
+					<button class="button-box return-new-game">
+						<h1 id="close-lose-box" class="red alert-box-h1" onclick="board.closeLoseBox(); board.drawBoard(); board.tryAgainClick()">try again</h1>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Connect socket -->
+{{ room.pk|json_script:"room-id" }}
+<script>
+
+
+	function scrollToBottom() {
+		var messages = document.querySelector('#chat-content');
+		messages.scrollTop = messages.scrollHeight;
+	}
+
+	const roomId = JSON.parse(document.querySelector("#room-id").textContent);
+	const username = "{{ request.user }}";
+	var current_turn = null;
+	var completed = null;
+	// When we're using HTTPS, use WSS too.
+	var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+	const url = ws_scheme + '://' +
+		window.location.host +
+		'/ws/caro/' +
+		roomId +
+		'/';
+	var socket = new WebSocket(url);
+	console.log(`Create socket ${url}`);
+
+	// Socket listens messages
+	socket.onmessage = function(e) {
+		const data = JSON.parse(e.data);
+
+		if (data.action == 'chat') {
+			console.log("Socket gain message: " + data.message);
+
+			var messageE = document.createElement("p");
+			var messageC = data.username + ": " + data.message;
+			var messageN = document.createTextNode(messageC);
+			messageE.appendChild(messageN);
+			document.querySelector('#messageContent').appendChild(messageE);
+			scrollToBottom();
+			return null;
+		}
+
+		if (data.action == "game_update") {
+			current_turn = data.current_turn;
+			completed = data.completed;
+
+			if (completed == true) {
+				// Winner is the only 1 in room
+				if (data.winner == username) {
+					console.log(`Winner: ${data.winner}`);
+					document.getElementById('win-box').style.visibility = "visible";
+					current_turn = null;
+				}
+			}
+			else {
+				console.log("Game start");
+				console.log(`Current player: ${current_turn}`);
+				board.readyClick();
+			}
+		}
+		if (data.action == "make_move") {
+			current_turn = data.current_turn;		// New current turn (not for display latest move)
+			completed = data.completed;
+			let status = data.status;
+			let i = data.row;
+			let j = data.col;
+
+			// Display
+			if (status == 'X') {
+				caro_game.xMove(i, j);
+			} else if (status == 'O') {
+				caro_game.oMove(i, j);
+			}
+
+			// Check end game
+			if (completed == true) {
+				console.log(`Winner: ${data.owner}`);
+				if (data.owner == username) {
+					document.getElementById('win-box').style.visibility = "visible";
+				} else {
+					document.getElementById('lose-box').style.visibility = "visible";
+				}
+				current_turn = null;
+			}
+		}
+		if (data.action == 'leave_room') {
+			window.location.pathname = '/';
+		}
+	};
+
+	socket.onclose = function(e) {
+		console.error("Chat socket closed unexpectedly");
+	};
+
+	// Chat system
+	document.querySelector('#chat-message-input').focus();
+	document.querySelector('#chat-message-input').onkeyup = function(e) {
+		if (e.keyCode === 13) {
+			document.querySelector('#chat-message-submit').click();
+		}
+	};
+	document.querySelector('#chat-message-submit').onclick = function(e) {
+		const messageInputDom = document.querySelector('#chat-message-input');
+		const message = messageInputDom.value;
+		socket.send(JSON.stringify({
+			'action': 'chat',
+			'message': message,
+			'username': username,
+		}));
+		messageInputDom.value = '';
+	};
+</script>
+{% endblock %}
