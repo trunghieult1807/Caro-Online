@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <title>{% block title %}{% endblock %}</title>
+        <script src="https://kit.fontawesome.com/39248c2d37.js" crossorigin="anonymous"></script>
+        {% block css %}
+        {% endblock %}
+    </head>
+    <body>
+        <div id="banner">
+    		<img src="{% static 'images/banner.png' %}">
+    	</div>
+        {% block body %}
+        {% endblock %}
+    </body>
+    <script type="text/javascript" src="{% static 'js/room_level.js' %}"></script>
+    {% block script %}
+    {% endblock %}
+</html>

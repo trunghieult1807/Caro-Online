@@ -1,0 +1,31 @@
+{% extends 'users/layout.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'users/form.css' %}">
+{% endblock head %}
+
+{% block avatar %}
+    <img src="{{ user.profile.image.url }}">
+    
+{% endblock %}
+
+{% block content %}
+    <div class="content-section">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="mb-4">Profile Edit</legend>
+                <label style='font-weight: bold; font-size: large'>Email</label>
+                {{ u_form.email }}
+                <label style='font-weight: bold; font-size: large'>Avatar</label>
+                {{ p_form.image }}
+
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update!</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
