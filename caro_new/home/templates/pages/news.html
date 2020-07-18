@@ -20,102 +20,38 @@
 
 	<div id="main">	
 		<div id="mid">
-			<div id="news-detail-1" class="tabcontent">
-			  <ul>
-			    <li><a href="">
-			    	<img src="{% static 'images/news/upgrade.jpg' %}">
-			    	<h3>Update Log #11</h3>
-			    	<p>Upgrade Login UI.</p>
-			    </a></li>
-			      
-			    <li><a href="">
-			    	<img src="{% static 'images/news/cup.jpg' %}">
-			    	<h3>Online Tournament #1</h3>
-			    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent euismod ultrices ante, ac laoreet nulla vestibulum adipiscing. Nam quis justo in augue auctor imperdiet.</p>
-			    </a></li>
 
-			    <li><a href="">
-			    	<img src="{% static 'images/news/upgrade.jpg' %}">
-			    	<h3>Update Log #10</h3>
-			    	<p>Adding contents to news page.</p>
-			    </a></li>
-
-			    <li><a href="">
-			    	<img src="{% static 'images/news/upgrade.jpg' %}">
-			    	<h3>Update Log #9</h3>
-			    	<p>...</p>
-			    </a></li>
-			  </ul>
+			<div class="articles">
+				{% for article in articles %}
+					<div class="article">
+						<img src="{{ article.thumb.url }}">
+						<h3><a href="{% url 'article_detail' slug=article.slug %}">{{ article.title }}</a></h3>
+						<p>{{ article.snippet | truncatechars:100}}</p>
+						<p>{{ article.date }} </p>
+					</div>
+				{% endfor %}
 			</div>
 
 
+			<div class="pagination">
+				{% if articles.has_previous %}
+					<a href="?page=1"><<</a>
+					<a href="?page={{ article.previous_page_number }}"><</a>
+				{% endif %}
 
-			<div id="news-detail-2" class="tabcontent">
-			  <ul>
-			    <li><a href="">
-			    	<img src="{% static 'images/news/upgrade.jpg' %}">
-			    	<h3>Update Log #8</h3>
-			    	<p>...</p>
-			    </a></li>
-			    
-			    <li><a href="">
-			    	<img src="{% static 'images/news/upgrade.jpg' %}">
-			    	<h3>Update Log #7</h3>
-			    	<p>...</p>
-			    </a></li>
+				{% for num in articles.paginator.page_range %}
+					{% if articles.number == num %}
+						<strong>{{ num }}</strong>
+					{% elif num > articles.number|add:'-4' and num < articles.number|add:'4' %}
+						<a href="?page={{ num }}">{{ num }}</a>
+					{% endif %}
+				{% endfor %}
 
-			    <li><a href="">
-			    	<img src="{% static 'images/news/upgrade.jpg' %}">
-			    	<h3>Update Log #6</h3>
-			    	<p>...</p>
-			    </a></li>
-
-			    <li><a href="">
-			    	<img src="{% static 'images/news/upgrade.jpg' %}">
-			    	<h3>Update Log #5</h3>
-			    	<p>...</p>
-			    </a></li>
-			  </ul>
+				{% if articles.has_next %}
+					<a href="?page={{ articles.next_page_number }}">></a>
+					<a href="?page={{ articles.paginator.num_page }}">>></a>
+				{% endif %}
 			</div>
-
-
-
-			<div id="news-detail-3" class="tabcontent">
-			  <ul>
-			    <li><a href="">
-			    	<img src="{% static 'images/news/upgrade.jpg' %}">
-			    	<h3>Update Log #4</h3>
-			    	<p>...</p>
-			    </a></li>
-			    
-			    <li><a href="">
-			    	<img src="{% static 'images/news/upgrade.jpg' %}">
-			    	<h3>Update Log #3</h3>
-			    	<p>...</p>
-			    </a></li>
-
-			    <li><a href="">
-			    	<img src="{% static 'images/news/upgrade.jpg' %}">
-			    	<h3>Update Log #2</h3>
-			    	<p>...</p>
-			    </a></li>
-
-			    <li><a href="">
-			    	<img src="{% static 'images/news/upgrade.jpg' %}">
-			    	<h3>Update Log #1</h3>
-			    	<p>...</p>
-			    </a></li>
-			  </ul>
-			</div>
-
-			<div id="news-list">
-				<i class="fas fa-angle-double-left"></i> <i class="fas fa-angle-left"></i> 
-					<a class="tablink" onclick="openPage('news-detail-1', this)" id="defaultOpen"> 1</a>, 
-					<a class="tablink" onclick="openPage('news-detail-2', this)"> 2</a>,
-					<a class="tablink" onclick="openPage('news-detail-3', this)"> 3 </a> 
-				<i class="fas fa-angle-right"></i> <i class="fas fa-angle-double-right"></i>
-			</div>
-
 		</div>
 	</div>
 
