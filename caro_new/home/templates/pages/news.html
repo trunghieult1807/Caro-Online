@@ -27,7 +27,7 @@
 						<img src="{{ article.thumb.url }}">
 						<h3><a href="{% url 'article_detail' slug=article.slug %}">{{ article.title }}</a></h3>
 						<p>{{ article.snippet | truncatechars:100}}</p>
-						<p>{{ article.date }}</p>
+						<p>{{ article.date }} </p>
 					</div>
 				{% endfor %}
 			</div>

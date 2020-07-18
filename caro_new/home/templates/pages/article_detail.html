@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block css %}
-	<link rel="stylesheet" type="text/css" href="{% static 'css/new_style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/detailed_style.css' %}">
 {% endblock %}
 
 {% block body %}
@@ -21,7 +21,8 @@
 	<div id="main">	
 		<div id="mid">
 			<h3>{{ article.title }}</h3>
-			<p>{{ article.body }}</p>
+			<p>{{ article.body | linebreaks }}</p>
+			<hr>
 			<p>{{ article.date }}</p>
 		</div>
 	</div>
