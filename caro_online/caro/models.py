@@ -146,7 +146,7 @@ class Game(models.Model):
         """
         return GameLog.objects.filter(game=self)
 
-    def next_player_turn(self):
+    def switch_turn(self):
         """
         Set the next player's turn
         """
@@ -355,6 +355,8 @@ class Room(models.Model):
                                 null=True, blank=True, on_delete=models.CASCADE)
     game = models.ForeignKey(Game, related_name='game',
                              null=True, blank=True, on_delete=models.CASCADE)
+    user1_ready = models.BooleanField(default=False)
+    user2_ready = models.BooleanField(default=False)
     count_ready = models.IntegerField(default=0)
     def __str__(self):
         return f'Room {self.pk}: {self.user1} vs {self.user2}'
@@ -366,11 +368,36 @@ class Room(models.Model):
         self.user1 = None
         self.user2 = None
         self.game = None
+        self.user1_ready = False
+        self.user2_ready = False
+        self.count_ready = 0
         self.save()
 
-    def increase_count_ready(self):
-        self.count_ready += 1
+    def user_ready(self, user):
+        if self.user1 == user:
+            self.user1_ready = True
+        elif self.user2 == user:
+            self.user2_ready = True
+
+        self.count_ready = self.count_user_ready()
         self.save()
+
+    def user_unready(self, user):
+        if self.user1 == user:
+            self.user1_ready = False
+        elif self.user2 == user:
+            self.user2_ready = False
+
+        self.count_ready = self.count_user_ready()
+        self.save()
+
+    def count_user_ready(self):
+        count = 0
+        if self.user1_ready == True:
+            count += 1
+        if self.user2_ready == True:
+            count += 1
+        return count
 
     @staticmethod
     def get_by_id(id):
@@ -427,7 +454,6 @@ class Room(models.Model):
 
     def create_game(self):
         if not self.is_available() and self.count_ready == 2:
-            print("Run create_game")
             self.game = Game.get_available_game()
             self.game.creator = self.user1
             self.game.opponent = self.user2
@@ -501,7 +527,7 @@ class GameCell(models.Model):
             self.game.mark_complete(winner=self.owner)
 
         # Switch player turn
-        self.game.next_player_turn()
+        self.game.switch_turn()
 
         # Let the game know about the move and result
         self.send_game_update()

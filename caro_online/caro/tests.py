@@ -44,8 +44,7 @@ class GameTestCase(TestCase):
         room = Room.get_by_id(1)
         user1 = User.objects.get(pk=1)
         room.enter_room(user1)
-        room.increase_count_ready()
-        room.increase_count_ready()
+        room.user_ready(user1)
 
         game = room.create_game()
         self.assertEqual(game, None)
@@ -57,11 +56,24 @@ class GameTestCase(TestCase):
         user2 = User.objects.get(pk=2)
         room.enter_room(user2)
 
-        room.increase_count_ready()
-        room.increase_count_ready()
+        room.user_ready(user1)
+        room.user_ready(user2)
         new_game = room.create_game()
         game = Game.get_by_id(1)
         self.assertEqual(new_game, game)
+
+    def test_create_game_two_player_unready(self):
+        room = Room.get_by_id(1)
+        user1 = User.objects.get(pk=1)
+        room.enter_room(user1)
+        user2 = User.objects.get(pk=2)
+        room.enter_room(user2)
+
+        room.user_ready(user1)
+        room.user_ready(user2)
+        room.user_unready(user1)
+        new_game = room.create_game()
+        self.assertEqual(new_game, None)
 
     def test_leave_room(self):
         # Setup
@@ -94,8 +106,8 @@ class GameTestCase(TestCase):
         user2 = User.objects.get(pk=2)
         room.enter_room(user1)
         room.enter_room(user2)
-        room.increase_count_ready()
-        room.increase_count_ready()
+        room.user_ready(user1)
+        room.user_ready(user2)
         new_game = room.create_game()
         # Test
         game = Game.get_by_id(1)
@@ -109,8 +121,8 @@ class GameTestCase(TestCase):
         user2 = User.objects.get(pk=2)
         room.enter_room(user1)
         room.enter_room(user2)
-        room.increase_count_ready()
-        room.increase_count_ready()
+        room.user_ready(user1)
+        room.user_ready(user2)
         new_game = room.create_game()
         # Test
         room.delete_game()
@@ -123,8 +135,8 @@ class GameTestCase(TestCase):
         user2 = User.objects.get(pk=2)
         room.enter_room(user1)
         room.enter_room(user2)
-        room.increase_count_ready()
-        room.increase_count_ready()
+        room.user_ready(user1)
+        room.user_ready(user2)
         new_game = room.create_game()
         # Test
         game = Game.get_by_id(1)
@@ -137,8 +149,8 @@ class GameTestCase(TestCase):
         user2 = User.objects.get(pk=2)
         room.enter_room(user1)
         room.enter_room(user2)
-        room.increase_count_ready()
-        room.increase_count_ready()
+        room.user_ready(user1)
+        room.user_ready(user2)
         new_game = room.create_game()
 
         # Test
@@ -167,8 +179,8 @@ class GameTestCase(TestCase):
         # Test
         self.assertEqual(room.enter_room(user1), True)
         self.assertEqual(room.enter_room(user2), True)
-        room.increase_count_ready()
-        room.increase_count_ready()
+        room.user_ready(user1)
+        room.user_ready(user2)
         new_game = room.create_game()
 
         game = Game.get_by_id(1)
@@ -192,8 +204,8 @@ class GameTestCase(TestCase):
         # Test
         room.enter_room(user1)
         room.enter_room(user2)
-        room.increase_count_ready()
-        room.increase_count_ready()
+        room.user_ready(user1)
+        room.user_ready(user2)
         game = room.create_game()
         self.assertEqual(room.get_current_game(), game)
 
@@ -204,8 +216,8 @@ class GameTestCase(TestCase):
         user2 = User.objects.get(pk=2)
         room.enter_room(user1)
         room.enter_room(user2)
-        room.increase_count_ready()
-        room.increase_count_ready()
+        room.user_ready(user1)
+        room.user_ready(user2)
         new_game = room.create_game()
 
         # Test

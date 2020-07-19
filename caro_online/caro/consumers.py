@@ -62,19 +62,28 @@ class CaroConsumer(JsonWebsocketConsumer):
                 }
             )
 
-        if action == 'create_game':
+        if action == 'ready':
             username = text_data_json['user']
+            user = User.objects.filter(username=username).first()
             room_id = int(text_data_json['room_id'])
             room = Room.get_by_id(room_id)
-            room.increase_count_ready()
 
-            game = room.create_game()
-            if game is not None:
-                # game.send_game_update()
-                print("Create new game")
-            else:
-                print("Faileddddd to create game")
-                return None
+            if user is not None:
+                room.user_ready(user)
+                game = room.create_game()
+                if game is not None:
+                    # game.send_game_update()
+                    print("Create new game")
+                else:
+                    print("Faileddddd to create game")
+                    return None
+        if action == 'unready':
+            username = text_data_json['user']
+            user = User.objects.filter(username=username).first()
+            room_id = int(text_data_json['room_id'])
+            room = Room.get_by_id(room_id)
+            if user is not None:
+                room.user_unready(user)
 
         if action == 'make_move':
             # Extract json message
