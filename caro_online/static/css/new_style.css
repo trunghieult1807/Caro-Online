@@ -1,5 +1,7 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400|Passion+One:400");
 body{
-	font-family: Arial;
+	/* font-family: Arial; */
+	font-family: "Source Sans Pro", sans-serif;
 	background: url('/static/images/body_background.jpg');
 	margin: 0px auto;
 }
@@ -41,7 +43,7 @@ body{
 	width: 1000px;
 	background: #303036;
 	color: #d3d3d3;
-	height: 240px;
+	height: 250px;
 	clear: left;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
@@ -80,11 +82,9 @@ body{
 	height: 300px;
 }
 
-#main #mid .tabcontent {
-	display: none;
-}
 
-#main #mid .tabcontent ul {
+
+#main #mid .articles {
 	margin-top: 40px;
 	margin-left: 47px;
 	list-style-type: none;
@@ -93,66 +93,58 @@ body{
 	padding: 0px 90px 0px 0px;
 }
 
-#main #mid .tabcontent ul li img {
-	width: 130px;
-	float: left;
-	margin: 0 15px 0 0;
-	border: 1px solid #000;
-}
-
-#main #mid .tabcontent ul li {
+#main #mid .articles .article {
 	width: 880px;
 	padding: 5px;
   	overflow: auto;
   	border-bottom: 1px solid grey;
 }
 
-#main #mid .tabcontent ul li:hover {
+#main #mid .articles .article img {
+	width: 130px;
+	float: left;
+	margin: 0 15px 0 0;
+	border: 1px solid #000;
+}
+
+#main #mid .articles .article:hover {
   	background: #eee;
   	cursor: pointer;
 }
 
-#main #mid .tabcontent ul li a{
+#main #mid .articles .article h3 a{
 	text-decoration: none;
 }
 
-#main #mid .tabcontent ul li h3{
+#main #mid .articles .article h3{
 	margin-left: 170px;
 	color: linear-gradient(-135deg, #c850c0, #4158d0);
 }
 
-#main #mid .tabcontent ul li p{
+#main #mid .articles .article p{
 	margin-left: 170px;
 	color: #000;
 }
 
-#main #mid #news-list {
+#main #mid .pagination {
+	margin-top: 15px;
 	text-align: center;
-	font-size: 18px;
-}
-
-#main #mid #news-list a {
-	text-decoration: none;
+	font-size: 20px;
 	color: #000;
 }
 
-#main #mid #news-list a:hover {
-	color: red;
-	cursor: pointer;
+#main #mid .pagination a {
+	text-decoration: none;
 }
 
-#main #mid #news-list i:hover {
-	color: red;
-	cursor: pointer;
-}
 
 #footer #about {
-	width: 400px;
+	width: 430px;
 	float: left;
 }
 
 #footer #about h4 {
-	text-indent: 35px;
+	text-indent: 30px;
 	font-size: 20px;
 }
 
@@ -160,22 +152,31 @@ body{
 	text-indent: 9px;
 }
 
+#footer #about #info-contact p {
+	font-size: 19px;
+}
+
+#footer #about #info-contact i {
+	padding: 3px;
+}
+
 #footer #quick-link {
-	width: 300px;
+	width: 270px;
 	float: left;
 }
 
 #footer #quick-link h4 {
-	text-indent: 60px;
+	text-indent: 40px;
 	font-size: 20px;
 }
 
 #footer #quick-link ul {
-	margin-left: 45px;
+	margin-left: 35px;
 }
 
 #footer #quick-link ul li{
 	margin-bottom: 10px;
+	font-size: 19px;
 }
 
 #footer #quick-link ul li a {
@@ -207,7 +208,7 @@ body{
 	outline: none;
 	color: #d3d3d3;
 	font-size: 15px;
-	text-indent: 5px;
+	text-indent: 15px;
 	width: 100%;
 }
 
@@ -227,16 +228,26 @@ body{
 	outline: none;
 	color: #d3d3d3;
 	font-size: 15px;
-	text-indent: 5px;
+	text-indent: 15px;
 	width: 100%;
 	padding-top: 6px;
 }
 
-#footer #contact-us button {
+#footer #contact-us #submit-button {
+	float: right;
+	background: linear-gradient(-135deg, #c850c0, #4158d0);
+	border: 2px solid linear-gradient(-135deg, #c850c0, #4158d0);
+	border-radius: 5px;
+	color: white;
+	font-size: 14px;
+	padding: 8px;
+	margin-right: 45px;
+	cursor: pointer;
 }
 
 #copy-right {
 	width: 1000px;
+	font-size: 20px;
 	clear: left;
 	height: 40px;
 	line-height: 40px;
