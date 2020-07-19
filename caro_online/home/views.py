@@ -7,6 +7,8 @@ from django.views.generic.detail import DetailView
 from users.models import Profile
 from django.core.mail import send_mail
 from django.conf import settings
+from django.core.paginator import Paginator
+from .models import Article
 
 # Create your views here.
 @login_required
@@ -44,7 +46,17 @@ def newsPage(request):
 			settings.EMAIL_HOST_USER,
 			['zone2120vn@gmail.com'],
 			fail_silently=False)
-	return render(request, 'pages/news.html')
+
+	articles = Article.objects.all().order_by('date')
+
+	paginator = Paginator(articles, 4)
+
+	page = request.GET.get('page')
+
+	articles = paginator.get_page(page)
+
+	return render(request, 'pages/news.html', {'articles': articles})
+
 
 @login_required
 def playPage(request):
@@ -63,6 +75,7 @@ def playPage(request):
 		'room_list': rooms
 	})
 
+
 @login_required
 def profilePage(request):
 	if request.method == 'POST':
@@ -75,3 +88,17 @@ def profilePage(request):
 			['zone2120vn@gmail.com'],
 			fail_silently=False)
 	return render(request, 'pages/profile.html')
+
+@login_required
+def article_detail(request, slug):
+	if request.method == 'POST':
+		sender = request.POST['sender']
+		message = request.POST['sender-message']
+
+		send_mail('Contact Form',
+			'From: ' + sender + ', \n' + message,
+			settings.EMAIL_HOST_USER,
+			['zone2120vn@gmail.com'],
+			fail_silently=False)
+	article = Article.objects.get(slug=slug)
+	return render(request, 'pages/article_detail.html', {'article': article})

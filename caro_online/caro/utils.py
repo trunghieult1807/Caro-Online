@@ -1,8 +1,8 @@
 from caro.models import *
 from django.contrib.auth.models import User
 
-number_of_games = 20
-number_of_rooms = 20
+number_of_games = 10
+number_of_rooms = 10
 
 def createGames(n=number_of_games):
     for i in range(n):
