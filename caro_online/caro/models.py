@@ -466,8 +466,10 @@ class Room(models.Model):
 
     def delete_game(self):
         self.game = None
+        self.user1_ready = False
+        self.user2_ready = False
         self.count_ready = 0
-        self.save(update_fields=['game', 'count_ready'])
+        self.save()
 
     def get_current_game(self):
         return self.game
