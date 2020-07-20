@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordResetForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
+from django.core.exceptions import ValidationError
 from .models import Profile
 
 class RegistrationForm(UserCreationForm):
@@ -21,6 +22,17 @@ class RegistrationForm(UserCreationForm):
         self.fields['email'].widget.attrs.update({'class':"input100", 'placeholder':"Email"})
         self.fields['password1'].widget.attrs.update({'class':'input100', 'placeholder':'Password'})
         self.fields['password2'].widget.attrs.update({'class':"input100", 'placeholder':"Confirm Password"})
+
+    def clean(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise ValidationError("This email is already existed. Please try another one.")
+
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username=username).exists():
+            raise ValidationError("This username is already existed. Please try another one.")
+
+        return self.cleaned_data
 
 
 class LoginForm(AuthenticationForm):

@@ -38,7 +38,7 @@
 			<img src="{% static 'images/Ranking.png' %}"><h3>Top 10</h3>
 			<ul>
 				{% for item in lists %}
-					<li><h4>{{forloop.counter}}</h4><img src="{% static 'images/avatar.png' %}">{{ item.0 }}</li>
+					<li><h4>{{forloop.counter}}</h4><img src="{% static 'images/avatar.png' %}">{{ item.0 }}<span>{{ item.1 }}</span></li>
 				{% endfor %}
 			</ul>
 		</div>
