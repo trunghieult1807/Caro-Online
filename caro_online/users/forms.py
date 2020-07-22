@@ -32,6 +32,9 @@ class RegistrationForm(UserCreationForm):
         if User.objects.filter(username=username).exists():
             raise ValidationError("This username is already existed. Please try another one.")
 
+        if len(username) < 6 or len(username) > 20:
+            raise ValidationError("Your username can only be between 6 to 20 characters.")
+
         return self.cleaned_data
 
 
