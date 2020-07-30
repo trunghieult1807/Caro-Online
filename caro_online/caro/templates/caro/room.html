@@ -6,7 +6,7 @@ Caro Online
 {% endblock %}
 
 {% block body %}
-<h1 id="logo">CARO ONLINE</h1>
+<h1 id="logo">CẢO ONLINE</h1>
 
 <div id="container">
 	<!-- Back button -->
@@ -173,8 +173,6 @@ Caro Online
 <!-- Connect socket -->
 {{ room.pk|json_script:"room-id" }}
 <script>
-
-
 	function scrollToBottom() {
 		var messages = document.querySelector('#chat-content');
 		messages.scrollTop = messages.scrollHeight;
@@ -271,7 +269,9 @@ Caro Online
 	};
 	document.querySelector('#chat-message-submit').onclick = function(e) {
 		const messageInputDom = document.querySelector('#chat-message-input');
-		const message = messageInputDom.value;
+		const message = messageInputDom.value.trim();
+		if (message.length == 0)
+			return false;
 		socket.send(JSON.stringify({
 			'action': 'chat',
 			'message': message,
