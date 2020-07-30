@@ -13,9 +13,9 @@ var timer = {
         document.getElementById("oppo1-time").textContent = String('00' + minutes).slice(-2) + ":" + String('00' + seconds).slice(-2);
 
         // If the count down is over, write some text
-        if (timer1 < 5) {
-          clearInterval(x);
-          //document.getElementById("oppo1-time").textContent = "EXPIRED";
+        if (timer1 < 0) {
+          // xTime = 1;
+          document.getElementById("oppo1-time").textContent = "Time is up, plz surrender, I cannot handle with this function!!!";
         }
       }, 1000
     );
@@ -32,8 +32,7 @@ var timer = {
 
         // If the count down is over, write some text
         if (timer2 < 0) {
-          clearInterval(y);
-          document.getElementById("oppo2-time").textContent = "EXPIRED";
+          document.getElementById("oppo1-time").textContent = "Time is up, plz surrender, I cannot handle with this function!!!";
         }
       }, 1000
     );

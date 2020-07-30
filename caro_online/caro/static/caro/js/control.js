@@ -32,7 +32,7 @@ document.querySelector('#return-box').onclick = function() {
 var ctrl = {
 	newGame : function() {
 		// board.writeBoard();
-		board.drawBoard();
+		//board.drawBoard();
 	},
 	rewind : function() {
 
@@ -48,3 +48,12 @@ var ctrl = {
 		board.drawBoard();
 	}
 };
+
+// var wasSubmitted = false;
+//     function checkBeforeSubmit(){
+//       if(!wasSubmitted) {
+//         wasSubmitted = true;
+//         return wasSubmitted;
+//       }
+//       return false;
+//     }
