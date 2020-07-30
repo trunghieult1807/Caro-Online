@@ -67,10 +67,8 @@ Caro Online
 				</ul>
 			</div>
 			<div id="small-chatbox-content-area">
-				<form style="clear: both">
-					<input id="chat-message-input" class="chat-message" type="text" placeholder="Enter to send">
-					<button id="chat-message-submit" class="chat-send" type="button">send</button>
-				</form>
+				<input id="chat-message-input" class="chat-message" type="text" placeholder="Enter to send">
+				<button id="chat-message-submit" class="chat-send" type="button">send</button>
 			</div>
 		</div>
 
@@ -175,8 +173,6 @@ Caro Online
 <!-- Connect socket -->
 {{ room.pk|json_script:"room-id" }}
 <script>
-
-
 	function scrollToBottom() {
 		var messages = document.querySelector('#chat-content');
 		messages.scrollTop = messages.scrollHeight;
@@ -273,7 +269,9 @@ Caro Online
 	};
 	document.querySelector('#chat-message-submit').onclick = function(e) {
 		const messageInputDom = document.querySelector('#chat-message-input');
-		const message = messageInputDom.value;
+		const message = messageInputDom.value.trim();
+		if (message.length == 0)
+			return false;
 		socket.send(JSON.stringify({
 			'action': 'chat',
 			'message': message,
