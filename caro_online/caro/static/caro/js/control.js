@@ -20,8 +20,54 @@ document.querySelector('#readyButton').onclick = function() {
 	}));
 };
 
+/////////////////
+document.querySelector('#win-box').onclick = function() {
+	let action = '';
+	if (document.querySelector("#waitingStatus").value == "READY") {
+		document.querySelector("#waitingStatus").value = "WAITING...";
+		action = 'ready';
+	}
+	else {
+		document.querySelector("#waitingStatus").value = "READY";
+		action = 'unready';
+	}
+
+	console.log("Ready clicked");
+	console.log(`${username}: ${action}`);
+
+	socket.send(JSON.stringify({
+		'action': action,
+		'user': username,
+		'room_id': roomId
+	}));
+};
+
+document.querySelector('#lose-box').onclick = function() {
+	let action = '';
+	if (document.querySelector("#waitingStatus").value == "READY") {
+		document.querySelector("#waitingStatus").value = "WAITING...";
+		action = 'ready';
+	}
+	else {
+		document.querySelector("#waitingStatus").value = "READY";
+		action = 'unready';
+	}
+
+	console.log("Ready clicked");
+	console.log(`${username}: ${action}`);
+
+	socket.send(JSON.stringify({
+		'action': action,
+		'user': username,
+		'room_id': roomId
+	}));
+};
+//////////////////////
+
+
 // Leave room button
 document.querySelector('#return-box').onclick = function() {
+	window.location.pathname = '/';
 	socket.send(JSON.stringify({
 		'action': 'leave_room',
 		'user': username,
